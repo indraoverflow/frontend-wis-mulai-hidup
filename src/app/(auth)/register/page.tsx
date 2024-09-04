@@ -17,7 +17,7 @@ import React from "react";
 export default function page() {
   return (
     <>
-      <Card className="flex flex-col gap-6 w-full max-w-[404px] bg-surface border-none">
+      <Card className="flex flex-col gap-6 w-full max-w-[404px] bg-surface border-none shadow-none">
         <CardHeader className="flex gap-4 p-0">
           <Image
             src="/images/logo.png"
