@@ -37,6 +37,16 @@ Ensure you have the following installed:
    yarn install
    ```
 
+3. copy `.env.example` and rename to `.env`:
+
+   ```bash
+   NEXTAUTH_SECRET=
+   NEXTAUTH_URL=
+
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   ```
+
 ## Usage
 
 ### Development Server
