@@ -1,6 +1,6 @@
 import React from "react";
-import { FaFacebook } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { FaFacebook } from "react-icons/fa";
 
 export default function FacebookButton() {
   return (
