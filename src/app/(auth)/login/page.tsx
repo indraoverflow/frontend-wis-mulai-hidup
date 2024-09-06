@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import LoginForm from "../../../components/auth/LoginForm";
 
 export default function page() {
   return (
@@ -30,38 +31,7 @@ export default function page() {
           </div>
           <p className="text-center text-sm">atau</p>
         </CardHeader>
-        <CardContent className="p-0">
-          <form>
-            <div className="grid w-full items-center gap-4">
-              <div className="flex flex-col space-y-1.5">
-                <Input 
-                  type="email"
-                  id="email"
-                  placeholder="Email"
-                />
-              </div>
-              <div className="flex flex-col space-y-1.5">
-                <Input
-                  type="password"
-                  id="password"
-                  placeholder="Kata Sandi"
-                />
-              </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col gap-4 justify-center">
-          <Button>Login</Button>
-          <p className="text-sm">
-            <span className="text-primary">
-              <Link href="">Lupa Kata Sandi</Link>
-            </span>
-            {" or "}
-            <span className="text-primary">
-              <Link href="/register">Buat Akun</Link>
-            </span>
-          </p>
-        </CardFooter>
+        <LoginForm />
       </Card>
     </>
   );
