@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/store/StoreProvider";
+import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { userApi } from "@/store/features/dummy/api/apiSlice";
 import SessionWrapper from "@/components/auth/SessionWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SessionWrapper>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
-    </SessionWrapper>
+    <StoreProvider>
+      <SessionWrapper>
+        <html lang="en">
+          <body className={inter.className}>{children}</body>
+        </html>
+      </SessionWrapper>
+    </StoreProvider>
   );
 }
