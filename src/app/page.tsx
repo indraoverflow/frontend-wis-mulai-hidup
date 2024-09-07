@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from "@/components/ui/button";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 export default function Home() {
@@ -17,14 +17,20 @@ export default function Home() {
         </p>
       )}
       <div className="flex gap-4">
-        <Link href="/register">
-          <Button variant="outline" size="lg">
-            Buat Akun
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button size="lg">Masuk</Button>
-        </Link>
+        {session ? (
+          <Button onClick={() => signOut()}>Log Out</Button>
+        ) : (
+          <>
+            <Link href="/register">
+              <Button variant="outline" size="lg">
+                Buat Akun
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button size="lg">Masuk</Button>
+            </Link>
+          </>
+        )}
       </div>
     </main>
   );

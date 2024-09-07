@@ -22,7 +22,7 @@ export async  function middleware(request: NextRequest) {
     if (publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
         // Jika token ada, arahkan ke halaman dashboard
         if (token) {
-            return NextResponse.redirect(new URL('/dummy', request.url));
+            return NextResponse.redirect(new URL('/', request.url));
         }
     }
 
