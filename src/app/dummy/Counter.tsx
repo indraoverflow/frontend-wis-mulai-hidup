@@ -6,6 +6,7 @@ import {
   resetCounter,
 } from "@/store/features/dummy/dummySlice";
 import { RootState } from "@/store/store";
+import { signOut } from "next-auth/react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -35,6 +36,7 @@ export default function Counter({}: Props) {
         </Button>
       </div>
       <Button onClick={() => dispatch(resetCounter())}>Reset</Button>
+      <Button onClick={() => signOut()}>Log Out</Button>
     </div>
   );
 }
