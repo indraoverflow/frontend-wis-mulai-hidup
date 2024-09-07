@@ -85,6 +85,11 @@ yarn start
 
 ## Screenshots
 
+| Page     | Mobile                                                | Dsktop                                                 |
+| -------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| Register | ![Register](./public/images/docs/register-mobile.png) | ![Register](./public/images/docs/register-desktop.png) |
+| Register | ![Register](./public/images/docs/login-mobile.png)    | ![Register](./public/images/docs/login-desktop.png)    |
+
 <!--
 ![Home Page](url-to-image)
 ![Invitation Customization](url-to-image)
