@@ -22,7 +22,7 @@ export default function page() {
           </Link>
           <CardDescription className="text-center font-normal  text-sm text-foreground">
             Buat undangan digital anda sekarang dan bagikan momen bahagia anda
-            kepada tamu dan rekan spesial.
+            kepada tamu dan rekan-rekan spesial.
           </CardDescription>
 
           <div className="flex justify-between gap-4 md:gap-10">

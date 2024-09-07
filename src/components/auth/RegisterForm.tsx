@@ -89,7 +89,7 @@ export default function RegisterForm({}: Props) {
         <Button className="px-6" type="submit">
           Buat Akun
         </Button>
-        <p className="text-foreground text-sm">
+        <p className="flex gap-2 text-foreground text-sm">
           Sudah punya akun?{" "}
           <span className="text-primary">
             <Link href="/login">Login</Link>
