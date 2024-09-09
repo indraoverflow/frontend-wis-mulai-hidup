@@ -70,7 +70,7 @@ const config: Config = {
         },
       },
       maxWidth: {
-        "max-w-desktop": "1440px",
+        desktop: "1440px",
       },
     },
   },
