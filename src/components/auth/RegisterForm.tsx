@@ -86,7 +86,7 @@ export default function RegisterForm({}: Props) {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col items-center gap-4 justify-center p-0">
-        <Button className="px-6" type="submit">
+        <Button className="px-6 rounded" type="submit">
           Buat Akun
         </Button>
         <p className="flex gap-2 text-foreground text-sm">

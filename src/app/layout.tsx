@@ -5,6 +5,7 @@ import SessionWrapper from "@/components/auth/SessionWrapper";
 import StoreProvider from "@/store/StoreProvider";
 import "./../styles/globals.css";
 import { elza, minervaModern } from "@/lib/fonts";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${elza.className}`}>
-        <StoreProvider>
-          <SessionWrapper>{children}</SessionWrapper>
-        </StoreProvider>
+        <Suspense fallback={<Loading />}>
+          <StoreProvider>
+            <SessionWrapper>{children}</SessionWrapper>
+          </StoreProvider>
+        </Suspense>
       </body>
     </html>
   );
+}
+
+function Loading() {
+  return <div className="bg-gray-500">loading</div>;
 }
