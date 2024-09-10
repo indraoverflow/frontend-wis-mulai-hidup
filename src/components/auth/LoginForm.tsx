@@ -53,7 +53,7 @@ export default function LoginForm({}: Props) {
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-4 justify-center">
-        <Button>Login</Button>
+        <Button className="px-6 rounded">Login</Button>
         <p className="text-sm flex gap-2">
           <span className="text-primary">
             <Link href="">Lupa Kata Sandi</Link>
