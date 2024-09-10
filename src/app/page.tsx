@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="relative flex flex-col items-center justify-center py-24 gap-8 bg-surface">
-        <section className="flex flex-col items-center justify-center max-w-desktop px-5 gap-5 lg:px-20 xl:px-[100px] mx-auto">
+      <main className="relative flex flex-col items-center justify-center gap-8 py-24 bg-surface">
+        <section className="flex flex-col items-center justify-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
           <h1 className={cn("text-5xl text-center", minervaModern.className)}>
             {'"'}Refleksi Cinta dan Keimanan
           </h1>
@@ -45,7 +45,7 @@ export default function Home() {
                   height={370}
                 />
               </CardContent>
-              <CardContent className="flex justify-between items-end p-0 border-b border-b-black">
+              <CardContent className="flex items-end justify-between p-0 border-b border-b-black">
                 <div>
                   <p className="text-[21px]">Bohemian {i + 1}</p>
                   <p className="text-[21px]">Bohemian</p>

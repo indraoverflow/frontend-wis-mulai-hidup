@@ -10,6 +10,8 @@ import { CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import ErrorMessage from "@/components/auth/ErrorMessage";
 import { userLoginSchema, UserLoginType } from "@/types/user-login-type";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -22,14 +24,29 @@ export default function LoginForm({}: Props) {
     resolver: zodResolver(userLoginSchema),
   });
 
-  const onSubmit: SubmitHandler<UserLoginType> = (data) => {
-    console.log(data);
+  const push = useRouter();
+
+  const onSubmit: SubmitHandler<UserLoginType> = async (data) => {
+    try {
+      console.log(data);
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+        callbackUrl: "/",
+      });
+      if (!res?.error) {
+        push.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <CardContent className="p-0">
-        <div className="grid w-full items-center gap-4">
+        <div className="grid items-center w-full gap-4">
           <div className="flex flex-col space-y-1.5">
             <Input
               type="email"
@@ -52,9 +69,9 @@ export default function LoginForm({}: Props) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col gap-4 justify-center">
+      <CardFooter className="flex flex-col justify-center gap-4">
         <Button className="px-6 rounded">Login</Button>
-        <p className="text-sm flex gap-2">
+        <p className="flex gap-2 text-sm">
           <span className="text-primary">
             <Link href="">Lupa Kata Sandi</Link>
           </span>
