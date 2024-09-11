@@ -12,11 +12,8 @@ export async function registerUser(data: UserRegisterType) {
       phone_number: data.phoneNumber,
     });
 
-    console.log("DAta => ", response.data);
-
     return response.data;
   } catch (e: any) {
-    console.log("Error =>", e.response.data.message);
-    return null;
+    throw new Error(e.response.data.message);
   }
 }

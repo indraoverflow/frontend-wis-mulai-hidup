@@ -38,6 +38,7 @@ export default function Header({}: Props) {
         </ul>
         <div className="relative flex items-center justify-end flex-1 gap-7 md:flex-grow-0 md:items-start">
           {session ? (
+            // FIXME: login and start free trial button slighly shown when user is logged in and the page is reloaded
             <Button
               size={"sm"}
               rounded={"sm"}

@@ -12,6 +12,7 @@ import ErrorMessage from "@/components/auth/ErrorMessage";
 import { userLoginSchema, UserLoginType } from "@/types/user-login-type";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FaSpinner } from "react-icons/fa";
 
 type Props = {};
 
@@ -19,12 +20,12 @@ export default function LoginForm({}: Props) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<UserLoginType>({
     resolver: zodResolver(userLoginSchema),
   });
 
-  const push = useRouter();
+  const { push } = useRouter();
 
   const onSubmit: SubmitHandler<UserLoginType> = async (data) => {
     try {
@@ -36,7 +37,9 @@ export default function LoginForm({}: Props) {
         callbackUrl: "/",
       });
       if (!res?.error) {
-        push.push("/");
+        push("/");
+      } else {
+        throw new Error(res.error);
       }
     } catch (error) {
       console.log(error);
@@ -46,31 +49,41 @@ export default function LoginForm({}: Props) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <CardContent className="p-0">
-        <div className="grid items-center w-full gap-4">
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="email"
-              id="email"
-              placeholder="Email"
-              {...register("email")}
-            />
-            {errors.email && <ErrorMessage error={errors.email.message} />}
+        <fieldset disabled={isSubmitting}>
+          <div className="grid items-center w-full gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && <ErrorMessage error={errors.email.message} />}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="password"
+                id="password"
+                placeholder="Kata Sandi"
+                {...register("password")}
+              />
+              {errors.password && (
+                <ErrorMessage error={errors.password.message} />
+              )}
+            </div>
           </div>
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="password"
-              id="password"
-              placeholder="Kata Sandi"
-              {...register("password")}
-            />
-            {errors.password && (
-              <ErrorMessage error={errors.password.message} />
-            )}
-          </div>
-        </div>
+        </fieldset>
       </CardContent>
       <CardFooter className="flex flex-col justify-center gap-4">
-        <Button className="px-6 rounded">Login</Button>
+        <Button className="px-6 rounded">
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="w-4 h-4 mr-2 animate-spin" /> Loading...
+            </>
+          ) : (
+            "Login"
+          )}
+        </Button>
         <p className="flex gap-2 text-sm">
           <span className="text-primary">
             <Link href="">Lupa Kata Sandi</Link>

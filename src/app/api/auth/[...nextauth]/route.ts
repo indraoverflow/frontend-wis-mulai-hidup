@@ -2,9 +2,46 @@ import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 // imports
 import config from "@/lib/config";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { DefaultSession, NextAuthOptions, User } from "next-auth";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id?: string | null;
+      roleName?: string | null;
+      accessToken?: string | null;
+      refreshToken?: string | null;
+    } & DefaultSession["user"];
+  }
+
+  interface User {
+    roleName: string | null;
+    accessToken: string | null;
+    refreshToken: string | null;
+  }
+}
+
+const getUserFromJwt = (accessToken: string, refreshToken: string): User => {
+  const decoded: {
+    id: string;
+    name: string;
+    email: string;
+    role_name: string;
+  } = jwtDecode(accessToken);
+
+  const user: User = {
+    id: decoded.id,
+    name: decoded.name,
+    email: decoded.email,
+    roleName: decoded.role_name,
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+  };
+
+  return user;
+};
 
 const authOptions: NextAuthOptions = {
   session: {
@@ -17,6 +54,25 @@ const authOptions: NextAuthOptions = {
       clientSecret: config.googleClientSecret as string,
     }),
     Credentials({
+      id: "jwt",
+      type: "credentials",
+      name: "jwt",
+      credentials: {
+        accessToken: {},
+        refreshToken: {},
+      },
+      async authorize(credentials, req) {
+        if (!credentials) return null;
+        const { accessToken, refreshToken } = credentials as {
+          accessToken: string;
+          refreshToken: string;
+        };
+
+        return getUserFromJwt(accessToken, refreshToken);
+      },
+    }),
+    Credentials({
+      id: "credentials",
       type: "credentials",
       name: "Credentials",
       credentials: {
@@ -30,64 +86,45 @@ const authOptions: NextAuthOptions = {
           email: string;
           password: string;
         };
+
         try {
           const res = await axios.post(`${config.apiUrl}/auth/login`, {
             email: email,
             password: password,
           });
 
-          console.log("token data => ", res.data.token);
+          const user = getUserFromJwt(
+            res.data.token.access_token,
+            res.data.token.refresh_token
+          );
 
-          const decoded: {
-            id: string;
-            name: string;
-            email: string;
-            role_name: string;
-          } = jwtDecode(res.data.token.access_token);
-          console.log("decoded => ", decoded);
-
-          const user = {
-            id: decoded.id,
-            name: decoded.name,
-            email: decoded.email,
-            roleName: decoded.role_name,
-          };
           return user;
-        } catch (error) {
-          return null;
+        } catch (error: any) {
+          throw new Error(error.response?.data.message);
         }
       },
     }),
   ],
   callbacks: {
     async jwt({ token, account, profile, user }) {
-      // console.log("account => ", account);
-      // console.log("profile => ", profile);
-      // console.log("user => ", user);
-      // console.log("token => ", token);
-      if (user) {
-        // This will only be executed at login. Each next invocation will skip this part.
-        // token.accessToken = user.token.accessToken;
-        // token.refreshToken = user.token.refreshToken;
+      if (account?.provider === "credentials" || account?.provider === "jwt") {
+        return { ...token, ...user };
       }
 
-      // if (account?.provider === "credentials") {
-      //   token.id = user?.id;
-      //   // token.role = user?.role;
-      //   token.email = user?.email;
-      //   token.name = user?.name;
-      // }
-      // if (user) {
-      //   token.id = user.id;
-      // }
       return token;
     },
     async session({ session, token }) {
-      if (token.email) {
-        session.user!.email = token.email;
+      session.user.email = token.email;
+      session.user.name = token.name;
+      if ("id" in token) session.user.id = token.id as string;
+      if ("roleName" in token) session.user.roleName = token.roleName as string;
+
+      if ("accessToken" in token) {
+        session.user.accessToken = token.accessToken as string;
       }
-      if (token.name) {
-        session.user!.name = token.name;
+
+      if ("refreshToken" in token) {
+        session.user.refreshToken = token.refreshToken as string;
       }
 
       return session;

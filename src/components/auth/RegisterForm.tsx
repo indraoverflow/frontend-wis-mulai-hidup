@@ -14,13 +14,13 @@ import {
 } from "@/types/user-register-type";
 import ErrorMessage from "@/components/auth/ErrorMessage";
 import { registerUser } from "@/actions/registerUser";
-import { RxReload } from "react-icons/rx";
 import { FaSpinner } from "react-icons/fa";
+import { signIn } from "next-auth/react";
 
 type Props = {};
 
 export default function RegisterForm({}: Props) {
-  const router = useRouter();
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -30,66 +30,79 @@ export default function RegisterForm({}: Props) {
   });
 
   const onSubmit: SubmitHandler<UserRegisterType> = async (data) => {
-    await registerUser(data);
-    router.push("/");
+    try {
+      const response = await registerUser(data);
+      await signIn("jwt", {
+        redirect: false,
+        accessToken: response.token.access_token,
+        refreshToken: response.token.refresh_token,
+        callbackUrl: "/",
+      });
+
+      push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
       <CardContent className="p-0">
-        <div className="grid items-center w-full gap-4">
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="text"
-              id="name"
-              placeholder="Nama"
-              {...register("name")}
-            />
-            {errors.name && <ErrorMessage error={errors.name.message} />}
+        <fieldset disabled={isSubmitting}>
+          <div className="grid items-center w-full gap-4">
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="text"
+                id="name"
+                placeholder="Nama"
+                {...register("name")}
+              />
+              {errors.name && <ErrorMessage error={errors.name.message} />}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="number"
+                id="phone_number"
+                placeholder="Nomor Handphone"
+                {...register("phoneNumber")}
+              />
+              {errors.phoneNumber && (
+                <ErrorMessage error={errors.phoneNumber.message} />
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="email"
+                id="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && <ErrorMessage error={errors.email.message} />}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="password"
+                id="password"
+                placeholder="Kata Sandi"
+                {...register("password")}
+              />
+              {errors.password && (
+                <ErrorMessage error={errors.password.message} />
+              )}
+            </div>
+            <div className="flex flex-col space-y-1.5">
+              <Input
+                type="password"
+                id="password_confirm"
+                placeholder="Konfirmasi Kata Sandi"
+                {...register("passwordConfirm")}
+              />
+              {errors.passwordConfirm && (
+                <ErrorMessage error={errors.passwordConfirm.message} />
+              )}
+            </div>
           </div>
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="number"
-              id="phone_number"
-              placeholder="Nomor Handphone"
-              {...register("phoneNumber")}
-            />
-            {errors.phoneNumber && (
-              <ErrorMessage error={errors.phoneNumber.message} />
-            )}
-          </div>
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="email"
-              id="email"
-              placeholder="Email"
-              {...register("email")}
-            />
-            {errors.email && <ErrorMessage error={errors.email.message} />}
-          </div>
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="password"
-              id="password"
-              placeholder="Kata Sandi"
-              {...register("password")}
-            />
-            {errors.password && (
-              <ErrorMessage error={errors.password.message} />
-            )}
-          </div>
-          <div className="flex flex-col space-y-1.5">
-            <Input
-              type="password"
-              id="password_confirm"
-              placeholder="Konfirmasi Kata Sandi"
-              {...register("passwordConfirm")}
-            />
-            {errors.passwordConfirm && (
-              <ErrorMessage error={errors.passwordConfirm.message} />
-            )}
-          </div>
-        </div>
+        </fieldset>
       </CardContent>
       <CardFooter className="flex flex-col items-center justify-center gap-4 p-0">
         <Button
@@ -97,7 +110,7 @@ export default function RegisterForm({}: Props) {
           type="submit"
           aria-disabled={isSubmitting}
         >
-          {isSubmitting || isLoading ? (
+          {isSubmitting ? (
             <>
               <FaSpinner className="w-4 h-4 mr-2 animate-spin" /> Loading...
             </>
