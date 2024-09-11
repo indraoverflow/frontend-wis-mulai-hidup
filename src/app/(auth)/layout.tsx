@@ -5,8 +5,8 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex min-h-screen bg-surface  items-center justify-center  p-5 lg:px-24 gap-8">
-      <div className="flex gap-20 items-center justify-center max-w-screen-desktop w-10/12 lg:w-full">
+    <section className="flex items-center justify-center min-h-screen gap-8 p-5 bg-surface lg:px-24">
+      <div className="flex items-center justify-center w-10/12 gap-20 max-w-screen-desktop lg:w-full">
         <Image
           src="/images/auth-hero.png"
           width={455}

@@ -20,7 +20,7 @@ export default function GoogleButton() {
   return (
     <Button
       variant="outline"
-      className="flex gap-2 text-2xl flex-1"
+      className="flex flex-1 gap-2 text-2xl bg-white"
       onClick={signInWithGoogle}
     >
       <FcGoogle width={24} height={24} />

@@ -6,14 +6,14 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import NavLink from "./NavLink";
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
 type Props = {};
 
 export default function Header({}: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const {data:session} = useSession();
+  const { data: session } = useSession();
   return (
     <header className="sticky top-0 py-[10px] md:py-5 lg:py-10 flex-col items-center bg-surface z-40">
       <nav className="flex  items-center justify-between md:gap-10 lg:gap-14 xl:gap-[138px] max-w-desktop px-5 lg:px-20 xl:px-[100px] mx-auto">
@@ -36,37 +36,39 @@ export default function Header({}: Props) {
           <NavLink label="Harga" route="/harga" />
           <NavLink label="FAQ" route="/faq" />
         </ul>
-        <div className="relative flex items-center justify-end flex-1 gap-7 md:flex-grow-0 md:items-start">{
-          session ? (
+        <div className="relative flex items-center justify-end flex-1 gap-7 md:flex-grow-0 md:items-start">
+          {session ? (
+            // FIXME: login and start free trial button slighly shown when user is logged in and the page is reloaded
             <Button
-            size={"sm"}
-            rounded={"sm"}
-            className="h-10 p-2 rounded lg:p-5"
-          >
-            Hai, &nbsp;{session.user?.name}
-          </Button>
-          ):(
-          <>
-            <Link href={"/login"}>
-              <Button
-              
-              variant={"outline"}
               size={"sm"}
               rounded={"sm"}
-              className="h-10 p-2 rounded bg-surface border-surface lg:p-5 lg:bg-primary lg:text-primary-foreground lg:hover:bg-primary/90 lg:hover:text-primary-foreground"
+              className="h-10 p-2 rounded lg:p-5"
+              onClick={() => signOut()}
+            >
+              Hai, &nbsp;{session.user?.name}
+            </Button>
+          ) : (
+            <>
+              {/* <Link href={"/login"}> */}
+              <Button
+                onClick={() => signIn()}
+                variant={"outline"}
+                size={"sm"}
+                rounded={"sm"}
+                className="h-10 p-2 rounded bg-surface border-surface lg:p-5 lg:bg-primary lg:text-primary-foreground lg:hover:bg-primary/90 lg:hover:text-primary-foreground"
               >
                 Login
               </Button>
-            </Link>
-            <Button
-              variant={"outline"}
-              size={"sm"}
-              className="h-10 px-2 py-0 border-black rounded md:px-9 lg:border-primary"
-            >
+              {/* </Link> */}
+              <Button
+                variant={"outline"}
+                size={"sm"}
+                className="h-10 px-2 py-0 border-black rounded md:px-9 lg:border-primary"
+              >
                 <span className="hidden md:block">Start &nbsp;</span> Free Trial
               </Button>
-          </>)
- }
+            </>
+          )}
           <button
             className="relative z-50 flex items-center justify-center w-8 h-8 md:hidden"
             onClick={() => setIsExpanded(!isExpanded)}
@@ -90,5 +92,3 @@ export default function Header({}: Props) {
     </header>
   );
 }
-
-
