@@ -42,7 +42,7 @@ Ensure you have the following installed:
    ```bash
    NEXTAUTH_SECRET=
    NEXTAUTH_URL=
-
+   API_URL=
    GOOGLE_CLIENT_ID=
    GOOGLE_CLIENT_SECRET=
    ```
