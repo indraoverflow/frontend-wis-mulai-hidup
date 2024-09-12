@@ -21,10 +21,9 @@ export default function page() {
           )}
         >
           Lihat contoh pasangan yang sudah menjadi client kami
-        </p> 
+        </p>
 
         <Button
-        
           variant={"outline"}
           className="flex gap-2 p-4 pr-5 bg-white rounded"
         >
@@ -34,7 +33,7 @@ export default function page() {
       </section>
       <section className="grid grid-cols-1 gap-5 px-5 mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-desktop lg:px-20 bg-blue xl:px-[100px]">
         {[0, 1, 2, 3, 4, 5].map((i) => (
-          <Card className=" flex-col p-6 gap-y-[14px] flex" key={i}>
+          <Card className="flex flex-col p-6 gap-y-[14px]" key={i}>
             <CardContent className="p-0">
               <Image
                 src="/template-placeholder.png"
@@ -43,7 +42,7 @@ export default function page() {
                 height={370}
               />
             </CardContent>
-            <CardDescription className="p-0 text-center border-b  border-b-black text-[40px]">
+            <CardDescription className="p-0 text-center border-b border-b-black text-[40px]">
               Azka & Zelda
             </CardDescription>
           </Card>

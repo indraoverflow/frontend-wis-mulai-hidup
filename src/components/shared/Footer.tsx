@@ -23,10 +23,10 @@ export default function Footer({}: Props) {
           <HiOutlineEnvelope className="w-full h-full" />
         </IconButton>
       </div>
-      <p className="text-sm lg:text-base text-center">
+      <p className="text-sm text-center lg:text-base">
         About Us | Privacy Policy | Term of Use
       </p>
-      <p className="text-sm lg:text-base text-center">
+      <p className="text-sm text-center lg:text-base">
         ©{`${new Date(Date.now()).getFullYear()}`}&nbsp;Mulai Hidup. Built with
         Heart and passion
       </p>
