@@ -26,15 +26,15 @@ const fetchProfile = async (token: string) => {
 }
 
 const ProfilePage = () => {
-  const { data: session } = useSession();
-  const [user, setUser] = useState<UserProfile | null>(null);
+  // const { data: session } = useSession();
+  // const [user, setUser] = useState<UserProfile | null>(null);
 
-  useEffect(() => {
-    if (session) {
-      fetchProfile(session.user?.accessToken as string)
-        .then((data) => setUser(data));
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     fetchProfile(session.user?.accessToken as string)
+  //       .then((data) => setUser(data));
+  //   }
+  // }, [session]);
 
   return (
     <div className="bg-surface min-h-screen flex flex-col items-center px-4 py-24">
@@ -55,19 +55,19 @@ const ProfilePage = () => {
             <div className='mb-3'>
               <h6 className='text-base mb-3'>Email</h6>
               <p className='text-[#B3B3B3]'>
-                {user?.email ?? '-'}
+                muhammadfahkri@gmail.com
               </p>
             </div>
             <div className='mb-3'>
               <h6 className='text-base mb-3'>Nama</h6>
               <p className='text-[#B3B3B3]'>
-                {user?.name ?? '-'}
+                Muhammad Fahkri
               </p>
             </div>
             <div className='mb-3'>
               <h6 className='text-base mb-3'>Nomor Handphone</h6>
               <p className='text-[#B3B3B3]'>
-                {user?.phone ?? '-'}
+                081388746659
               </p>
             </div>
             <div className='mb-3'>
@@ -79,7 +79,7 @@ const ProfilePage = () => {
             <div className='mb-3'>
               <h6 className='text-base mb-3'>Jenis Kelamin</h6>
               <p className='text-[#B3B3B3]'>
-                {user?.gender ?? '-'}
+                Laki-laki
               </p>
             </div>
           </CardContent>
