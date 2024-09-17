@@ -3,9 +3,8 @@ import { getSession } from "next-auth/react";
 import config from "@/lib/config";
 
 // Create an Axios instance with default configuration
-const axiosInstance: AxiosInstance = axios.create({
-  baseURL: `http://localhost:3001`,
-//   baseURL: `${config.apiUrl}`,
+const axiosInstance: AxiosInstance = axios.create({  
+  baseURL: `${config.apiUrl}`,
   timeout: 10000, // Request timeout in milliseconds
   headers: {
     "Content-Type": "application/json",
