@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import config from "./lib/config";
 
 // Daftar rute yang memerlukan login
-const protectedRoutes = ["/dummy"];
+const protectedRoutes = [
+  "/profile",
+  "/password",
+  "/password/edit",
+  "/my-invitation"
+];
 
 // Daftar rute yang tidak boleh diakses jika sudah login
 const publicRoutes = ["/login", "/register"];
