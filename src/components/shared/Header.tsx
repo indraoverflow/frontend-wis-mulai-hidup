@@ -2,7 +2,7 @@
 
 import React from "react";
 import Logo from "./Logo";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import NavLink from "./NavLink";
@@ -15,16 +15,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 type Props = {
   showMenu?: boolean;
 };
 
-export default function Header({
-  showMenu = true,
-}: Props) {
+export default function Header({ showMenu = true }: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const { data: session } = useSession();
   return (
@@ -41,7 +39,7 @@ export default function Header({
           <ul
             className={cn(
               "flex justify-start flex-1 flex-col z-40 h-screen px-4 pt-24 gap-6 w-10/12 top-0 right-0  max-w-sm border-l border-l-tertiary  bg-surface absolute transition-all duration-500 ease-in-out",
-              "md:justify-center  md:item-center md:static md:flex-row md:max-w-[400px] md:h-fit md:pt-0   md:p-0  md:gap-0 md:border-none lg:gap-[76px]  lg:max-w-full",
+              "md:justify-evenly md:item-center md:static md:flex-row md:max-w-[400px] md:h-fit md:pt-0   md:p-0  md:gap-0 md:border-none lg:gap-[76px]  lg:max-w-full",
               `${isExpanded ? "w-10/12" : "w-0 px-0 overflow-hidden"}`
             )}
           >
@@ -52,17 +50,23 @@ export default function Header({
           </ul>
         )}
         <div className="relative flex items-center justify-end flex-1 gap-7 md:flex-grow-0 md:items-start">
-          {session ? (
+          {session && session.user ? (
             // FIXME: login and start free trial button slighly shown when user is logged in and the page is reloaded
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <Button
-                  size={"sm"}
-                  rounded={"sm"}
-                  className="h-10 p-2 rounded lg:p-5"
+                <div
+                  // size={"sm"}
+                  // rounded={"sm"}
+                  className={buttonVariants({
+                    size: "sm",
+                    rounded: "sm",
+                    className:
+                      "h-10 p-2 rounded lg:p-5 flex items-center gap-2",
+                  })}
                 >
-                  Hai, &nbsp;{session.user?.name} <IoMdArrowDropdown className="ml-2" />
-                </Button>
+                  Hai, &nbsp;{session.user?.name}{" "}
+                  <IoMdArrowDropdown className="ml-2" />
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>

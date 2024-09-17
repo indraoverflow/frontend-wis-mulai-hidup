@@ -13,8 +13,8 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="relative flex flex-col items-center justify-center gap-8 py-24 bg-surface">
-        <section className="container flex flex-col items-center justify-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] mb-8 md:mb-24">
+      <main className="relative flex flex-col items-center justify-center gap-24 py-24  bg-surface">
+        <section className="container flex flex-col items-center justify-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] ">
           <h1 className={cn("text-5xl text-center", minervaModern.className)}>
             {'"'}Refleksi Cinta dan Keimanan
           </h1>
@@ -35,8 +35,8 @@ export default function Home() {
             Mulai Sekarang
           </Button>
         </section>
-        <section className="container flex flex-col px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] mb-8 md:mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
+        <section className="container flex flex-col gap-14 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] ">
+          <div className="grid grid-cols-1 gap-5  mx-auto md:grid-cols-2 lg:grid-cols-3 max-w-desktop  bg-blue">
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <Card className="flex flex-col p-6 gap-y-[14px] " key={i}>
                 <CardContent className="p-0 flex justify-center">
@@ -72,15 +72,11 @@ export default function Home() {
             Mulai Sekarang
           </Button>
         </section>
-        <section className="container flex flex-col items-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] mb-8 md:mb-24">
+        <section className="container flex flex-col items-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] ">
           <h3 className={cn("text-4xl text-center", minervaModern.className)}>
             Mengapa Layanan Kami ?
           </h3>
-          <p
-            className="text-2xl text-center"
-          >
-            Benefit memakai layanan kami:
-          </p>
+          <p className="text-2xl text-center">Benefit memakai layanan kami:</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="px-16 py-20">
               <CardContent className="flex items-center justify-center mb-6">
@@ -91,9 +87,7 @@ export default function Home() {
                   height={158}
                 />
               </CardContent>
-              <p className="text-center text-xl">
-                Hemat Biaya dan Waktu
-              </p>
+              <p className="text-center text-xl">Hemat Biaya dan Waktu</p>
             </Card>
             <Card className="px-16 py-20">
               <CardContent className="flex items-center justify-center mb-6">
@@ -104,9 +98,7 @@ export default function Home() {
                   height={158}
                 />
               </CardContent>
-              <p className="text-center text-xl">
-                Fleksibilitas Design
-              </p>
+              <p className="text-center text-xl">Fleksibilitas Design</p>
             </Card>
             <Card className="px-16 py-20">
               <CardContent className="flex items-center justify-center mb-6">
@@ -117,9 +109,7 @@ export default function Home() {
                   height={158}
                 />
               </CardContent>
-              <p className="text-center text-xl">
-                Ramah Lingkungan
-              </p>
+              <p className="text-center text-xl">Ramah Lingkungan</p>
             </Card>
             <Card className="px-16 py-20">
               <CardContent className="flex items-center justify-center mb-6">
@@ -130,40 +120,40 @@ export default function Home() {
                   height={158}
                 />
               </CardContent>
-              <p className="text-center text-xl">
-                Update Real-time
-              </p>
+              <p className="text-center text-xl">Update Real-time</p>
             </Card>
           </div>
         </section>
         <section className="container flex flex-col gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-          <h3 className={cn("text-4xl text-center mb-9", minervaModern.className)}>
+          <h3
+            className={cn("text-4xl text-center mb-9", minervaModern.className)}
+          >
             Apa Kata Mereka ?
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {[0, 1, 2, 3].map((i) => (
-            <Card key={i}>
-              <CardContent className="p-12">
-                <h1 className="text-5xl font-semibold mb-12">“Quote”</h1>
-                <div className="flex items-center gap-6">
-                  <Avatar>
-                    <AvatarImage 
-                      src="https://github.com/shadcn.png" 
-                      className="rounded-full" 
-                      width={80} 
-                      height={80} 
-                      alt="@shadcn" 
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <CardDescription>
-                    <h4 className="text-xl">Title</h4>
-                    <p className="text-xl">Description</p>
-                  </CardDescription>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+            {[0, 1, 2, 3].map((i) => (
+              <Card key={i}>
+                <CardContent className="p-12">
+                  <h1 className="text-5xl font-semibold mb-12">“Quote”</h1>
+                  <div className="flex items-center gap-6">
+                    <Avatar>
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        className="rounded-full"
+                        width={80}
+                        height={80}
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <CardContent>
+                      <h4 className="text-xl">Title</h4>
+                      <p className="text-xl">Description</p>
+                    </CardContent>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
       </main>

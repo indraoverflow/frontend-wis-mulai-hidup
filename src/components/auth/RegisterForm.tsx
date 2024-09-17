@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,6 +16,9 @@ import ErrorMessage from "@/components/auth/ErrorMessage";
 import { registerUser } from "@/actions/registerUser";
 import { FaSpinner } from "react-icons/fa";
 import { signIn } from "next-auth/react";
+import { Alert, AlertDescription } from "../ui/alert";
+import { RxCrossCircled } from "react-icons/rx";
+import { errorMapper } from "@/lib/error-mapper";
 
 type Props = {};
 
@@ -28,6 +31,7 @@ export default function RegisterForm({}: Props) {
   } = useForm<UserRegisterType>({
     resolver: zodResolver(userRegisterSchema),
   });
+  const [serverError, setServerError] = useState<string[]>([]);
 
   const onSubmit: SubmitHandler<UserRegisterType> = async (data) => {
     try {
@@ -38,15 +42,27 @@ export default function RegisterForm({}: Props) {
         refreshToken: response.token.refresh_token,
         callbackUrl: "/",
       });
-
-      push("/");
+      setServerError([]);
+      if (!response?.error) {
+        push("/");
+      }
     } catch (error) {
-      console.log(error);
+      setServerError([errorMapper(`${(error as Error).message}`)]);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      {serverError.length > 0 && (
+        <Alert variant="destructive">
+          <AlertDescription className="flex items-center justify-between">
+            {serverError}{" "}
+            <span onClick={() => setServerError([])} className="cursor-pointer">
+              <RxCrossCircled className="h-5 w-5" />
+            </span>
+          </AlertDescription>
+        </Alert>
+      )}
       <CardContent className="p-0">
         <fieldset disabled={isSubmitting}>
           <div className="grid items-center w-full gap-4">
