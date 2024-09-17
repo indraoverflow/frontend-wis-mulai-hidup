@@ -7,7 +7,7 @@ const protectedRoutes = [
   "/profile",
   "/password",
   "/password/edit",
-  "/my-invitation"
+  "/my-invitation",
 ];
 
 // Daftar rute yang tidak boleh diakses jika sudah login

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,10 +13,14 @@ import { userLoginSchema, UserLoginType } from "@/types/user-login-type";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FaSpinner } from "react-icons/fa";
+import { Alert, AlertDescription } from "../ui/alert";
+import { RxCrossCircled } from "react-icons/rx";
+import { errorMapper } from "@/lib/error-mapper";
 
 type Props = {};
 
 export default function LoginForm({}: Props) {
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
@@ -24,30 +28,39 @@ export default function LoginForm({}: Props) {
   } = useForm<UserLoginType>({
     resolver: zodResolver(userLoginSchema),
   });
-
-  const { push } = useRouter();
+  const [serverError, setServerError] = useState<string[]>([]);
 
   const onSubmit: SubmitHandler<UserLoginType> = async (data) => {
     try {
-      console.log(data);
       const res = await signIn("credentials", {
         redirect: false,
         email: data.email,
         password: data.password,
         callbackUrl: "/",
       });
+      setServerError([]);
       if (!res?.error) {
         push("/");
       } else {
         throw new Error(res.error);
       }
     } catch (error) {
-      console.log(error);
+      setServerError([errorMapper(`${(error as Error).message}`)]);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      {serverError.length > 0 && (
+        <Alert variant="destructive">
+          <AlertDescription className="flex items-center justify-between">
+            {serverError}{" "}
+            <span onClick={() => setServerError([])} className="cursor-pointer">
+              <RxCrossCircled className="h-5 w-5" />
+            </span>
+          </AlertDescription>
+        </Alert>
+      )}
       <CardContent className="p-0">
         <fieldset disabled={isSubmitting}>
           <div className="grid items-center w-full gap-4">

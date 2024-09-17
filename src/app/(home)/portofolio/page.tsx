@@ -9,7 +9,7 @@ import { GoArrowUpRight } from "react-icons/go";
 
 export default function page() {
   return (
-    <main className="relative flex flex-col items-center justify-center gap-8 py-24 bg-surface">
+    <main className="relative flex flex-col items-center justify-center gap-24 py-24 bg-surface">
       <section className="flex flex-col items-center justify-center gap-5 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
         <h1 className={cn("text-5xl text-center", minervaModern.className)}>
           Portofolio
