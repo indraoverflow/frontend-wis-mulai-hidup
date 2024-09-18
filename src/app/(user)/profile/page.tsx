@@ -58,23 +58,23 @@ const ProfilePage = () => {
           <CardContent>
             <div className="mb-3">
               <h6 className="text-base mb-3">Email</h6>
-              <p className="text-[#B3B3B3]">{user?.email ?? "-"}</p>
+              <p className="text-philippine-silver">{user?.email ?? "-"}</p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Nama</h6>
-              <p className="text-[#B3B3B3]">{user?.name ?? "-"}</p>
+              <p className="text-philippine-silver">{user?.name ?? "-"}</p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Nomor Handphone</h6>
-              <p className="text-[#B3B3B3]">{user?.phone ?? "-"}</p>
+              <p className="text-philippine-silver">{user?.phone ?? "-"}</p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Tanggal Lahir</h6>
-              <p className="text-[#B3B3B3]">05 - 10 - 1992</p>
+              <p className="text-philippine-silver">05 - 10 - 1992</p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Jenis Kelamin</h6>
-              <p className="text-[#B3B3B3]">{user?.gender ?? "-"}</p>
+              <p className="text-philippine-silver">{user?.gender ?? "-"}</p>
             </div>
           </CardContent>
         </Card>

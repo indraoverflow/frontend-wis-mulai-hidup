@@ -12,7 +12,7 @@ export default function PasswordPage() {
     return (
         <div className="bg-surface min-h-screen flex flex-col items-center px-4 py-24">
             <div className="container mx-auto max-w-5xl">
-            <h3 className='text-2xl font-bold text-[#B3B3B3]'>Kata Sandi</h3>
+            <h3 className='text-2xl font-bold text-philippine-silver'>Kata Sandi</h3>
             <hr className='my-3'/>
             <Card>
                 <CardHeader>
@@ -27,12 +27,12 @@ export default function PasswordPage() {
                     <hr className='border-primary'/>
                 </CardHeader>
                 <CardContent>
-                    <p className='text-[#B3B3B3] mb-3'>
+                    <p className='text-philippine-silver mb-3'>
                         Dengan membuat kata sandi, anda dapat melakukan login dengan menggunakan kata sandi ataupun dengan akun google dan facebook
                     </p>
                     <div className='mb-3'>
                         <h6 className='text-base mb-3'>Email</h6>
-                        <p className='text-[#B3B3B3]'>
+                        <p className='text-philippine-silver'>
                             {session?.user?.email ?? '-'}
                         </p>
                     </div>
