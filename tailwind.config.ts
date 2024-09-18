@@ -68,6 +68,7 @@ const config: Config = {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        "philippine-silver": "#B3B3B3",
       },
       maxWidth: {
         desktop: "1440px",
