@@ -26,8 +26,8 @@ export default function Header({ showMenu = true }: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const { data: session } = useSession();
   return (
-    <header className="sticky top-0 py-[10px] md:py-5 lg:py-10 flex-col items-center bg-surface z-40">
-      <nav className="flex  items-center justify-between md:gap-10 lg:gap-14 xl:gap-[138px] max-w-desktop px-5 lg:px-20 xl:px-[100px] mx-auto">
+    <header className="sticky top-0  py-7 px-7 md:py-5 lg:py-10 lg:px-0 flex-col items-center bg-surface z-40">
+      <nav className="flex  items-center justify-between md:gap-10 lg:gap-14 xl:gap-[138px] max-w-desktop px-5  lg:px-20 xl:px-[100px] mx-auto">
         <Logo width={80} height={80} className="w-10 lg:w-20" />
         {isExpanded ? (
           <div
@@ -39,7 +39,7 @@ export default function Header({ showMenu = true }: Props) {
           <ul
             className={cn(
               "flex justify-start flex-1 flex-col z-40 h-screen px-4 pt-24 gap-6 w-10/12 top-0 right-0  max-w-sm border-l border-l-tertiary  bg-surface absolute transition-all duration-500 ease-in-out",
-              "md:justify-evenly md:item-center md:static md:flex-row md:max-w-[400px] md:h-fit md:pt-0   md:p-0  md:gap-0 md:border-none lg:gap-[76px]  lg:max-w-full",
+              "md:justify-evenly md:item-center md:static md:flex-row md:max-w-[400px] md:h-fit md:pt-0   md:p-0  md:gap-0 md:border-none lg:gap-12 xl:gap-[76px] lg:max-w-screen-md xl:max-w-desktop",
               `${isExpanded ? "w-10/12" : "w-0 px-0 overflow-hidden"}`
             )}
           >
@@ -49,7 +49,7 @@ export default function Header({ showMenu = true }: Props) {
             <NavLink label="FAQ" route="/faq" />
           </ul>
         )}
-        <div className="relative flex items-center justify-end flex-1 gap-7 md:flex-grow-0 md:items-start">
+        <div className="relative flex items-center justify-end flex-1 gap-4 md:gap-7 md:flex-grow-0 md:items-start">
           {session && session.user ? (
             // FIXME: login and start free trial button slighly shown when user is logged in and the page is reloaded
             <DropdownMenu>
@@ -94,7 +94,7 @@ export default function Header({ showMenu = true }: Props) {
                 variant={"outline"}
                 size={"sm"}
                 rounded={"sm"}
-                className="h-10 p-2 rounded bg-surface border-surface lg:p-5 lg:bg-primary lg:text-primary-foreground lg:hover:bg-primary/90 lg:hover:text-primary-foreground"
+                className="h-8 md:h-10  rounded bg-primary text-primary-foreground border-surface md:text-black lg:p-5 md:bg-surface lg:bg-primary lg:text-primary-foreground lg:hover:bg-primary/90 lg:hover:text-primary-foreground"
               >
                 Login
               </Button>
@@ -102,7 +102,7 @@ export default function Header({ showMenu = true }: Props) {
               <Button
                 variant={"outline"}
                 size={"sm"}
-                className="h-10 px-2 py-0 border-black rounded md:px-9 lg:border-primary"
+                className="h-8 md:h-10  py-0 border-black rounded md:px-9 lg:border-primary"
               >
                 <span className="hidden md:block">Start &nbsp;</span> Free Trial
               </Button>
