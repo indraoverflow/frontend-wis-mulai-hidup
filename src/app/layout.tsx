@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${elza.className}`}>
+      <body className={`${elza.className} min-h-dvh flex flex-col`}>
         <Suspense fallback={<Loading />}>
           <StoreProvider>
             <SessionWrapper>{children}</SessionWrapper>
