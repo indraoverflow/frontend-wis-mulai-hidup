@@ -85,10 +85,10 @@ yarn start
 
 ## Screenshots
 
-| Page     | Mobile                                                | Dsktop                                                 |
+| Page     | Mobile                                                | Desktop                                                 |
 | -------- | ----------------------------------------------------- | ------------------------------------------------------ |
 | Register | ![Register](./public/images/docs/register-mobile.png) | ![Register](./public/images/docs/register-desktop.png) |
-| Register | ![Register](./public/images/docs/login-mobile.png)    | ![Register](./public/images/docs/login-desktop.png)    |
+| Login | ![Login](./public/images/docs/login-mobile.png)    | ![Login](./public/images/docs/login-desktop.png)    |
 
 <!--
 ![Home Page](url-to-image)
