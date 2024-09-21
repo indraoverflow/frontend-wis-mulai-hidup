@@ -3,6 +3,7 @@ import { Card, CardContent } from "../ui/card";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type Props = {
   image: number;
@@ -24,14 +25,14 @@ export default function TemplatePreviewCard({ image = 1 }: Props) {
           <p className="text-[21px]">Basic {image}</p>
           <p className="text-[21px]">Bohemian</p>
         </div>
-        <a
-          href=""
+        <Link
+          href={`/theme/${image > 2 ? 1 : image}`}
           className={cn(
             "flex justify-center items-center m-2 rounded-full border border-black h-7 w-7"
           )}
         >
           <GoArrowUpRight className="w-5 h-5" />
-        </a>
+        </Link>
       </CardContent>
     </Card>
   );
