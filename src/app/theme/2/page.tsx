@@ -8,12 +8,97 @@ import CommentCard from "@/components/theme/comment-card";
 import OurStory from "@/components/theme/OurStory";
 import { accounts, comments, story } from "@/lib/data";
 import Footer from "@/components/shared/Footer";
+import Image from "next/image";
 
 export default function ThemePage() {
   return (
     <>
-      <div className="relative">
-        <div className="py-[262px] bg-phthalo-green">
+      <main className="relative">
+        <div className="bg-surface pb-0">
+          <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
+            <div className="text-center mb-[-150px]">
+              <h3 className="font-bold text-4xl mb-14">
+                We’r Getting Married
+              </h3>
+              <h2 className="text-5xl text-dark-liver mb-3">
+                Assalamualaikum Warrohmatullah Wabarrakatuhu
+              </h2>
+              <p className="font-medium text-spanish-gray text-xl mb-8">
+                By asking for the grace and blessing of Allah SWT. We intend to hold a wedding celebration for our sons and daughters, which Allah SWT willing will be held on:
+              </p>
+              <h3 className="font-bold text-raisin-black text-4xl">
+                THE WEDDING OF
+              </h3>
+              <p className="text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20">
+                <Image
+                  src={"/images/icon/leaf-theme-black.svg"}
+                  alt={"leaf decoration left"}
+                  width={40}
+                  height={60}
+                  className="hidden md:block"
+                />
+                Azka & Zeldya
+                <Image
+                  src={"/images/icon/leaf-theme-black.svg"}
+                  alt={"leaf decoration left"}
+                  className="hidden md:block  scale-x-[-1]"
+                  width={40}
+                  height={60}
+                />
+              </p>
+              <p className="text-[40px] text-raisin-black">
+                •<span className="mx-8">02 02 2025</span>•
+              </p>
+            </div>
+            <div className="relative top-48 z-20">
+              <div className="flex flex-col md:flex-row gap-8 w-full justify-center px-12 sm:px-20 md:px-12 lg:px-48">
+                <div className="rounded-[200px] overflow-hidden">
+                  <Image
+                    src={"/images/couple/groom-hero.png"}
+                    alt={"mempelai laki laki"}
+                    width={509}
+                    height={706}
+                    className="object-cover h-full"
+                  />
+                </div>
+                <div>
+                  <Image 
+                    src={"/images/icon/chevron-down-theme.svg"}
+                    alt="chevron down"
+                    width={18}
+                    height={18}
+                  />
+                </div>
+                <div className="rounded-[200px] overflow-hidden">
+                  <Image
+                    src={"/images/couple/bride-hero.png"}
+                    alt={"mempelai perempuan"}
+                    width={509}
+                    height={706}
+                    className="object-cover  h-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative px-4 py-32 md:py-[262px] bg-phthalo-green z-10">
+          <div className="hidden lg:block absolute right-0 top-0  z-30">
+            <Image 
+              src={"/images/background/bg-patern-theme.svg"}
+              alt="background patern"
+              width={522.6}
+              height={482.47}
+            />
+          </div>
+          <div className="hidden lg:block  absolute left-0 bottom-0  scale-[-1] z-30">
+            <Image 
+              src={"/images/background/bg-patern-theme.svg"}
+              alt="background patern"
+              width={522.6}
+              height={482.47}
+            />
+          </div>
           <OurStory
             {...story}
             className="border border-white text-white"
@@ -113,7 +198,7 @@ export default function ThemePage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
       <Footer variant="dark" />
     </>
   );
