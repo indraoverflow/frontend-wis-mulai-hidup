@@ -79,6 +79,7 @@ const config: Config = {
         "raisin-black": "#242424",
         "granite-gray": "#666666",
         isabelline: "#F0EFEF",
+        "dark-liver": "#4D4D4D",
       },
       maxWidth: {
         desktop: "1440px",
