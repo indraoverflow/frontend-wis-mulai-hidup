@@ -10,17 +10,22 @@ import { accounts, comments, story } from "@/lib/data";
 import Footer from "@/components/shared/Footer";
 import Image from "next/image";
 
+import { Comfortaa, Allura } from 'next/font/google';
+
+const comfortaa = Comfortaa({ subsets: ['latin'] });
+const allura = Allura({ subsets: ['latin'], weight: '400' });
+
 export default function ThemePage() {
   return (
     <>
-      <main className="relative">
+      <main className={`relative ${comfortaa.className}`}>
         <div className="bg-surface pb-0">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="text-center mb-[-150px]">
-              <h3 className="font-bold text-4xl mb-14">
+              <h3 className={`font-bold text-4xl mb-14`}>
                 We’r Getting Married
               </h3>
-              <h2 className="text-5xl text-dark-liver mb-3">
+              <h2 className={`text-5xl text-dark-liver mb-3 ${allura.className}`}>
                 Assalamualaikum Warrohmatullah Wabarrakatuhu
               </h2>
               <p className="font-medium text-spanish-gray text-xl mb-8">
@@ -29,7 +34,7 @@ export default function ThemePage() {
               <h3 className="font-bold text-raisin-black text-4xl">
                 THE WEDDING OF
               </h3>
-              <p className="text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20">
+              <p className={`text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20 ${allura.className}`}>
                 <Image
                   src={"/images/icon/leaf-theme-black.svg"}
                   alt={"leaf decoration left"}
