@@ -16,7 +16,7 @@ export default function TimeCard({
   return (
     <Card
       className={cn(
-        "rounded-[100px] text-white border-none bg-phthalo-green",
+        "rounded-[100px] text-white bg-phthalo-green",
         className
       )}
     >
