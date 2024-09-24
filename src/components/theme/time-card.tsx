@@ -20,9 +20,11 @@ export default function TimeCard({
         className
       )}
     >
-      <div className="px-4 md:px-11 py-8 text-center">
-        <h5 className="text-6xl font-bold mb-3">{title}</h5>
-        <p className="text-3xl">{subtitle}</p>
+      <div className="px-4 md:px-11 py-6 md:py-8 text-center">
+        <h5 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-2 md:mb-3">
+          {title}
+        </h5>
+        <p className="text-xl md:text-3xl">{subtitle}</p>
       </div>
     </Card>
   );
