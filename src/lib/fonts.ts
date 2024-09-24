@@ -1,3 +1,4 @@
+import { Comfortaa, Allura, Playfair_Display, Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 export const elza = localFont({
@@ -42,4 +43,28 @@ export const minervaModern = localFont({
   ],
   display: "swap",
   preload: true,
+});
+
+export const comfortaa = Comfortaa({
+  subsets: ["latin"],
+  preload: true,
+  display: "swap",
+});
+export const allura = Allura({
+  subsets: ["latin"],
+  weight: "400",
+  preload: true,
+  display: "swap",
+});
+
+export const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  preload: true,
+  display: "swap",
+});
+
+export const inter = Inter({
+  subsets: ["latin"],
+  preload: true,
+  display: "swap",
 });

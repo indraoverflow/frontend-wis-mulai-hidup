@@ -41,7 +41,7 @@ export default function OurStory({
           </div>
           <div
             className={cn(
-              " flex-1 hidden mb:block px-3 pt-7 pb-4 rounded-[20px]",
+              " flex-1 hidden md:block px-3 pt-7 pb-4 rounded-[20px]",
               className
             )}
           >
@@ -68,7 +68,7 @@ export default function OurStory({
           </div>
           <div
             className={cn(
-              " flex-1 hidden mb:block px-3 pt-7 pb-4 rounded-[20px]",
+              " flex-1 hidden md:block px-3 pt-7 pb-4 rounded-[20px]",
               className
             )}
           >
