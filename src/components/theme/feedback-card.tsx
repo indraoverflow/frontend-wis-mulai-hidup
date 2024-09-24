@@ -1,10 +1,16 @@
-import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '../ui/card';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Textarea } from '../ui/textarea';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Button } from '../ui/button';
+import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "../ui/card";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Button } from "../ui/button";
 
 interface FeedbackCardProps {
   title: string;
@@ -24,7 +30,9 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-black text-center">{title}</CardTitle>
+        <CardTitle className="text-3xl font-bold text-black text-center">
+          {title}
+        </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
@@ -50,18 +58,40 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
             <span className="text-red-500">*</span>
             {attendanceLabel}
           </Label>
-          <RadioGroup defaultValue="yes" className="flex space-x-4">
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="yes" id="yes" />
-              <Label htmlFor="yes">Yes</Label>
+          <RadioGroup
+            defaultValue="yes"
+            className="flex gap-0 rounded-[20px] overflow-hidden shadow-sm border border-platinum w-fit p-0"
+          >
+            <div className="flex items-center ">
+              <RadioGroupItem value="yes" id="yes" className="peer hidden" />
+              <Label
+                htmlFor="yes"
+                className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured"
+              >
+                Yes
+              </Label>
             </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="maybe" id="maybe" />
-              <Label htmlFor="maybe">Maybe</Label>
+            <div className="flex items-center">
+              <RadioGroupItem
+                value="maybe"
+                id="maybe"
+                className="peer hidden"
+              />
+              <Label
+                htmlFor="maybe"
+                className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured"
+              >
+                Maybe
+              </Label>
             </div>
-            <div className="flex items-center space-x-2">
-              <RadioGroupItem value="no" id="no" />
-              <Label htmlFor="no">No</Label>
+            <div className="flex items-center">
+              <RadioGroupItem value="no" id="no" className="peer hidden" />
+              <Label
+                htmlFor="no"
+                className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured"
+              >
+                No
+              </Label>
             </div>
           </RadioGroup>
         </div>

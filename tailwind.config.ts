@@ -80,6 +80,7 @@ const config: Config = {
         "granite-gray": "#666666",
         isabelline: "#F0EFEF",
         "dark-liver": "#4D4D4D",
+        "fire-opal": "#E65E5E",
       },
       maxWidth: {
         desktop: "1440px",
