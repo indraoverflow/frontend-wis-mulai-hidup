@@ -1,25 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { CreateInvitationType } from "@/types/invitation-types";
 import Image from "next/image";
 import { UseFormReturn } from "react-hook-form";
 
 export default function SelectTheme({
   form,
 }: {
-  form: UseFormReturn<
-    {
-      mr: string;
-      mrName: string;
-      mrTitle: string;
-      mrProfile: string;
-      mrs: string;
-      mrsName: string;
-      mrsTitle: string;
-      mrsProfile: string;
-    },
-    any,
-    undefined
-  >;
+  form: UseFormReturn<CreateInvitationType, any, undefined>;
 }) {
   return (
     <div className="bg-white flex flex-col items-center px-4 py-8">

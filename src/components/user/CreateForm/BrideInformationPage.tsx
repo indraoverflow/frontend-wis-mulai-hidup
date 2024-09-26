@@ -1,5 +1,3 @@
-"use client";
-
 import SubmitButton from "@/components/button/submit";
 import {
   Form,
@@ -11,26 +9,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { CreateInvitationType } from "@/types/invitation-types";
 import React from "react";
 import { UseFormReturn } from "react-hook-form";
 
 export default function BrideInformationPage({
   form,
 }: {
-  form: UseFormReturn<
-    {
-      mr: string;
-      mrName: string;
-      mrTitle: string;
-      mrProfile: string;
-      mrs: string;
-      mrsName: string;
-      mrsTitle: string;
-      mrsProfile: string;
-    },
-    any,
-    undefined
-  >;
+  form: UseFormReturn<CreateInvitationType, any, undefined>;
 }) {
   return (
     <div className="min-h-screen bg-surface py-24">
