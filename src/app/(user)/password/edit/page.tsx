@@ -1,13 +1,12 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import SubmitButton from '@/components/button/submit';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import axiosInstance from '@/lib/axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { FaSpinner } from 'react-icons/fa';
 import { z } from 'zod';
 
 const formPasswordSchema = z.object({
@@ -67,15 +66,7 @@ export default function EditPasswordPage() {
                                     </FormItem>
                                 )}
                             />
-                            <Button type='submit' className='w-full' disabled={form.formState.isSubmitting}>
-                                {form.formState.isSubmitting ? (
-                                    <>
-                                        <FaSpinner className="w-4 h-4 mr-2 animate-spin" /> Loading...
-                                    </>
-                                ) : (
-                                    'Simpan'
-                                )}
-                            </Button>
+                            <SubmitButton isSubmitting={form.formState.isSubmitting} />
                         </form>
                     </Form>
                 </CardContent>

@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import MenuInvitation from '@/components/user/MenuInvitation/Menu';
 import Image from 'next/image';
 import React from 'react'
 
@@ -14,53 +15,7 @@ export default function CreateInvitationPage() {
             </div>
             <div className="bg-white flex flex-col items-center px-4 py-8 mb-12">
                 <div className="container mx-auto max-w-5xl">
-                    <div className="flex gap-4 md:gap-6 lg:gap-16">
-                        <Card className="w-32">
-                            <CardHeader className="items-center">
-                                <Image
-                                    src="/images/icon/idea-theme.svg"
-                                    alt="Cost and Time"
-                                    width={60}
-                                    height={60}
-                                />
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-center text-sm">
-                                    Pilih Tema
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card className="w-32">
-                            <CardHeader className="items-center">
-                                <Image
-                                    src="/images/icon/couple-2.svg"
-                                    alt="Cost and Time"
-                                    width={60}
-                                    height={60}
-                                />
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-center text-sm">
-                                    Informasi Mempelai
-                                </p>
-                            </CardContent>
-                        </Card>
-                        <Card className="w-32">
-                            <CardHeader className="items-center">
-                                <Image
-                                    src="/images/icon/calendar-time-and-date.svg"
-                                    alt="Cost and Time"
-                                    width={60}
-                                    height={60}
-                                />
-                            </CardHeader>
-                            <CardContent>
-                                <p className="text-center text-sm">
-                                    Jadwal dan Lokasi Pernikahan
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </div>
+                    <MenuInvitation />
                 </div>
             </div>
             <div className="bg-white flex flex-col items-center px-4 py-8">
