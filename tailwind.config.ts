@@ -81,6 +81,7 @@ const config: Config = {
         isabelline: "#F0EFEF",
         "dark-liver": "#4D4D4D",
         "fire-opal": "#E65E5E",
+        "dark-lavender": "#65558F",
       },
       maxWidth: {
         desktop: "1440px",

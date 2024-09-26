@@ -1,4 +1,11 @@
-import { Comfortaa, Allura, Playfair_Display, Inter } from "next/font/google";
+import {
+  Comfortaa,
+  Allura,
+  Playfair_Display,
+  Inter,
+  Roboto,
+  Roboto_Flex,
+} from "next/font/google";
 import localFont from "next/font/local";
 
 export const elza = localFont({
@@ -64,6 +71,13 @@ export const playfairDisplay = Playfair_Display({
 });
 
 export const inter = Inter({
+  subsets: ["latin"],
+  preload: true,
+  display: "swap",
+});
+
+export const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
   preload: true,
   display: "swap",

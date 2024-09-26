@@ -88,14 +88,29 @@ const authOptions: NextAuthOptions = {
         };
 
         try {
-          const res = await axios.post(`${config.apiUrl}/auth/login`, {
-            email: email,
-            password: password,
+          const res = await axios.get(`${config.apiUrl}/protect`, {
+            withCredentials: true,
           });
 
+          const response = await axios.post(
+            `${config.apiUrl}/auth/login`,
+            {
+              email: email,
+              password: password,
+            },
+            {
+              headers: {
+                Cookie: res.headers["set-cookie"]?.join("; "),
+
+                "XSRF-TOKEN": res.data.csrf_token,
+              },
+              withCredentials: true,
+            }
+          );
+
           const user = getUserFromJwt(
-            res.data.token.access_token,
-            res.data.token.refresh_token
+            response.data.token.access_token,
+            response.data.token.refresh_token
           );
 
           return user;
