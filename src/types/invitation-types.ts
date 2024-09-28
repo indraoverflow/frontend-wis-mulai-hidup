@@ -1,4 +1,3 @@
-import { vi } from "date-fns/locale";
 import { z } from "zod";
 
 export const formBrideScheme = z.object({
@@ -23,8 +22,6 @@ export const formBrideScheme = z.object({
   video: z.string().default(""),
   music: z.string().default(""),
 });
-
-export type CreateInvitationType = z.infer<typeof formBrideScheme>;
 
 export const formBrideLabels = {
   mr: "Mr.",
@@ -59,4 +56,37 @@ export const formAdditionalInformationScheme = formBrideScheme.pick({
   music: true,
 });
 
-export type AdditionalInformationType = z.infer<typeof formAdditionalInformationScheme>;
+export const createInvitationRequestScheme = z.object({
+  title_reception: z.string().optional().default(""),
+  name_man: z.string().default(""),
+  title_man: z.string().default(""),
+  parent_man: z.string().default(""),
+  description_man: z.string().default(""),
+  name_woman: z.string().default(""),
+  title_woman: z.string().default(""),
+  parent_woman: z.string().default(""),
+  description_woman: z.string().default(""),
+  start_date: z.string().default(""),
+  end_date: z.string().optional(),
+  location: z.string().default(""),
+  address: z.string().default(""),
+  user_id: z.number().optional().default(0),
+  theme_id: z.number().optional().default(0),
+  wedding_ceremony: z
+    .object({
+      title_ceremony: z.string().default(""),
+      start_date: z.string().default(""),
+      end_date: z.string().default(""),
+      location: z.string().default(""),
+      address: z.string().default(""),
+    })
+    .optional(),
+});
+
+export type CreateInvitationType = z.infer<typeof formBrideScheme>;
+export type AdditionalInformationType = z.infer<
+  typeof formAdditionalInformationScheme
+>;
+export type CreateInvitationRequest = z.infer<
+  typeof createInvitationRequestScheme
+>;

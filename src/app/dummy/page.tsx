@@ -1,6 +1,7 @@
 import React from "react";
 import Counter from "./Counter";
 import User from "./User";
+import CreateInvitation from "./CreateInvitation";
 
 type Props = {};
 
@@ -17,6 +18,7 @@ type Props = {};
 export default function Page({}: Props) {
   return (
     <div className="flex min-h-screen flex-col gap-8 items-center justify-center w-full">
+      <CreateInvitation />
       <Counter />
       <User />
     </div>
