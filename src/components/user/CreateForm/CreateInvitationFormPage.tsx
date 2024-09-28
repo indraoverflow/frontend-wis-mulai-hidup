@@ -12,6 +12,7 @@ import { Form, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import BrideInformationPage from "./BrideInformationPage";
 import ScheduleAndLocation from "./SceduleAndLocation";
+import AdditonalInformationForm from "./AdditionalInformationForm";
 
 export default function CreateInvitationFormPage() {
   const [formIndex, setFormIndex] = React.useState(0);
@@ -47,6 +48,7 @@ export default function CreateInvitationFormPage() {
           {formIndex === 0 && <SelectTheme form={form} />}
           {formIndex === 1 && <BrideInformationPage form={form} />}
           {formIndex === 2 && <ScheduleAndLocation form={form} />}
+          {formIndex === 3 && <AdditonalInformationForm form={form} />}
         </form>
       </FormProvider>
     </div>

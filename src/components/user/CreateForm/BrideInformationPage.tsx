@@ -19,7 +19,7 @@ export default function BrideInformationPage({
   form: UseFormReturn<CreateInvitationType, any, undefined>;
 }) {
   return (
-    <div className="min-h-screen bg-surface py-24">
+    <div className="min-h-screen bg-surface py-8">
       <div className="bg-white p-6">
         <div className="container mx-auto max-w-5xl">
           <div className="flex gap-4">
