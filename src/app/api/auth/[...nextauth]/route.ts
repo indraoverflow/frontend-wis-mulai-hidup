@@ -1,6 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-// imports
 import config from "@/lib/config";
 import NextAuth, { DefaultSession, NextAuthOptions, User } from "next-auth";
 import axios from "axios";

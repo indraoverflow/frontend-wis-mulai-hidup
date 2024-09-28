@@ -42,8 +42,7 @@ export function DatePicker({ field }: { field: any }) {
           selected={field.value}
           onSelect={field.onChange}
           disabled={(date) =>
-            date.getDate() < new Date().getDate() ||
-            date > new Date("2100-01-01")
+            date < new Date() || date > new Date("2100-01-01")
           }
           initialFocus
         />
