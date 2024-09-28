@@ -3,6 +3,7 @@
 import SelectTheme from "@/components/user/CreateForm/SelectTheme";
 import MenuInvitation from "@/components/user/MenuInvitation/MenuIvitation";
 import {
+  createInvitationRequestScheme,
   CreateInvitationType,
   formBrideScheme,
 } from "@/types/invitation-types";
@@ -12,8 +13,13 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import BrideInformationPage from "./BrideInformationPage";
 import ScheduleAndLocation from "./SceduleAndLocation";
 import AdditonalInformationForm from "./AdditionalInformationForm";
+import { useAddInvitationMutation } from "@/store/features/invitation/wedding-reception-slice";
+import { useSession } from "next-auth/react";
 
 export default function CreateInvitationFormPage() {
+  const [addInvitation, addInvitationResult] = useAddInvitationMutation();
+  const session = useSession();
+
   const [formIndex, setFormIndex] = React.useState(0);
   const form = useForm({
     resolver: zodResolver(formBrideScheme),
@@ -23,6 +29,36 @@ export default function CreateInvitationFormPage() {
   const onSubmit: SubmitHandler<CreateInvitationType> = async (values) => {
     try {
       console.log(values);
+      var date = `${values.startDate?.getFullYear()}-${values.startDate?.getMonth()}-${values.startDate?.getDay()}`;
+      console.log(date);
+
+      let data = createInvitationRequestScheme.parse({
+        title_reception: "Reception Dari web bari",
+        name_man: values.mrName,
+        title_man: "Mr.",
+        parent_man: "Budiman",
+        description_man: values.mrProfile,
+        name_woman: values.mrsName,
+        title_woman: "Mrs.",
+        parent_woman: "Lala",
+        description_woman: values.mrsProfile,
+        start_date: date,
+        end_date: date,
+        location: values.location,
+        address: values.address,
+        user_id: Number(session.data?.user.id),
+        theme_id: values.themeId,
+        wedding_ceremony: {
+          title_ceremony: "Akad Nikah",
+          start_date: date,
+          end_date: date,
+          location: values.location,
+          address: values.address,
+        },
+      });
+
+      let res = await addInvitation(data);
+      console.log(res);
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const formBrideScheme = z.object({
+  themeId: z.number().default(0),
   mr: z.string().default(""),
   mrName: z.string().default(""),
   mrTitle: z.string().default(""),
