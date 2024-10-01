@@ -32,7 +32,7 @@ export default function BrideInformationPage({
                   <FormControl>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-white placeholder:text-philippine-silver"
                       placeholder="Mr"
                       {...field}
                     />
@@ -51,7 +51,7 @@ export default function BrideInformationPage({
                     <FormControl>
                       <Input
                         type="text"
-                        className="bg-white"
+                        className="bg-white placeholder:text-philippine-silver"
                         placeholder="Nama Anda"
                         {...field}
                       />
@@ -70,7 +70,7 @@ export default function BrideInformationPage({
                   <FormControl>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-white placeholder:text-philippine-silver"
                       placeholder="Gelar Anda"
                       {...field}
                     />
@@ -88,7 +88,7 @@ export default function BrideInformationPage({
                 <FormLabel className="hidden md:block">Profil</FormLabel>
                 <FormControl>
                   <Textarea
-                    className="bg-white"
+                    className="bg-white placeholder:text-philippine-silver"
                     placeholder="Isi profil menarikmu"
                     {...field}
                   />
@@ -110,7 +110,7 @@ export default function BrideInformationPage({
                   <FormControl>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-white placeholder:text-philippine-silver"
                       placeholder="mrs"
                       {...field}
                     />
@@ -131,7 +131,7 @@ export default function BrideInformationPage({
                     <FormControl>
                       <Input
                         type="text"
-                        className="bg-white"
+                        className="bg-white placeholder:text-philippine-silver"
                         placeholder="Nama Pasangan"
                         {...field}
                       />
@@ -150,7 +150,7 @@ export default function BrideInformationPage({
                   <FormControl>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-white placeholder:text-philippine-silver"
                       placeholder="Gelar Anda"
                       {...field}
                     />
@@ -168,7 +168,7 @@ export default function BrideInformationPage({
                 <FormLabel className="hidden md:block">Profil</FormLabel>
                 <FormControl>
                   <Textarea
-                    className="bg-white"
+                    className="bg-white placeholder:text-philippine-silver"
                     placeholder="Isi profil menarikmu"
                     {...field}
                   />

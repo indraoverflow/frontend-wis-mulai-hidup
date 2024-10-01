@@ -1,46 +1,32 @@
 "use client";
 
-import fetchProfile from "@/actions/fetchUser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import config from "@/lib/config";
-import axios from "axios";
+import { useGetUserProfileMutation } from "@/store/features/user/profile";
+import { UserProfile } from "@/types/user-profile.type";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
-interface UserProfile {
-  email: string;
-  name: string;
-  phone: string;
-  // birthDate: string;
-  gender: string;
-}
-
-// config.apiUrl tidak terbaca di client side, dipindah dilu ke server action, nanti ambil datanya lewat rtk query aja kalo udah di setup
-// const fetchProfile = async (token: string) => {
-//   const response = await axios.get(`${config.apiUrl}/user`, {
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-
-//   return response.data;
-// };
-
 const ProfilePage = () => {
+  const [getUserProfile, getUserProfileResult] = useGetUserProfileMutation();
   const { data: session } = useSession();
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    if (session) {
-      fetchProfile(
-        session.user?.accessToken as string,
-        session.user?.id as string
-      )
-        .then((data) => setUser(data))
-        .catch((err) => console.log("error get profile => ", err));
-    }
-  }, [session]);
+    const fetchUserProfile = async () => {
+      if (session) {
+        try {
+          const result = await getUserProfile(session.user?.id as string);
+          setUser(result.data.data);
+        } catch (err) {
+          console.error("Error fetching profile:", err);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [session, getUserProfile]);
 
   return (
     <div className="bg-surface min-h-screen flex flex-col items-center px-4 py-24">
@@ -51,30 +37,42 @@ const ProfilePage = () => {
           <CardHeader>
             <div className="flex justify-between items-center  gap-6 mb-3">
               <CardTitle className="text-2xl">Profil</CardTitle>
-              <Button>Ubah</Button>
+              <Link href="/profile/edit">
+                <Button>Ubah</Button>
+              </Link>
             </div>
             <hr className="border-primary" />
           </CardHeader>
           <CardContent>
             <div className="mb-3">
               <h6 className="text-base mb-3">Email</h6>
-              <p className="text-philippine-silver">{user?.email ?? "-"}</p>
+              <p className="text-philippine-silver">
+                {user?.email ?? "-"}
+              </p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Nama</h6>
-              <p className="text-philippine-silver">{user?.name ?? "-"}</p>
+              <p className="text-philippine-silver">
+                {user?.name ?? "-"}
+              </p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Nomor Handphone</h6>
-              <p className="text-philippine-silver">{user?.phone ?? "-"}</p>
+              <p className="text-philippine-silver">
+                {user?.phone_number ?? "-"}
+              </p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Tanggal Lahir</h6>
-              <p className="text-philippine-silver">05 - 10 - 1992</p>
+              <p className="text-philippine-silver">
+                {user?.birth_date ? new Date(user.birth_date).toLocaleDateString() : "-"}
+              </p>
             </div>
             <div className="mb-3">
               <h6 className="text-base mb-3">Jenis Kelamin</h6>
-              <p className="text-philippine-silver">{user?.gender ?? "-"}</p>
+              <p className="text-philippine-silver">
+                {user?.gender ?? "-"}
+              </p>
             </div>
           </CardContent>
         </Card>

@@ -2,18 +2,23 @@ import { configureStore } from "@reduxjs/toolkit";
 import counterSlice from "./features/dummy/dummySlice";
 import { userApi } from "./features/dummy/api/apiSlice";
 import { weddingReceptionApi } from "./features/invitation/wedding-reception-slice";
+import { getUserProfileApi, userProfileApi } from "./features/user/profile";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       counter: counterSlice,
       userApi: userApi.reducer,
+      userProfileApi: userProfileApi.reducer,
+      getUserProfileApi: getUserProfileApi.reducer,
       weddingReceptionApi: weddingReceptionApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
         userApi.middleware,
-        weddingReceptionApi.middleware
+        weddingReceptionApi.middleware,
+        userProfileApi.middleware,
+        getUserProfileApi.middleware,
       ),
   });
 };
