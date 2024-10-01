@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { axiosBaseQuery } from "@/lib/axios/axios-base-query";
+import { CreateInvitationRequest } from "@/types/invitation-types";
 
 export const weddingReceptionApi = createApi({
   reducerPath: "weddingReceptionApi",
@@ -9,8 +10,6 @@ export const weddingReceptionApi = createApi({
   endpoints: (build) => ({
     addInvitation: build.mutation({
       query: (data) => {
-        console.log("data in rtk query", data);
-
         return {
           url: "/receptions/create",
           method: "POST",
@@ -18,7 +17,27 @@ export const weddingReceptionApi = createApi({
         };
       },
     }),
+    getInvitationByUserId: build.query({
+      query: (id) => {
+        return {
+          url: `/receptions/user/${id}`,
+          method: "GET",
+        };
+      },
+    }),
+    getInvitationById: build.query({
+      query: (id) => {
+        return {
+          url: `/receptions/${id}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddInvitationMutation } = weddingReceptionApi;
+export const {
+  useAddInvitationMutation,
+  useGetInvitationByUserIdQuery,
+  useGetInvitationByIdQuery,
+} = weddingReceptionApi;
