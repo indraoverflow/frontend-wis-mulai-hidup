@@ -2,31 +2,24 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetUserProfileMutation } from "@/store/features/user/profile";
+import { useGetUserProfileQuery } from "@/store/features/user/profile";
 import { UserProfile } from "@/types/user-profile.type";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const ProfilePage = () => {
-  const [getUserProfile, getUserProfileResult] = useGetUserProfileMutation();
   const { data: session } = useSession();
+  const { data: userProfileData } = useGetUserProfileQuery(session?.user?.id as string, {
+    skip: !session,
+  });
   const [user, setUser] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (session) {
-        try {
-          const result = await getUserProfile(session.user?.id as string);
-          setUser(result.data.data);
-        } catch (err) {
-          console.error("Error fetching profile:", err);
-        }
-      }
-    };
-
-    fetchUserProfile();
-  }, [session, getUserProfile]);
+    if (userProfileData) {
+      setUser(userProfileData.data);
+    }
+  }, [userProfileData]);
 
   return (
     <div className="bg-surface min-h-screen flex flex-col items-center px-4 py-24">

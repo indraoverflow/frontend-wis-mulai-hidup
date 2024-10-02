@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { DatePicker } from '@/components/user/CreateForm/DatePicker';
-import { useEditProfileMutation, useGetUserProfileMutation } from '@/store/features/user/profile';
+import { useEditProfileMutation, useGetUserProfileQuery } from '@/store/features/user/profile';
 import { EditProfileType, formUserProfileScheme, UserProfile } from '@/types/user-profile.type';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
@@ -16,8 +16,11 @@ import { useForm } from 'react-hook-form';
 
 
 export default function EditProfilePage() {
-    const [getUserProfile, getUserProfileResult] = useGetUserProfileMutation();
     const { data: session } = useSession();
+    const { data: userProfileData, error, isLoading } = useGetUserProfileQuery(session?.user?.id as string, {
+        skip: !session,
+    });
+
     const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
     const form = useForm({
@@ -26,35 +29,27 @@ export default function EditProfilePage() {
     });
 
     useEffect(() => {
-        const fetchUserProfile = async () => {
-            if (session) {
-                try {
-                    const result = await getUserProfile(session.user?.id as string);
-                    // format result.data.data 
-                    let data = {
-                        email: result.data.data.email ?? "",
-                        name: result.data.data.name ?? "",
-                        phone_number: result.data.data.phone_number ?? "",
-                        birth_date: result.data.data.birth_date ?? null,
-                        gender: result.data.data.gender ?? ""
-                    }
+        if (userProfileData) {
+            const data = {
+                email: userProfileData.data.email ?? "",
+                name: userProfileData.data.name ?? "",
+                phone_number: userProfileData.data.phone_number ?? "",
+                birth_date: userProfileData.data.birth_date ?? null,
+                gender: userProfileData.data.gender ?? ""
+            };
 
-                    console.log(data);
+            console.log(data);
 
-                    // set form value
-                    form.setValue("email", data.email);
-                    form.setValue("name", data.name);
-                    form.setValue("phone_number", data.phone_number);
-                    // form.setValue("birth_date", data.birth_date);
-                    form.setValue("gender", data.gender);
-                } catch (err) {
-                    console.error("Error fetching profile:", err);
-                }
-            }
-        };
-
-        fetchUserProfile();
-    }, [session, getUserProfile, form]);
+            // set form value
+            form.setValue("email", data.email);
+            form.setValue("name", data.name);
+            form.setValue("phone_number", data.phone_number);
+            // form.setValue("birth_date", data.birth_date);
+            form.setValue("gender", data.gender);
+        } else if (error) {
+            console.error("Error fetching profile:", error);
+        }
+    }, [userProfileData, error, form]);
 
     const [editProfile, editProfileResult] = useEditProfileMutation();
 
