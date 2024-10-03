@@ -13,23 +13,24 @@ import { FiCheck } from "react-icons/fi";
 
 export default function page() {
   const priceItems = [
-    { items: "Countdown Timer", basic: true },
-    { items: "Foto Cover", basic: true },
-    { items: "Detail Jadwal Acara", basic: true },
-    { items: "Google Maps", basic: true },
-    { items: "Registry", basic: true },
-    { items: "Wedding Team", basic: true },
-    { items: "Premium Template", basic: true },
-    { items: "Galeri Foto", basic: true },
-    { items: "Wedding Story", basic: true },
-    { items: "Wedding Video", basic: true },
-    { items: "Bridesmaid and Bestmen", basic: true },
-    { items: "Things to Do", basic: true },
-    { items: "Wedding Wish", basic: true },
-    { items: "QR Code Scanner", basic: true },
-    { items: "Virtual Gift", basic: true },
-    { items: "Virtual Check-In", basic: true },
-    { items: "Tablet & Printer", basic: true },
+    { items: "Durasi Berlangganan", basic: "1 bulan", premium: "2 bulan" },
+    { items: "Countdown Timer", basic: true, premium: true },
+    { items: "Foto Cover", basic: true, premium: true },
+    { items: "Detail Jadwal Acara", basic: true, premium: true },
+    { items: "Google Maps", basic: true, premium: true },
+    { items: "Wedding Team", basic: true, premium: true },
+    { items: "Registry", basic: true, premium: true },
+    { items: "Wedding Story", basic: true, premium: true },
+    { items: "Bridesmaid and Bestmen", basic: true, premium: true },
+    { items: "Things to Do", basic: true, premium: true },
+    { items: "QR Code Scanner", basic: true, premium: true },
+    { items: "Virtual Gift", basic: true, premium: true },
+    { items: "Virtual Check-In", basic: true, premium: true },
+    { items: "Tablet & Printer", basic: true, premium: true },
+    { items: "Musik Backsound", basic: false, premium: true },
+    { items: "Galeri Foto", basic: false, premium: true },
+    { items: "Wedding Video", basic: false, premium: true },
+    { items: "Premium Template", basic: false, premium: true },
   ];
 
   return (
@@ -46,7 +47,7 @@ export default function page() {
           </h1>
           <p
             className={cn(
-              "text-xl lg:text-[40px] tracking-wide leading-tight text-center max-w-[1034px]  mb-4 lg:mt-0",
+              "text-xl lg:text-2xl tracking-wide leading-tight text-center max-w-[1034px]  mb-4 lg:mt-0",
               minervaModern.className
             )}
           >
@@ -60,24 +61,46 @@ export default function page() {
           <TableHeader>
             <TableRow>
               <TableHead className="align-top text-2xl">Paket</TableHead>
+              <TableHead className="align-top text-2xl text-center">Basic</TableHead>
+              <TableHead className="align-top text-2xl text-center">Premium</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {priceItems.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="w-8/12 md:w-1/2 pr-0 whitespace-nowrap">
+                <TableCell className="pr-0 whitespace-nowrap">
                   {item.items}
                 </TableCell>
-                <TableCell className="flex justify-start md:justify-start w-full pl-0">
-                  {item.basic && <FiCheck className="md:w-6 md:h-5 md:-ml-3" />}
+                <TableCell className="text-center">
+                  {item.basic === true ? (
+                    <FiCheck className="md:w-6 md:h-5 mx-auto" />
+                  ) : (
+                    item.basic
+                  )}
+                </TableCell>
+                <TableCell className="text-center">
+                  {item.premium === true ? (
+                    <FiCheck className="md:w-6 md:h-5 mx-auto" />
+                  ) : (
+                    item.premium
+                  )}
                 </TableCell>
               </TableRow>
             ))}
             <TableRow>
-              {/* buat colpsan 2 dan letakan button di tengah */}
-              <TableCell colSpan={2} className="py-6 ">
-                <Button className="flex mx-auto px-6 md:px-16">
-                  Buat Undangan
+              <TableCell></TableCell>
+              <TableCell className="py-6 text-center">
+                <Button size="lg" className="px-6 md:px-12">
+                  Basic
+                  <br />
+                  Rp. 150.000
+                </Button>
+              </TableCell>
+              <TableCell className="py-6 text-center">
+                <Button size="lg" className="px-6 md:px-12">
+                  Premium
+                  <br />
+                  Rp. 200.000
                 </Button>
               </TableCell>
             </TableRow>
