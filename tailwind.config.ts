@@ -82,6 +82,8 @@ const config: Config = {
         "dark-liver": "#4D4D4D",
         "fire-opal": "#E65E5E",
         "dark-lavender": "#65558F",
+        snow: "#FCF9F7",
+        "copper-red": "#C6754D",
       },
       maxWidth: {
         desktop: "1440px",

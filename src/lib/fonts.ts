@@ -52,6 +52,18 @@ export const minervaModern = localFont({
   preload: true,
 });
 
+export const amstelvarAlpha = localFont({
+  src: [
+    {
+      path: "../../public/fonts/AmstelvarAlpha/AmstelvarAlpha_Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  preload: true,
+});
+
 export const comfortaa = Comfortaa({
   subsets: ["latin"],
   preload: true,
