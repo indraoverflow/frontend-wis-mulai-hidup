@@ -1,3 +1,4 @@
+import SubmitButton from "@/components/button/submit";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -212,6 +213,9 @@ export default function AdditonalInformationForm({
             ))}
           </div>
           {/* <Button type="submit" className="w-full">Submit</Button> */}
+          <div className="text-center">
+            <SubmitButton isSubmitting={form.formState.isSubmitting} />
+          </div>
         </div>
       </div>
     </div>

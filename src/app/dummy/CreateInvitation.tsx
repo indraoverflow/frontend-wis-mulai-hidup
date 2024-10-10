@@ -20,13 +20,17 @@ export default function CreateInvitation({}: Props) {
     try {
       let data = createInvitationRequestScheme.parse({
         title_reception: "Reception 3",
-        name_man: "Andi",
+        name_man: "Andi Budiman",
+        nickname_man: "Budiman",
+        birthdate_man: "2000-12-12",
         prefix_man: "Mr.",
         title_man: "S.H.",
         father_man: "Budiman",
         mother_man: "Ayu",
         description_man: "ini desc 1",
-        name_woman: "Melati",
+        name_woman: "Melati Sukma",
+        nickname_woman: "Melati",
+        birthdate_woman: "2000-12-12",
         prefix_woman: "Mrs.",
         title_woman: "S.E.",
         mother_woman: "Lala",
@@ -34,18 +38,33 @@ export default function CreateInvitation({}: Props) {
         description_woman: "ini desc 2",
         start_date: "2024-12-12",
         end_date: "2024-12-20",
-        time: "10:00",
+        start_time: "13:00",
+        end_time: "15:00",
         time_zone: "WIB",
         location: "Jakarta",
         address: "Matraman",
         theme_id: 1,
         wedding_ceremony: {
           title_ceremony: "Akad Nikah",
+          start_time: "08:00",
+          end_time: "09:00",
           start_date: "2024-12-10",
           end_date: "2024-12-10",
           location: "Jakarta",
           address: "Condet",
         },
+        account_bank: [
+          {
+            name: "Andi Budiman",
+            number: "112121212",
+            bank: "MANDIRI",
+          },
+          {
+            name: "Sukma Melati",
+            number: "9999222",
+            bank: "BCA",
+          },
+        ],
       });
 
       console.log(data);
