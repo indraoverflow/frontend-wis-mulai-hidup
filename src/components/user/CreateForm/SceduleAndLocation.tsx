@@ -23,18 +23,105 @@ export default function ScheduleAndLocation({
     <div className="min-h-screen bg-surface py-8">
       <div className="bg-white p-6">
         <div className="container mx-auto max-w-5xl">
+          <p className="mb-3">Jadwal & Lokasi Akad</p>
+          <div className="flex gap-8">
+            <div>
+              <FormField
+                control={form.control}
+                name="startDate"
+                render={({ field }) => (
+                  <FormItem className="mb-6 flex flex-col gap-3">
+                    <FormLabel>Tanggal Mulai</FormLabel>
+                    <DatePicker field={field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <TimePicker form={form} />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="endDate"
+                render={({ field }) => (
+                  <FormItem className="mb-6 flex flex-col gap-3">
+                    <FormLabel>Tanggal Berakhir</FormLabel>
+                    <DatePicker field={field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <TimePicker form={form} />
+            </div>
+          </div>
+          <TimezoneSelector form={form} />
           <FormField
             control={form.control}
-            name="startDate"
+            name="location"
             render={({ field }) => (
               <FormItem className="mb-6 flex flex-col gap-3">
-                <FormLabel>Pilih Tanggal</FormLabel>
-                <DatePicker field={field} />
+                <FormLabel className="hidden md:block">Lokasi</FormLabel>
+                <FormControl>
+                  <Input
+                    className="bg-white placeholder:text-philippine-silver"
+                    placeholder="Lokasi"
+                    {...field}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <TimePicker form={form} />
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="mb-6 flex flex-col gap-3">
+                <FormLabel className="hidden md:block">Alamat</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="bg-white placeholder:text-philippine-silver"
+                    placeholder="Alamat"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="container mx-auto max-w-5xl">
+          <p className="mb-3">Jadwal & Lokasi Resepsi</p>
+          <div className="flex gap-8">
+            <div>
+              <FormField
+                control={form.control}
+                name="startDate"
+                render={({ field }) => (
+                  <FormItem className="mb-6 flex flex-col gap-3">
+                    <FormLabel>Tanggal Mulai</FormLabel>
+                    <DatePicker field={field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <TimePicker form={form} />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="endDate"
+                render={({ field }) => (
+                  <FormItem className="mb-6 flex flex-col gap-3">
+                    <FormLabel>Tanggal Berakhir</FormLabel>
+                    <DatePicker field={field} />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <TimePicker form={form} />
+            </div>
+          </div>
           <TimezoneSelector form={form} />
           <FormField
             control={form.control}
