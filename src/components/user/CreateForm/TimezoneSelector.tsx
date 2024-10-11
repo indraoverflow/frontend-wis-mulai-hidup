@@ -19,12 +19,13 @@ import { UseFormReturn } from "react-hook-form";
 
 type Props = {
   form: UseFormReturn<CreateInvitationType, any, undefined>;
+  name: "timeZone" | "weddingCeremony.timeZone";
 };
-export default function TimezoneSelector({ form }: Props) {
+export default function TimezoneSelector({ form, name }: Props) {
   return (
     <FormField
       control={form.control}
-      name="timeZone"
+      name={name}
       render={({ field }) => (
         <FormItem className="mb-6 flex flex-col gap-3">
           <FormLabel className="hidden md:block">Pilih Zona Waktu</FormLabel>
@@ -33,7 +34,7 @@ export default function TimezoneSelector({ form }: Props) {
               <SelectTrigger className="w-full bg-white justify-between ">
                 <SelectValue
                   placeholder={
-                    field.value.length > 0 ? (
+                    field.value?.length > 0 ? (
                       field.value
                     ) : (
                       <span className="text-philippine-silver">Zona Waktu</span>
