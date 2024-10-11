@@ -14,9 +14,19 @@ import { CreateInvitationType } from "@/types/invitation-types";
 
 type Props = {
   form: UseFormReturn<CreateInvitationType, any, undefined>;
+  hour:
+    | "startHour"
+    | "endHour"
+    | "weddingCeremony.startHour"
+    | "weddingCeremony.endHour";
+  minute:
+    | "startMinute"
+    | "endMinute"
+    | "weddingCeremony.startMinute"
+    | "weddingCeremony.endMinute";
 };
 
-export default function TimePicker({ form }: Props) {
+export default function TimePicker({ form, hour, minute }: Props) {
   const { setValue } = form;
   return (
     <div>
@@ -26,7 +36,7 @@ export default function TimePicker({ form }: Props) {
       <div className="flex  max-w-72 px-6 gap-1">
         <FormField
           control={form.control}
-          name="startHour"
+          name={hour}
           render={({ field }) => (
             <FormItem className="mb-2 flex flex-col ">
               <FormControl>
@@ -44,7 +54,7 @@ export default function TimePicker({ form }: Props) {
                   onChange={(e) => {
                     let value =
                       Number(e.target.value) < 24 ? e.target.value : "00";
-                    setValue("startHour", Number(value));
+                    setValue(hour, Number(value));
                   }}
                 />
               </FormControl>
@@ -60,7 +70,7 @@ export default function TimePicker({ form }: Props) {
         <span className={cn("text-[57px] -mt-3", roboto.className)}>:</span>
         <FormField
           control={form.control}
-          name="startMinute"
+          name={minute}
           render={({ field }) => (
             <FormItem className="mb-2 flex flex-col ">
               <FormControl>
@@ -78,7 +88,7 @@ export default function TimePicker({ form }: Props) {
                   onChange={(e) => {
                     let value =
                       Number(e.target.value) < 60 ? e.target.value : "00";
-                    setValue("startMinute", Number(value));
+                    setValue(minute, Number(value));
                   }}
                 />
               </FormControl>

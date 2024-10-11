@@ -1,5 +1,22 @@
 import { z } from "zod";
 
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 5; // 3MB
+const ACCEPTED_FILE_TYPES = ["image/png", "image/jpeg", "image/jpg"];
+
+const imageSchema = z
+  .instanceof(File)
+  .optional()
+  .refine((file) => {
+    return !file || file.size <= MAX_UPLOAD_SIZE;
+  }, "File size must be less than 3MB")
+  .refine((file) => {
+    return (
+      !file ||
+      ACCEPTED_FILE_TYPES.includes(file.type) ||
+      file.type.includes("text/html")
+    );
+  }, "File must be an image");
+
 export const formBrideScheme = z.object({
   themeId: z.number().default(0),
   mr: z.string().default(""),
@@ -21,28 +38,39 @@ export const formBrideScheme = z.object({
   startDate: z.date().optional(),
   endDate: z.date().optional(),
   startHour: z.number().min(0).max(23).default(0),
-  startMinute: z.number().min(0).max(59).default(0),
   endHour: z.number().min(0).max(23).default(0),
+  startMinute: z.number().min(0).max(59).default(0),
   endMinute: z.number().min(0).max(59).default(0),
   timeZone: z.string().default(""),
   location: z.string().default(""),
   address: z.string().default(""),
   weddingCeremony: z
     .object({
-      title: z.string().default(""),
+      title: z.string().default("Akad"),
+      startDate: z.date().optional(),
+      endDate: z.date().optional(),
       startHour: z.number().min(0).max(23).default(0),
       startMinute: z.number().min(0).max(59).default(0),
       endHour: z.number().min(0).max(23).default(0),
       endMinute: z.number().min(0).max(59).default(0),
       location: z.string().default(""),
       address: z.string().default(""),
+      timeZone: z.string().default(""),
     })
     .default({}),
   accoutBank: z
-    .array(z.object({ name: z.string(), number: z.string(), bank: z.string() }))
+    .array(
+      z.object({
+        name: z.string().default(""),
+        number: z.string().default(""),
+        bank: z.string().default(""),
+      })
+    )
     .default([]),
   groomImage: z.string().default(""),
   brideImage: z.string().default(""),
+  groomStory: z.string().default(""),
+  brideStory: z.string().default(""),
   cover: z.string().default(""),
   gallery: z.array(z.string()).default([]),
   video: z.string().default(""),
@@ -120,8 +148,20 @@ export const createInvitationRequestScheme = z.object({
     })
     .optional(),
   account_bank: z
-    .array(z.object({ name: z.string(), number: z.string(), bank: z.string() }))
+    .array(
+      z.object({
+        name: z.string().optional(),
+        number: z.string().optional(),
+        bank: z.string().optional(),
+      })
+    )
     .default([]),
+});
+
+export const uploadMediaScheme = z.object({
+  man_media: imageSchema.optional(),
+  woman_media: imageSchema.optional(),
+  wedding_media: imageSchema.optional(),
 });
 
 export type CreateInvitationType = z.infer<typeof formBrideScheme>;
@@ -131,3 +171,5 @@ export type AdditionalInformationType = z.infer<
 export type CreateInvitationRequest = z.infer<
   typeof createInvitationRequestScheme
 >;
+
+export type UploadMediaType = z.infer<typeof uploadMediaScheme>;
