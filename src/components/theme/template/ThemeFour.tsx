@@ -8,7 +8,7 @@ import Image from "next/image";
 import OurStory from "@/components/theme/OurStory";
 import { accounts, comments, story } from "@/lib/data";
 import DateCountDown from "@/components/theme/DateCountdown";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa, inter, playfairDisplay } from "@/lib/fonts";
 import Footer from "@/components/shared/Footer";
 

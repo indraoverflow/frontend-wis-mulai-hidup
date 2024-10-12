@@ -19,6 +19,9 @@ import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios/axios";
 import config from "@/lib/config";
 import { get } from "http";
+import { getStringDate, getStringTime } from "@/lib/utils/date-time-util";
+import { dataUrlToFile } from "@/lib/utils/file-util";
+import { createInvitationFormToRequest } from "@/lib/utils/create-invitation-util";
 
 export default function CreateInvitationFormPage() {
   const [addInvitation, addInvitationResult] = useAddInvitationMutation();
@@ -34,113 +37,25 @@ export default function CreateInvitationFormPage() {
     try {
       console.log(values);
 
-      const getStringDate = (date?: Date) =>
-        `${date?.getFullYear() ?? 1970}-${date?.getMonth() ?? 1}-${
-          date?.getDay() ?? 1
-        }`;
-
-      const getStringTime = (hour?: number, minute?: number) =>
-        `${hour ? hour : 0}:${minute ? minute : 0}`;
-
-      const data = createInvitationRequestScheme.parse({
-        title_reception: "Resepsi",
-        name_man: values.mrName,
-        nickname_man: values.mrNickname,
-        birthdate_man: "01-01-2000",
-        prefix_man: values.mr,
-        title_man: values.mrTitle,
-        father_man: values.mrFather,
-        mother_man: values.mrMother,
-        description_man: values.mrProfile,
-        name_woman: values.mrsName,
-        nickname_woman: values.mrsNickname,
-        birthdate_woman: "01-01-2000",
-        prefix_woman: values.mrs,
-        title_woman: values.mrsTitle,
-        father_woman: values.mrsFather,
-        mother_woman: values.mrsMother,
-        description_woman: values.mrsProfile,
-        start_date: getStringDate(values.startDate),
-        end_date: getStringDate(values.endDate),
-        start_time: getStringTime(values.startHour, values.startMinute),
-        end_time: getStringTime(values.endHour, values.endMinute),
-        time_zone: values.timeZone.toUpperCase(),
-        location: values.location,
-        address: values.address,
-        theme_id: values.themeId,
-        wedding_ceremony: {
-          title_ceremony: "Akad",
-          start_time: getStringTime(
-            values.weddingCeremony.startHour,
-            values.weddingCeremony.startMinute
-          ),
-          end_time: getStringTime(
-            values.weddingCeremony.endHour,
-            values.weddingCeremony.endMinute
-          ),
-          start_date: getStringDate(values.weddingCeremony.startDate),
-          end_date: getStringDate(values.weddingCeremony.endDate),
-          location: values.weddingCeremony.location,
-          address: values.weddingCeremony.address,
-        },
-        account_bank: [
-          {
-            name: values.accoutBank.at(0)?.name,
-            number: values.accoutBank.at(0)?.number,
-            bank: values.accoutBank.at(0)?.bank,
-          },
-          {
-            name: values.accoutBank.at(1)?.name,
-            number: values.accoutBank.at(1)?.number,
-            bank: values.accoutBank.at(1)?.bank,
-          },
-        ],
-      });
-
-      const manMedia: File = (await fetch(values.groomImage).then((res) =>
-        res.blob()
-      )) as File;
-      const womanMedia: File = (await fetch(values.brideImage).then((res) =>
-        res.blob()
-      )) as File;
-      const cover: File = (await fetch(values.cover).then((res) =>
-        res.blob()
-      )) as File;
-
-      console.log(manMedia, womanMedia, cover);
+      const data = createInvitationFormToRequest(values);
 
       let media = uploadMediaScheme.parse({
-        man_media: manMedia.type.includes("text/html")
-          ? undefined
-          : new File([manMedia], `man_media.${manMedia.type.split("/")[1]}`, {
-              type: manMedia.type,
-            }),
-        woman_media: womanMedia.type.includes("text/html")
-          ? undefined
-          : new File(
-              [womanMedia],
-              `woman_media.${manMedia.type.split("/")[1]}`,
-              {
-                type: womanMedia.type,
-              }
-            ),
-        wedding_media: cover.type.includes("text/html")
-          ? undefined
-          : new File([cover], `wedding_media.${manMedia.type.split("/")[1]}`, {
-              type: cover.type,
-            }),
+        man_media: dataUrlToFile(values.groomImage, "man_media"),
+        woman_media: dataUrlToFile(values.brideImage, "woman_media"),
+        wedding_media: dataUrlToFile(values.cover, "cover"),
       });
 
       console.log(media);
 
       let res = await addInvitation(data);
 
-      let response = await axiosInstance.post(
+      const response = await axiosInstance.post(
         `${config.apiUrl}/receptions/upload_media/2`,
         media,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Accept: "multipart/form-data",
           },
         }
       );

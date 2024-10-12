@@ -7,7 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { CreateInvitationType } from "@/types/invitation-types";
 import Image from "next/image";
 import Link from "next/link";

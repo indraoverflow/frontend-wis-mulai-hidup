@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import React from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
 import { FiYoutube } from "react-icons/fi";
