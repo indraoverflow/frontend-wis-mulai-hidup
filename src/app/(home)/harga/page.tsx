@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { minervaModern } from "@/lib/fonts";
 import { FiCheck } from "react-icons/fi";
 
@@ -61,8 +61,12 @@ export default function page() {
           <TableHeader>
             <TableRow>
               <TableHead className="align-top text-2xl">Paket</TableHead>
-              <TableHead className="align-top text-2xl text-center">Basic</TableHead>
-              <TableHead className="align-top text-2xl text-center">Premium</TableHead>
+              <TableHead className="align-top text-2xl text-center">
+                Basic
+              </TableHead>
+              <TableHead className="align-top text-2xl text-center">
+                Premium
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

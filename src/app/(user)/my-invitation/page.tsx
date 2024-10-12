@@ -1,7 +1,7 @@
 "use client";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { useGetInvitationByUserIdQuery } from "@/store/features/invitation/wedding-reception-slice";
 import { useSession } from "next-auth/react";
 import Image from "next/image";

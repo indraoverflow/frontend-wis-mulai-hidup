@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { roboto } from "@/lib/fonts";
 import { WiTime4 } from "react-icons/wi";
 import {

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent } from "../ui/card";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import Link from "next/link";
 
 type Props = {
