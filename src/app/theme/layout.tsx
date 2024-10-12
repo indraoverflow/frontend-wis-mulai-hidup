@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { minervaModern } from "@/lib/fonts";
 
 export default function MainLayout({
@@ -6,9 +6,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className={cn("", minervaModern.className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("", minervaModern.className)}>{children}</div>;
 }

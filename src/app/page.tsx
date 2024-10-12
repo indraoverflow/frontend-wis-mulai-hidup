@@ -5,7 +5,7 @@ import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import { Button } from "@/components/ui/button";
 import { minervaModern } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { FiArrowUpRight } from "react-icons/fi";
 
 export default function page() {

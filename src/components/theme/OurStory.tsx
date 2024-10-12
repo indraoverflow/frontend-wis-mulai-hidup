@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { OurStoryProps } from "@/types/our-story-props";
 import Image from "next/image";
 

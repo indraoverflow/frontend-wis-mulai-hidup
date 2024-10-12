@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { cva, VariantProps } from "class-variance-authority";
 
 const textAreaVariants = cva(
@@ -26,13 +26,13 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, variant, ...props }, ref) => {
     return (
       <textarea
-      className={cn(textAreaVariants({ variant, className }))}
+        className={cn(textAreaVariants({ variant, className }))}
         ref={ref}
         {...props}
       />
-    )
+    );
   }
-)
-Textarea.displayName = "Textarea"
+);
+Textarea.displayName = "Textarea";
 
-export { Textarea }
+export { Textarea };

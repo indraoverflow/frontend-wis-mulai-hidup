@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import React from "react";
 
 export default function ErrorMessage({

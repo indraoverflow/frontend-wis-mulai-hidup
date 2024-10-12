@@ -2,7 +2,7 @@ import PortofolioPreviewCard from "@/components/home/PortofolioPreviewCard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { minervaModern } from "@/lib/fonts";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import Image from "next/image";
 import React from "react";
 import { FiArrowUpRight } from "react-icons/fi";

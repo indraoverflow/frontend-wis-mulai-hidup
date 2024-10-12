@@ -18,7 +18,7 @@ const imageSchema = z
   }, "File must be an image");
 
 export const formBrideScheme = z.object({
-  themeId: z.number().default(0),
+  themeId: z.number().default(1),
   mr: z.string().default(""),
   mrName: z.string().default(""),
   mrNickname: z.string().default(""),
@@ -132,10 +132,10 @@ export const createInvitationRequestScheme = z.object({
   end_date: z.string().optional(),
   start_time: z.string().default(""),
   end_time: z.string().default(""),
-  time_zone: z.string().default(""),
+  time_zone: z.string().default("WIB"),
   location: z.string().default(""),
   address: z.string().default(""),
-  theme_id: z.number().optional().default(0),
+  theme_id: z.number().optional().default(1),
   wedding_ceremony: z
     .object({
       title_ceremony: z.string().default(""),
@@ -149,11 +149,13 @@ export const createInvitationRequestScheme = z.object({
     .optional(),
   account_bank: z
     .array(
-      z.object({
-        name: z.string().optional(),
-        number: z.string().optional(),
-        bank: z.string().optional(),
-      })
+      z
+        .object({
+          name: z.string().optional(),
+          number: z.string().optional(),
+          bank: z.string().optional(),
+        })
+        .nullable()
     )
     .default([]),
 });

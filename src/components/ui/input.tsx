@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { cva, VariantProps } from "class-variance-authority";
 
 const inputVariants = cva(

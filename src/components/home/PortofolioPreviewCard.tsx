@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription } from "../ui/card";
 import { GoArrowUpRight } from "react-icons/go";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { minervaModern } from "@/lib/fonts";
 
 type Props = {

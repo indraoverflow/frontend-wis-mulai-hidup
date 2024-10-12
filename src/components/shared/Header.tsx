@@ -3,7 +3,7 @@
 import React from "react";
 import Logo from "./Logo";
 import { Button, buttonVariants } from "../ui/button";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import NavLink from "./NavLink";
 import { signIn, signOut, useSession } from "next-auth/react";

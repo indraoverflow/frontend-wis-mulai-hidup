@@ -5,7 +5,7 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { HiOutlineArrowDownCircle } from "react-icons/hi2";
 import { SlArrowDownCircle } from "react-icons/sl";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/tailwind-util";
 
 const Accordion = AccordionPrimitive.Root;
 
