@@ -25,7 +25,7 @@ export default function ThemeSeven() {
             <main className={`relative ${comfortaa.className}`}>
                 <section className="bg-black text-white">
                     <div className="relative px-5 lg:px-16">
-                        <div className={cn("text-center", playfairDisplay.className)}>
+                        <div className={cn("text-center mb-8 md:mb-0", playfairDisplay.className)}>
                             <h1 className="text-9xl mb-2">R & R</h1>
                             <h5 className="text-4xl">
                                 5TH <span className="font-bold">January</span> 2025
@@ -34,7 +34,7 @@ export default function ThemeSeven() {
                                 - save the date to calendar -
                             </h5>
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className="flex flex-col md:flex-row gap-8 items-center justify-between md:-mb-52">
                             <div className={playfairDisplay.className}>
                                 <p className="text-center text-4xl mb-3">
                                     Raka
@@ -48,6 +48,8 @@ export default function ThemeSeven() {
                                             objectFit="cover"
                                             alt="mempelai pria"
                                         />
+                                    </div>
+                                    <div className="absolute inset-y-8 inset-x-5">
                                         <Image
                                             src="/images/couple/groom-hero.png"
                                             alt="mempelai pria"
@@ -71,6 +73,8 @@ export default function ThemeSeven() {
                                             objectFit="cover"
                                             alt="mempelai wanita"
                                         />
+                                    </div>
+                                    <div className="absolute inset-y-8 inset-x-5">
                                         <Image
                                             src="/images/couple/bride-hero.png"
                                             alt="mempelai wanita"
@@ -79,6 +83,28 @@ export default function ThemeSeven() {
                                             className="relative rounded-full z-10"
                                         />
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="flex justify-center">
+                            <div className="relative w-[268.33px] lg:w-full max-w-[621.05px] h-[428.37px] lg:h-[1020.03px]">
+                                <div className="absolute inset-0">
+                                    <Image
+                                        src="/images/background/bg-frame-template-7.svg"
+                                        className="relative z-20"
+                                        layout="fill"
+                                        objectFit="cover"
+                                        alt="mempelai"
+                                    />
+                                </div>
+                                <div className="absolute inset-y-8 inset-x-5 lg:inset-y-24 lg:inset-x-12">
+                                    <Image
+                                        src="/images/couple/couple-hero.png"
+                                        alt="mempelai"
+                                        layout="fill"
+                                        objectFit="cover"
+                                        className="relative rounded-full z-10"
+                                    />
                                 </div>
                             </div>
                         </div>
