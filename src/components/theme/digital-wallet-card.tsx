@@ -43,7 +43,7 @@ const DigitalWalletCard: React.FC<DigitalWalletCardProps> = ({ title, note, acco
               <Input
                 value={account.accountNumber}
                 readOnly
-                className="pr-10 border-0 shadow-light-carmine-pink shadow-sm"
+                className="pr-10 border-0 bg-white shadow-light-carmine-pink shadow-sm"
               />
               <Button
                 variant="ghost"
