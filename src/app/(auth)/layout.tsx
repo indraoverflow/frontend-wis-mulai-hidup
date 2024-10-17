@@ -1,4 +1,6 @@
+import Loading from "@/components/shared/Loading";
 import Image from "next/image";
+import { Suspense } from "react";
 export default function AuthLayout({
   children,
 }: {
@@ -16,7 +18,7 @@ export default function AuthLayout({
         />
 
         <div className="border border-secondary h-[488px] hidden lg:block"></div>
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </div>
     </section>
   );

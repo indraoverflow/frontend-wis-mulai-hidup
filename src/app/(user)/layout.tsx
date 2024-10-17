@@ -1,5 +1,7 @@
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import Loading from "@/components/shared/Loading";
+import { Suspense } from "react";
 export default function MainLayout({
   children,
 }: {
@@ -7,9 +9,11 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <Header showMenu={false} />
-      {children}
-      <Footer />
+      <Suspense fallback={<Loading />}>
+        <Header showMenu={false} />
+        {children}
+        <Footer />
+      </Suspense>
     </>
   );
 }

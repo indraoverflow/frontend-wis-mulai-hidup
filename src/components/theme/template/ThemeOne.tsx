@@ -9,8 +9,18 @@ import OurStory from "@/components/theme/OurStory";
 import { accounts, comments, story } from "@/lib/data";
 import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
+import { CreateInvitationRequest } from "@/types/invitation-types";
 
-export default function ThemeOne() {
+export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
+  let startDate;
+  let dateString;
+  if (data) {
+    startDate = new Date(data.start_date);
+    dateString = `${startDate.getUTCDate()} ${
+      startDate.getMonth() + 1
+    } ${startDate.getFullYear()}`;
+  }
+
   return (
     <>
       <main className="bg-surface">
@@ -41,7 +51,8 @@ export default function ThemeOne() {
                 height={60}
                 className="scale-x-[-1] w-6 h-6 md:w-8 md:h-8"
               />
-              Azka & Zeldya
+              {data?.nickname_man ?? "Azka"} &{" "}
+              {data?.nickname_woman ?? "Zeldya"}
               <Image
                 src={"/images/icon/leaf-theme-1.svg"}
                 alt={"leaf decoration left"}
@@ -51,7 +62,7 @@ export default function ThemeOne() {
               />
             </p>
             <p className="text-2xl md:text-3xl lg:text-[40px] flex gap-2 md:gap-[30px]">
-              •<span>02 02 2025</span>•
+              •<span>{dateString ?? "02 02 2025"}</span>•
             </p>
           </div>
           <div className="flex  gap-6 lg:gap-20 lg:w-full justify-center w-11/12 mx-auto  sm:px-20 md:px-12 lg:px-48">

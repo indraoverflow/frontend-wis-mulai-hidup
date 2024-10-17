@@ -10,6 +10,8 @@ export const weddingReceptionApi = createApi({
   endpoints: (build) => ({
     addInvitation: build.mutation({
       query: (data) => {
+        console.log("rtk ", data);
+
         return {
           url: "/receptions/create",
           method: "POST",
@@ -33,6 +35,19 @@ export const weddingReceptionApi = createApi({
         };
       },
     }),
+    addInvitationMedia: build.mutation({
+      query: (data) => {
+        return {
+          url: `/receptions/upload_media/${data.receptionId}`,
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "multipart/form-data",
+          },
+          data: data.media,
+        };
+      },
+    }),
   }),
 });
 
@@ -40,4 +55,5 @@ export const {
   useAddInvitationMutation,
   useGetInvitationByUserIdQuery,
   useGetInvitationByIdQuery,
+  useAddInvitationMediaMutation,
 } = weddingReceptionApi;
