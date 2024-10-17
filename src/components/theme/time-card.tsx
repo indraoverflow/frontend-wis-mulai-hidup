@@ -23,7 +23,7 @@ export default function TimeCard({
       )}
     >
       <div className="px-4 md:px-11 py-6 md:py-8 text-center flex flex-col justify-between h-full">
-        <h5 className="text-3xl md:text-4xl lg:text-6xl font-bold ">{title}</h5>
+        <h5 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-2">{title}</h5>
         <p className="text-xl md:text-3xl">{subtitle}</p>
       </div>
     </Card>
