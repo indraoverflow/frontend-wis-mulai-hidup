@@ -3,15 +3,15 @@ import React from "react";
 import { Comfortaa, Allura, Montaga } from "next/font/google";
 import { minervaModern } from "@/lib/fonts";
 import Image from "next/image";
-import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
-import { accounts, comments, story } from "@/lib/data";
+import { accounts, comments } from "@/lib/data";
 import CommentCard from "@/components/theme/comment-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
 import DateCountDown from "../DateCountdown";
 import CeremonyCardPotrait from "../CeremonyCardPotrait";
+import { cn } from "@/lib/utils/tailwind-util";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -20,7 +20,7 @@ const montaga = Montaga({ subsets: ["latin"], weight: "400" });
 export default function ThemeSix() {
     return (
         <>
-            <main className={`relative ${montaga.className}`}>
+            <main className={cn("relative", montaga.className)}>
                 <section className="relative md:w-full z-20 min-h-[960px] lg:min-h-[1110px]">
                     <Image
                         src="/images/background/hero-bg-theme-6.png"
@@ -99,11 +99,11 @@ export default function ThemeSix() {
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                             </div>
                             <div className="text-center">
-                                <h3 className={`text-black font-bold text-4xl mb-14 ${comfortaa.className}`}>
+                                <h3 className={cn("text-black font-bold text-4xl mb-14", comfortaa.className)}>
                                     We’r Getting Married
                                 </h3>
                                 <h2
-                                    className={`text-5xl text-dark-liver mb-3 ${allura.className}`}
+                                    className={cn("text-5xl text-dark-liver mb-3", allura.className)}
                                 >
                                     Assalamualaikum Warrohmatullah Wabarrakatuhu
                                 </h2>
@@ -113,16 +113,16 @@ export default function ThemeSix() {
                                     Allah SWT willing will be held on:
                                 </p>
                             </div>
-                            <div className={`mb-8 lg:mb-24 ${comfortaa.className}`}>
+                            <div className={cn("mb-8 lg:mb-24", comfortaa.className)}>
                                 <h3 className="text-center text-gray text-3xl md:text-5xl mb-8 md:mb-36">
                                     05 February 2025
                                 </h3>
                                 <DateCountDown
                                     date={new Date("2024-10-10T12:00:00")}
-                                    className="text-white bg-black rounded-[20px] w-40 h-48"
+                                    className="text-white bg-black rounded-[20px] w-full h-auto md:w-40 md:h-48"
                                 />
                             </div>
-                            <div className={`flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px] ${comfortaa.className}`}>
+                            <div className={cn("flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px]", comfortaa.className)}>
                                 <CeremonyCardPotrait
                                     backgroundImage="/images/background/bg-ceremony-potrait.png"
                                     iconImage="/images/icon/wedding-ring.svg"
@@ -156,7 +156,7 @@ export default function ThemeSix() {
                                     height="100%"
                                 ></iframe>
                             </div>
-                            <p className={`text-center text-spanish-gray text-xl font-medium mb-16 ${comfortaa.className}`}>
+                            <p className={cn("text-center text-spanish-gray text-xl font-medium mb-16", comfortaa.className)}>
                                 It is an honor and happiness for us if Mr / Ms / Brother (i) is willing to attend to give blessings to the bride and groom.
                             </p>
                         </div>
@@ -176,7 +176,7 @@ export default function ThemeSix() {
                         <h5 className="text-2xl text-center mb-11">
                             We sincerely hope for your presence at the wedding of
                         </h5>
-                        <div className={`bg-white flex flex-col md:flex-row justify-between items-center gap-12 mb-24 ${minervaModern.className}`}>
+                        <div className={cn("bg-white flex flex-col md:flex-row justify-between items-center gap-12 mb-24", minervaModern.className)}>
                             <div className="flex flex-col justify-center items-center">
                                 <Image
                                     src={"/images/couple/groom-hero-theme-6.png"}
@@ -226,7 +226,7 @@ export default function ThemeSix() {
                                 </div>
                             </div>
                         </div>
-                        <div className={`${comfortaa.className}`}>
+                        <div className={cn("", comfortaa.className)}>
                             <h3 className="text-center text-4xl font-bold mb-16">
                                 Give a Gift
                             </h3>
@@ -245,7 +245,7 @@ export default function ThemeSix() {
                         </div>
                     </div>
                 </section>
-                <div className={`bg-copper-red py-7 ${comfortaa.className}`}>
+                <div className={cn("bg-copper-red py-7", comfortaa.className)}>
                     <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
                         <div className="mb-9">
                             <FeedbackCard

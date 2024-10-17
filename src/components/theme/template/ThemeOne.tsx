@@ -116,7 +116,7 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
               </h3>
               <DateCountDown
                 date={new Date("2024-10-10T12:00:00")}
-                className="bg-black text-white rounded-[20px] w-40 h-48"
+                className="bg-black text-white rounded-[20px] w-full h-auto md:w-40 md:h-48"
               />
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px]">

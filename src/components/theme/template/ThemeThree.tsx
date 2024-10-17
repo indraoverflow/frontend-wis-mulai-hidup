@@ -2,7 +2,6 @@ import React from "react";
 
 import { Comfortaa, Allura } from "next/font/google";
 import Image from "next/image";
-import TimeCard from "@/components/theme/time-card";
 import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
@@ -11,6 +10,8 @@ import OurStory from "@/components/theme/OurStory";
 import CommentCard from "@/components/theme/comment-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
+import DateCountDown from "../DateCountdown";
+import { cn } from "@/lib/utils/tailwind-util";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -18,7 +19,7 @@ const allura = Allura({ subsets: ["latin"], weight: "400" });
 export default function ThemeThree() {
   return (
     <>
-      <main className={`relative ${comfortaa.className}`}>
+      <main className={cn("relative", comfortaa.className)}>
         <div className="bg-surface">
           <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="text-center mb-14">
@@ -29,7 +30,7 @@ export default function ThemeThree() {
                 height={340.6}
                 className="w-full mb-1"
               />
-              <h4 className={`text-5xl mb-3 ${allura.className}`}>
+              <h4 className={cn("text-5xl mb-3", allura.className)}>
                 Turut mengundang Atas Pernikahan
               </h4>
               <hr className="border-black" />
@@ -44,7 +45,7 @@ export default function ThemeThree() {
                   className="object-cover h-full rounded-[150px]"
                 />
                 <div>
-                  <h4 className={`text-9xl mb-6 ${allura.className}`}>Azka</h4>
+                  <h4 className={cn("text-9xl mb-6", allura.className)}>Azka</h4>
                   <p className="text-2xl font-bold mb-4">
                     Putra dari Bapak Murzandi dan ibu Halimah
                   </p>
@@ -52,13 +53,13 @@ export default function ThemeThree() {
                 </div>
               </div>
               <p
-                className={`text-9xl text-center my-6 md:my-[-50px] ${allura.className}`}
+                className={cn("text-9xl text-center my-6 md:my-[-50px]", allura.className)}
               >
                 &
               </p>
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
                 <div>
-                  <h4 className={`text-9xl mb-6 ${allura.className}`}>
+                  <h4 className={cn("text-9xl mb-6", allura.className)}>
                     Zeldya
                   </h4>
                   <h5 className="font-bold text-4xl">Binti Syaifull</h5>
@@ -97,31 +98,13 @@ export default function ThemeThree() {
               </div>
               <hr className="border-black mb-28" />
               <div className="mb-24">
-                <h3 className="text-center text-gray text-5xl mb-36">
+                <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
                   05 February 2025
                 </h3>
-                <div className="grid grid-cols-4 md:flex md:justify-center gap-8">
-                  <TimeCard
-                    title="21"
-                    subtitle="H"
-                    className="bg-transparent border-black text-black"
-                  />
-                  <TimeCard
-                    title="06"
-                    subtitle="D"
-                    className="bg-transparent border-black text-black"
-                  />
-                  <TimeCard
-                    title="50"
-                    subtitle="M"
-                    className="bg-transparent border-black text-black"
-                  />
-                  <TimeCard
-                    title="28"
-                    subtitle="S"
-                    className="bg-transparent border-black text-black"
-                  />
-                </div>
+                <DateCountDown
+                  date={new Date("2024-10-10T12:00:00")}
+                  className="bg-transparent border-black text-black w-full h-auto md:w-40 md:h-48"
+                />
               </div>
               <div className="mb-5">
                 <CeremonyCard
