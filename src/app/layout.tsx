@@ -6,6 +6,7 @@ import StoreProvider from "@/store/StoreProvider";
 import "./../styles/globals.css";
 import { elza, minervaModern } from "@/lib/fonts";
 import { Suspense } from "react";
+import Loading from "@/components/shared/Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,8 +32,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
-
-function Loading() {
-  return <div className="bg-gray-500">loading</div>;
 }
