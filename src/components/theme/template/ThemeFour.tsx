@@ -15,7 +15,7 @@ import Footer from "@/components/shared/Footer";
 export default function ThemeFour() {
   return (
     <>
-      <main className={cn("bg-surface", comfortaa.className)}>
+      <main className={cn("relative overflow-hidden bg-surface", comfortaa.className)}>
         <section className="relative md:w-full z-20 overflow-hidden">
           <div className="w-full  h-full  absolute top-0 left-0 opacity-[98%] -z-10 bg-fire-opal overflow-hidden">
             <Image
@@ -105,20 +105,22 @@ export default function ThemeFour() {
             </div>
           </div>
         </section>
-        <section className=" flex justify-between items-center max-w-[1040px] mx-auto py-[44px] border-b border-b-raisin-black mb-10">
+        <section className=" flex flex-col md:flex-row justify-between items-center max-w-[1040px] mx-auto py-[44px] border-b border-b-raisin-black mb-10">
           <div className="flex flex-col gap-4 items-center">
             <p className={cn("text-[40px]", inter.className)}>Azka Kosasih</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
               Bin Murzandi
             </p>
           </div>
-          <Image
-            src={"/images/icon/love-decor-theme-4.svg"}
-            alt={"love decoration"}
-            width={300}
-            height={550}
-            className="rotate-180"
-          />
+          <div className="w-[300px] h-[550px] relative">
+            <Image
+              src={"/images/icon/love-decor-theme-4.svg"}
+              alt={"love decoration"}
+              layout="fill"
+              objectFit="cover"
+              className="rotate-180"
+            />
+          </div>
           <div className="flex flex-col gap-4 items-center">
             <p className={cn("text-[40px]", inter.className)}>Azka Kosasih</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
@@ -127,7 +129,7 @@ export default function ThemeFour() {
           </div>
         </section>
 
-        <section className="bg-fire-opal pt-5 relative">
+        <section className="bg-fire-opal px-5 pt-5 relative">
           <div className="border-b border-b-raisin-black max-w-[1040px] mx-auto pt-8 pb-[151px]">
             <OurStory
               {...story}
@@ -135,7 +137,7 @@ export default function ThemeFour() {
             />
           </div>
         </section>
-        <div className="relative">
+        <div className="relative container px-5 pt-[100px] pb-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
           <Image
             src={"/images/icon/love-decor-theme-4.svg"}
             alt={"love decoration"}
@@ -143,109 +145,109 @@ export default function ThemeFour() {
             height={550}
             className="absolute -left-24 top-96 rotate-180"
           />
-          <div className="container px-5 pt-[100px] pb-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <div className="mb-12 md:mb-16 lg:mb-24 ">
-              <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
-                05 February 2025
-              </h3>
-              <DateCountDown
-                date={new Date("2024-10-10T12:00:00")}
-                className="bg-fire-opal text-raisin-black w-40 h-48"
-              />
-            </div>
-            <div className="mb-5 mx-auto max-w-[1040px]">
-              <CeremonyCard
-                backgroundImage="/images/background/bg-ceremony.png"
-                iconImage="/images/icon/wedding-ring.svg"
-                ceremonyTitle="Akad Ceremony"
-                ceremonyTime="07:00 - 08:00"
-                locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
-                buttonText="Open Map"
-              />
-            </div>
-            <div className="mb-16 mx-auto max-w-[1040px]">
-              <CeremonyCard
-                backgroundImage="/images/background/bg-card-place.png"
-                iconImage="/images/icon/dinner-table.svg"
-                ceremonyTitle="Wedding Reseption"
-                ceremonyTime="11.00 - 14.00"
-                locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
-                buttonText="Open Map"
-              />
-            </div>
-
-            <div
-              style={{
-                width: "100%",
-                height: "331px",
-              }}
-              className="mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200"
-            >
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
-                loading="lazy"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </div>
-            <Image
-              src={"/images/icon/love-decor-theme-4.svg"}
-              alt={"love decoration"}
-              width={300}
-              height={550}
-              className="absolute -right-24"
+          <div className="mb-12 md:mb-16 lg:mb-24 ">
+            <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
+              05 February 2025
+            </h3>
+            <DateCountDown
+              date={new Date("2024-10-10T12:00:00")}
+              className="bg-fire-opal text-raisin-black w-full h-auto md:w-40 md:h-48"
             />
-
-            <div className="relative text-center mt-12 md:mt-20 mb-12 max-w-[1040px] mx-auto ">
-              <p className="text-center text-spanish-gray text-xl font-medium mb-16">
-                It is an honor and happiness for us if Mr / Ms / Brother (i) is
-                willing to attend to give blessings to the bride and groom.
-              </p>
-              <p className="text-spanish-gray text-xl font-medium mb-3">
-                &quot;And among His verses is that He has created for you wives
-                of your own kind, so that you may feel comfortable in them, and
-                He has made between you mawaddah and mercy. Verily in that are
-                signs for the people who think&quot;
-              </p>
-              <p className="text-granite-gray text-2xl font-medium">
-                - AR-RUM 21 -
-              </p>
-            </div>
-            <div className="max-w-[1040px] mx-auto mb-[335px]">
-              <h3 className="text-black text-center text-4xl font-bold mb-8 lg:mb-16 ">
-                Give a Gift
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <DigitalWalletCard
-                  title="Digital Wallet"
-                  note="Note: Click copy button to copy bank number"
-                  accounts={accounts}
-                />
-                <OfflineGiftCard
-                  title="Offline Gift"
-                  address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
-                  buttonText="Open Map"
-                />
-              </div>
-            </div>
+          </div>
+          <div className="mb-5 mx-auto max-w-[1040px]">
+            <CeremonyCard
+              backgroundImage="/images/background/bg-ceremony.png"
+              iconImage="/images/icon/wedding-ring.svg"
+              ceremonyTitle="Akad Ceremony"
+              ceremonyTime="07:00 - 08:00"
+              locationTitle="InterContinental Jakarta Hotel"
+              locationAddress="Jl. Jalan Metro Pondok Indah"
+              buttonText="Open Map"
+            />
+          </div>
+          <div className="mb-16 mx-auto max-w-[1040px]">
+            <CeremonyCard
+              backgroundImage="/images/background/bg-card-place.png"
+              iconImage="/images/icon/dinner-table.svg"
+              ceremonyTitle="Wedding Reseption"
+              ceremonyTime="11.00 - 14.00"
+              locationTitle="InterContinental Jakarta Hotel"
+              locationAddress="Jl. Jalan Metro Pondok Indah"
+              buttonText="Open Map"
+            />
           </div>
 
-          <div className="bg-fire-opal">
-            <div className="container py-7 w-11/12 mx-auto max-w-[1040px] bg-fire-opal">
-              <div className="mb-4 md:mb-9">
-                <FeedbackCard
-                  title="Say Something!"
-                  nameLabel="Name"
-                  messageLabel="Message"
-                  attendanceLabel="Attendance"
-                  buttonText="Send Now!"
-                />
-              </div>
-              <div>
-                <CommentCard comments={comments} />
-              </div>
+          <div
+            style={{
+              width: "100%",
+              height: "331px",
+            }}
+            className="relative mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200 z-10"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+              loading="lazy"
+              width="100%"
+              height="100%"
+            ></iframe>
+          </div>
+          <Image
+            src={"/images/icon/love-decor-theme-4.svg"}
+            alt={"love decoration"}
+            width={300}
+            height={550}
+            className="absolute bottom-0 -right-24 z-0"
+          />
+
+          <div className="relative text-center mt-12 md:mt-20 mb-12 max-w-[1040px] mx-auto ">
+            <p className="text-center text-spanish-gray text-xl font-medium mb-16">
+              It is an honor and happiness for us if Mr / Ms / Brother (i) is
+              willing to attend to give blessings to the bride and groom.
+            </p>
+            <p className="text-spanish-gray text-xl font-medium mb-3">
+              &quot;And among His verses is that He has created for you wives
+              of your own kind, so that you may feel comfortable in them, and
+              He has made between you mawaddah and mercy. Verily in that are
+              signs for the people who think&quot;
+            </p>
+            <p className="text-granite-gray text-2xl font-medium">
+              - AR-RUM 21 -
+            </p>
+          </div>
+        </div>
+        <div className="container px-5 pt-[100px] pb-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
+          <div className="max-w-[1040px] mx-auto mb-[335px]">
+            <h3 className="text-black text-center text-4xl font-bold mb-8 lg:mb-16 ">
+              Give a Gift
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <DigitalWalletCard
+                title="Digital Wallet"
+                note="Note: Click copy button to copy bank number"
+                accounts={accounts}
+              />
+              <OfflineGiftCard
+                title="Offline Gift"
+                address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                buttonText="Open Map"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-fire-opal">
+          <div className="container py-7 w-11/12 mx-auto max-w-[1040px] bg-fire-opal">
+            <div className="mb-4 md:mb-9">
+              <FeedbackCard
+                title="Say Something!"
+                nameLabel="Name"
+                messageLabel="Message"
+                attendanceLabel="Attendance"
+                buttonText="Send Now!"
+              />
+            </div>
+            <div>
+              <CommentCard comments={comments} />
             </div>
           </div>
         </div>

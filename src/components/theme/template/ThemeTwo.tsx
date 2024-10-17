@@ -2,7 +2,6 @@ import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
-import TimeCard from "@/components/theme/time-card";
 import React from "react";
 import CommentCard from "@/components/theme/comment-card";
 import OurStory from "@/components/theme/OurStory";
@@ -11,6 +10,8 @@ import Footer from "@/components/shared/Footer";
 import Image from "next/image";
 
 import { Comfortaa, Allura } from "next/font/google";
+import DateCountDown from "../DateCountdown";
+import { cn } from "@/lib/utils/tailwind-util";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -18,15 +19,15 @@ const allura = Allura({ subsets: ["latin"], weight: "400" });
 export default function ThemeTwo() {
   return (
     <>
-      <main className={`relative ${comfortaa.className}`}>
+      <main className={cn('relative', comfortaa.className)}>
         <div className="bg-surface pb-0">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="text-center mb-[-150px]">
-              <h3 className={`font-bold text-4xl mb-14`}>
+              <h3 className="font-bold text-4xl mb-14">
                 We’r Getting Married
               </h3>
               <h2
-                className={`text-5xl text-dark-liver mb-3 ${allura.className}`}
+                className={cn("text-5xl text-dark-liver mb-3", allura.className)}
               >
                 Assalamualaikum Warrohmatullah Wabarrakatuhu
               </h2>
@@ -39,7 +40,7 @@ export default function ThemeTwo() {
                 THE WEDDING OF
               </h3>
               <p
-                className={`text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20 ${allura.className}`}
+                className={cn("text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20", allura.className)}
               >
                 <Image
                   src={"/images/icon/leaf-theme-black.svg"}
@@ -62,7 +63,7 @@ export default function ThemeTwo() {
               </p>
             </div>
             <div className="relative top-48 z-20">
-              <div className="flex flex-col md:flex-row gap-8 w-full justify-center px-12 sm:px-20 md:px-12 lg:px-48">
+              <div className="flex flex-col md:flex-row gap-8 w-full justify-center items-center md:items-stretch px-12 sm:px-20 md:px-12 lg:px-48">
                 <div className="rounded-[200px] overflow-hidden">
                   <Image
                     src={"/images/couple/groom-hero.png"}
@@ -119,15 +120,13 @@ export default function ThemeTwo() {
         <div className="bg-surface">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-24">
-              <h3 className="text-center text-gray text-5xl mb-36">
+              <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
                 05 February 2025
               </h3>
-              <div className="grid grid-cols-4 md:flex md:justify-center gap-8">
-                <TimeCard title="21" subtitle="H" />
-                <TimeCard title="06" subtitle="D" />
-                <TimeCard title="50" subtitle="M" />
-                <TimeCard title="28" subtitle="S" />
-              </div>
+              <DateCountDown
+                date={new Date("2024-10-10T12:00:00")}
+                className="bg-phthalo-green text-white rounded-full w-full h-auto md:w-40 md:h-48"
+              />
             </div>
             <div className="mb-5">
               <CeremonyCard

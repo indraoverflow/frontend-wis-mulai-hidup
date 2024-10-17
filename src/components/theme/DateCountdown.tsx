@@ -12,7 +12,7 @@ export default function DateCountDown({
 }) {
   const [days, hours, minutes, seconds] = useCountdown(date);
   return (
-    <div className="grid grid-cols-4 md:flex md:justify-center gap-3 md:gap-8">
+    <div className="flex md:justify-center gap-3 md:gap-8">
       <TimeCard title={days?.toString()} subtitle="D" className={className} />
       <TimeCard title={hours.toString()} subtitle="H" className={className} />
       <TimeCard title={minutes.toString()} subtitle="M" className={className} />

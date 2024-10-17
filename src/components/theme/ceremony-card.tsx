@@ -34,11 +34,11 @@ const CeremonyCard: React.FC<CeremonyCardProps> = ({
           className="brightness-75"
         />
       </div>
-      <CardContent className="relative px-24 py-10 space-y-4 text-white z-10">
+      <CardContent className="relative px-6 md:px-24 py-10 space-y-4 text-white z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
-          <div className="flex flex-col items-center space-x-2">
+          <div className="flex flex-col items-center justify-center space-x-2">
             <Image src={iconImage} alt="Ceremony" width={65} height={65} />
-            <h2 className="text-2xl font-bold">{ceremonyTitle}</h2>
+            <h2 className="text-2xl font-bold text-center">{ceremonyTitle}</h2>
             <hr className="border-black border w-full" />
             <p>{ceremonyTime}</p>
           </div>

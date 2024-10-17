@@ -11,6 +11,7 @@ import CommentCard from "@/components/theme/comment-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
 import DateCountDown from "../DateCountdown";
+import { cn } from "@/lib/utils/tailwind-util";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -18,7 +19,7 @@ const allura = Allura({ subsets: ["latin"], weight: "400" });
 export default function ThemeFive() {
     return (
         <>
-            <main className={`relative ${minervaModern.className}`}>
+            <main className={cn("relative", minervaModern.className)}>
                 <section className="relative md:w-full z-20 md:min-h-[860px] lg:min-h-[1110px]">
                     <Image
                         src={"/images/background/hero-bg-theme-5.png"}
@@ -35,13 +36,13 @@ export default function ThemeFive() {
                             height={54.25}
                             className="mb-4 lg:mb-8"
                         />
-                        <p className={`text-xl md:text-5xl text-center mb-6 lg:mb-[55px] ${allura.className}`}>
+                        <p className={cn("text-xl md:text-5xl text-center mb-6 lg:mb-[55px]", allura.className)}>
                             The Wedding Of
                         </p>
                         <p className={`text-center text-4xl md:text-6xl lg:text-[128px] mb-6 lg:mb-[55px]`}>
                             Dena
                             <br />
-                            <span className={`${minervaModern.className}`}>&</span>
+                            <span className={cn("", minervaModern.className)}>&</span>
                             <br />
                             Hawa
                         </p>
@@ -156,7 +157,7 @@ export default function ThemeFive() {
                                 </h3>
                                 <DateCountDown
                                     date={new Date("2024-10-10T12:00:00")}
-                                    className="text-white bg-transparent rounded-[100px] w-40 h-48"
+                                    className="text-white bg-transparent w-full h-auto md:w-40 md:h-48"
                                 />
                             </div>
                             <div className="mb-5">
@@ -205,7 +206,7 @@ export default function ThemeFive() {
                                 <h3 className="text-center text-4xl font-bold mb-16">
                                     Give a Gift
                                 </h3>
-                                <div className={`grid grid-cols-1 md:grid-cols-2 gap-5 ${comfortaa.className}`}>
+                                <div className={cn("grid grid-cols-1 md:grid-cols-2 gap-5", comfortaa.className)}>
                                     <DigitalWalletCard
                                         title="Digital Wallet"
                                         note="Note: Click copy button to copy bank number"
@@ -230,7 +231,7 @@ export default function ThemeFive() {
                         </div>
                     </div>
                 </section>
-                <div className={`bg-philippine-silver py-7 ${comfortaa.className}`}>
+                <div className={cn("bg-philippine-silver py-7", comfortaa.className)}>
                     <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
                         <div className="mb-9">
                             <FeedbackCard
