@@ -26,7 +26,7 @@ export default function TemplatePreviewCard({ image = 1 }: Props) {
           <p className="text-[21px]">Bohemian</p>
         </div>
         <Link
-          href={`/theme/${image > 4 ? 1 : image}`}
+          href={`/theme/${image}`}
           className={cn(
             "flex justify-center items-center m-2 rounded-full border border-black h-7 w-7"
           )}

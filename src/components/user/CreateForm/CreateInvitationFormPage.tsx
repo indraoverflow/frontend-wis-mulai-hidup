@@ -14,17 +14,19 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import BrideInformationPage from "./BrideInformationPage";
 import ScheduleAndLocation from "./SceduleAndLocation";
 import AdditonalInformationForm from "./AdditionalInformationForm";
-import { useAddInvitationMutation } from "@/store/features/invitation/wedding-reception-slice";
+import {
+  useAddInvitationMediaMutation,
+  useAddInvitationMutation,
+} from "@/store/features/invitation/wedding-reception-slice";
 import { useSession } from "next-auth/react";
 import axiosInstance from "@/lib/axios/axios";
 import config from "@/lib/config";
-import { get } from "http";
-import { getStringDate, getStringTime } from "@/lib/utils/date-time-util";
 import { dataUrlToFile } from "@/lib/utils/file-util";
 import { createInvitationFormToRequest } from "@/lib/utils/create-invitation-util";
 
 export default function CreateInvitationFormPage() {
   const [addInvitation, addInvitationResult] = useAddInvitationMutation();
+  const [addMedia, addMediaResult] = useAddInvitationMediaMutation();
   const session = useSession();
 
   const [formIndex, setFormIndex] = React.useState(0);
@@ -42,24 +44,24 @@ export default function CreateInvitationFormPage() {
       let media = uploadMediaScheme.parse({
         man_media: dataUrlToFile(values.groomImage, "man_media"),
         woman_media: dataUrlToFile(values.brideImage, "woman_media"),
-        wedding_media: dataUrlToFile(values.cover, "cover"),
+        our_story_man: dataUrlToFile(values.brideImage, "our_story_man"),
+        our_story_woman: dataUrlToFile(values.brideImage, "our_story_woman"),
+        wedding_media: values.gallery.map((url, index) =>
+          dataUrlToFile(url, `weddings_media_${index}`)
+        ),
       });
 
       console.log(media);
 
-      let res = await addInvitation(data);
+      const res = await addInvitation(data);
+      const receptionId = res.data.receptionId;
 
-      const response = await axiosInstance.post(
-        `${config.apiUrl}/receptions/upload_media/2`,
-        media,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Accept: "multipart/form-data",
-          },
-        }
-      );
-      console.log(res, response);
+      const response = await addMedia({
+        receptionId: receptionId,
+        media: media,
+      });
+
+      // console.log(res, response);
     } catch (error) {
       console.log(error);
     }

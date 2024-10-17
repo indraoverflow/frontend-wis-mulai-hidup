@@ -85,20 +85,22 @@ export default function AdditonalInformationForm({
     field: keyof AdditionalInformationType,
     value: string | string[]
   ) => {
-    if (field === "video") {
-      return (
-        <video
-          src={value as string}
-          className="w-full h-full object-cover rounded"
-        />
-      );
-    } else if (field === "music") {
-      return (
-        <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded">
-          <span className="text-xs">Audio</span>
-        </div>
-      );
-    } else if (field === "gallery") {
+    // if (field === "video") {
+    //   return (
+    //     <video
+    //       src={value as string}
+    //       className="w-full h-full object-cover rounded"
+    //     />
+    //   );
+    // } else if (field === "music") {
+    //   return (
+    //     <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded">
+    //       <span className="text-xs">Audio</span>
+    //     </div>
+    //   );
+    // } else
+
+    if (field === "gallery") {
       return (
         <ScrollArea className="h-64 w-full border border-primary rounded">
           <div className="flex gap-2 p-2">
@@ -184,11 +186,12 @@ export default function AdditonalInformationForm({
                           id={field}
                           onChange={(e) => handleFileChange(e, field)}
                           accept={
-                            field === "video"
-                              ? "video/*"
-                              : field === "music"
-                              ? "audio/*"
-                              : "image/*"
+                            "image/*"
+                            // field === "video"
+                            //   ? "video/*"
+                            //   : field === "music"
+                            //   ? "audio/*"
+                            //   : "image/*"
                           }
                           multiple={field === "gallery"}
                         />
@@ -197,11 +200,11 @@ export default function AdditonalInformationForm({
                             htmlFor={field}
                             className="cursor-pointer flex items-center justify-center gap-2"
                           >
-                            Upload
+                            Upload Foto
                             {/* tipe upload foto/musik/video */}
-                            {field === "video" && " Video"}
+                            {/* {field === "video" && " Video"}
                             {field === "music" && " Musik"}
-                            {field !== "video" && field !== "music" && " Foto"}
+                            {field !== "video" && field !== "music" && " Foto"} */}
                           </label>
                         </Button>
                       </div>

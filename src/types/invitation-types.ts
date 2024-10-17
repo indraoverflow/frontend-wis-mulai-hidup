@@ -44,6 +44,7 @@ export const formBrideScheme = z.object({
   timeZone: z.string().default(""),
   location: z.string().default(""),
   address: z.string().default(""),
+  videoUrl: z.string().url().optional().or(z.literal("")).default(""),
   weddingCeremony: z
     .object({
       title: z.string().default("Akad"),
@@ -71,10 +72,10 @@ export const formBrideScheme = z.object({
   brideImage: z.string().default(""),
   groomStory: z.string().default(""),
   brideStory: z.string().default(""),
-  cover: z.string().default(""),
+  // cover: z.string().default(""),
   gallery: z.array(z.string()).default([]),
-  video: z.string().default(""),
-  music: z.string().default(""),
+  // video: z.string().default(""),
+  // music: z.string().default(""),
 });
 
 export const formBrideLabels = {
@@ -94,20 +95,24 @@ export const formBrideLabels = {
   address: "Address",
   groomImage: "Mempelai Pria",
   brideImage: "Mempelai Wanita",
-  cover: "Foto Cover",
+  groomStory: "Story Mempelai Pria",
+  brideStory: "Story Mempelai Wanita",
+  // cover: "Foto Cover",
   gallery: "Foto Galeri",
-  video: "Video",
-  music: "Musik Background",
+  // video: "Video",
+  // music: "Musik Background",
 };
 
 // Additional Information
 export const formAdditionalInformationScheme = formBrideScheme.pick({
   groomImage: true,
   brideImage: true,
-  cover: true,
+  groomStory: true,
+  brideStory: true,
+  // cover: true,
   gallery: true,
-  video: true,
-  music: true,
+  // video: true,
+  // music: true,
 });
 
 export const createInvitationRequestScheme = z.object({
@@ -136,6 +141,7 @@ export const createInvitationRequestScheme = z.object({
   location: z.string().default(""),
   address: z.string().default(""),
   theme_id: z.number().optional().default(1),
+  video_url: z.string().url().optional().or(z.literal("")).default(""),
   wedding_ceremony: z
     .object({
       title_ceremony: z.string().default(""),
@@ -163,7 +169,9 @@ export const createInvitationRequestScheme = z.object({
 export const uploadMediaScheme = z.object({
   man_media: imageSchema.optional(),
   woman_media: imageSchema.optional(),
-  wedding_media: imageSchema.optional(),
+  our_story_man: imageSchema.optional(),
+  our_story_woman: imageSchema.optional(),
+  wedding_media: z.array(imageSchema.optional()).default([]),
 });
 
 export type CreateInvitationType = z.infer<typeof formBrideScheme>;

@@ -15,7 +15,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   switch (Number(themeId)) {
     case 1:
-      return <ThemeOne />;
+      return <ThemeOne data={data.data} />;
 
     case 2:
       return <ThemeTwo />;
