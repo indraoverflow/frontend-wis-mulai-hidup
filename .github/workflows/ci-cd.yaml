@@ -1,0 +1,27 @@
+name: Continious Integration and Continious Deployment on Heroku
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      
+      - name: Use Node JS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.9.0'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Docker Image
+        run: docker build -t mulaihidup-fe:${{ github.run_number }} .
+      
