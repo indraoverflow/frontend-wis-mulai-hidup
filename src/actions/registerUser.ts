@@ -1,8 +1,6 @@
-"use server";
 import config from "@/lib/config";
 import { UserRegisterType } from "@/types/user-register-type";
 import axios from "axios";
-import { cookies as ck } from "next/headers";
 
 export async function registerUser(data: UserRegisterType) {
   try {

@@ -4,6 +4,7 @@ import config from "@/lib/config";
 import NextAuth, { DefaultSession, NextAuthOptions, User } from "next-auth";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { loginUser } from "@/actions/loginUser";
 
 declare module "next-auth" {
   interface Session {
@@ -87,25 +88,10 @@ const authOptions: NextAuthOptions = {
         };
 
         try {
-          const res = await axios.get(`${config.apiUrl}/protect`, {
-            withCredentials: true,
+          const response = await loginUser({
+            email: email,
+            password: password,
           });
-
-          const response = await axios.post(
-            `${config.apiUrl}/auth/login`,
-            {
-              email: email,
-              password: password,
-            },
-            {
-              headers: {
-                Cookie: res.headers["set-cookie"]?.join("; "),
-
-                "XSRF-TOKEN": res.data.csrf_token,
-              },
-              withCredentials: true,
-            }
-          );
 
           const user = getUserFromJwt(
             response.data.token.access_token,
