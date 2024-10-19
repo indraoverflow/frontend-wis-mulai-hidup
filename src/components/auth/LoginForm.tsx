@@ -16,6 +16,7 @@ import { FaSpinner } from "react-icons/fa";
 import { Alert, AlertDescription } from "../ui/alert";
 import { RxCrossCircled } from "react-icons/rx";
 import { errorMapper } from "@/lib/error-mapper";
+import { loginUser } from "@/actions/loginUser";
 
 type Props = {};
 
@@ -32,10 +33,11 @@ export default function LoginForm({}: Props) {
 
   const onSubmit: SubmitHandler<UserLoginType> = async (data) => {
     try {
-      const res = await signIn("credentials", {
+      const response = await loginUser(data);
+      const res = await signIn("jwt", {
         redirect: false,
-        email: data.email,
-        password: data.password,
+        accessToken: response.token.access_token,
+        refreshToken: response.token.refresh_token,
         callbackUrl: "/",
       });
       setServerError([]);
