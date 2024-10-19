@@ -1,7 +1,7 @@
 "use client";
 
 import SubmitButton from '@/components/button/submit';
-import { Alert, AlertTitle } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { RxCrossCircled } from 'react-icons/rx';
 
 
 export default function EditProfilePage() {
@@ -37,8 +38,6 @@ export default function EditProfilePage() {
                 birth_date: userProfileData.data.birth_date ?? null,
                 gender: userProfileData.data.gender ?? ""
             };
-
-            console.log(data);
 
             // set form value
             form.setValue("email", data.email);
@@ -68,7 +67,9 @@ export default function EditProfilePage() {
             }
 
             const res = await editProfile({ id: session.user.id, data });
-            setAlert({ type: 'success', message: 'Profil berhasil diperbarui!' });
+            if(!res?.error){
+                setAlert({ type: 'success', message: 'Profil berhasil diperbarui!' });
+            }
         } catch (error) {
             setAlert({ type: 'error', message: 'Gagal memperbarui profil. Silakan coba lagi.' });
         }
@@ -88,9 +89,14 @@ export default function EditProfilePage() {
                     </CardHeader>
                     <CardContent>
                         {alert && (
-                            <Alert variant={alert.type === 'success' ? 'primary' : 'destructive'} className="mb-6">
-                                <AlertTitle>{alert.type === 'success' ? 'Berhasil' : 'Gagal'}</AlertTitle>
-                                {alert.message}
+                            <Alert variant={alert.type === 'success' ? 'primary' : 'destructive'} className="mb-6 flex justify-between items-center">
+                                <AlertDescription>
+                                    <AlertTitle>{alert.type === 'success' ? 'Berhasil' : 'Gagal'}</AlertTitle>
+                                    {alert.message}
+                                </AlertDescription>
+                                <span onClick={() => setAlert(null)} className="cursor-pointer">
+                                    <RxCrossCircled className="h-5 w-5" />
+                                </span>
                             </Alert>
                         )}
                         <Form {...form}>
