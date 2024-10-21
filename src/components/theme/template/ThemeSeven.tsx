@@ -14,6 +14,7 @@ import CeremonyCardPotrait from "../CeremonyCardPotrait";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils/tailwind-util";
 import Navbar from "../header/Navbar";
+import { Card, CardContent } from "@/components/ui/card";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
@@ -22,7 +23,7 @@ export default function ThemeSeven() {
     return (
         <>
             <Navbar />
-            <main className={`relative ${comfortaa.className}`}>
+            <main className={cn('relative', comfortaa.className)}>
                 <section className="bg-black text-white">
                     <div className="relative px-5 lg:px-16">
                         <div className={cn("text-center mb-8 md:mb-0", playfairDisplay.className)}>
@@ -108,32 +109,83 @@ export default function ThemeSeven() {
                                 </div>
                             </div>
                         </div>
+                        <div className="absolute left-0 right-0 bottom-52 h-[400px] z-0">
+                            <Image
+                                src={"/images/background/bg-template-border-gradient-7.png"}
+                                alt="background patern"
+                                layout="fill"
+                                objectFit="cover"
+                                className="z-0"
+                            />
+                        </div>
                         {/* <div className="bg-gradient-to-r from-philippine-yellow to-light-silver h-[2px]"></div> */}
                     </div>
-                    <div className="container px-5 py-5 lg:py-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
+                    <div className="container px-5 pt-5 lg:pt-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
                         <h3 className="text-6xl mb-40 text-center">
                             Allah destined it, Allah brought us together…
                         </h3>
-                        {/* <div className="relative">
+                        <div className="relative">
                             <Carousel>
                                 <CarouselContent>
-                                    <CarouselItem className="basis-1/4">
-                                        <div className="relative border border-philippine-yellow rounded-full">
-                                            <div className="relative">
-                                                <h5>Raka</h5>
-                                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.</p>
-                                            </div>
-                                        </div>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-[218px] overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-[218px] border-2 border-light-silver" />
+                                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+                                                    <h2 className="text-3xl font-serif mb-4">Raka</h2>
+                                                    <p className="text-sm text-center max-w-[80%] leading-relaxed">
+                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.
+                                                    </p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
                                     </CarouselItem>
-                                    <CarouselItem className="basis-1/4">2</CarouselItem>
-                                    <CarouselItem className="basis-1/4">3</CarouselItem>
-                                    <CarouselItem className="basis-1/4">4</CarouselItem>
-                                    <CarouselItem className="basis-1/4">5</CarouselItem>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
+                                                <Image
+                                                    src={"/images/background/carousel-weeding-1-theme-7.png"}
+                                                    alt="wedding"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="w-full h-full"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-[218px] overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-[218px] border-2 border-light-silver" />
+                                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+                                                    <h2 className="text-3xl font-serif mb-4">Raisa</h2>
+                                                    <p className="text-sm text-center max-w-[80%] leading-relaxed">
+                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.
+                                                    </p>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
+                                                <Image
+                                                    src={"/images/background/carousel-weeding-2-theme-7.png"}
+                                                    alt="wedding"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="w-full h-full"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
                                 </CarouselContent>
                             </Carousel>
-                        </div> */}
+                        </div>
                         <div
-                            className="rounded-lg overflow-hidden mb-10"
+                            className="rounded-lg overflow-hidden my-16"
                             style={{
                                 width: "100%",
                                 height: "557px",
@@ -146,14 +198,62 @@ export default function ThemeSeven() {
                                 title="YouTube video player"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
                         </div>
+                        <div className="relative mb-16">
+                            <Carousel>
+                                <CarouselContent>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
+                                                <Image
+                                                    src={"/images/couple/gallery-wedding-1-theme-7.png"}
+                                                    alt="wedding"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="w-full h-full"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
+                                                <Image
+                                                    src={"/images/couple/gallery-wedding-2-theme-7.png"}
+                                                    alt="wedding"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="w-full h-full"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
+                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
+                                        <Card className="bg-transparent border-none">
+                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
+                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
+                                                <Image
+                                                    src={"/images/couple/gallery-wedding-3-theme-7.png"}
+                                                    alt="wedding"
+                                                    layout="fill"
+                                                    objectFit="cover"
+                                                    className="w-full h-full"
+                                                />
+                                            </CardContent>
+                                        </Card>
+                                    </CarouselItem>
+                                </CarouselContent>
+                            </Carousel>
+                        </div>
                         <hr />
                         <div className="my-8 lg:my-16">
                             <h3 className="text-center text-gray text-3xl md:text-5xl mb-8 md:mb-36">
                                 05 February 2025
                             </h3>
                             <DateCountDown
-                                date={new Date("2024-10-10T12:00:00")}
-                                className="text-white bg-black rounded-[20px] w-40 h-48"
+                                date={new Date("2024-11-11T12:00:00")}
+                                className="text-white bg-black rounded-[20px] w-full h-auto md:w-40 md:h-48"
                             />
                         </div>
                         <div className="flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px]">
@@ -210,17 +310,30 @@ export default function ThemeSeven() {
                                 />
                             </div>
                         </div>
-                        <div className="mb-9">
-                            <FeedbackCard
-                                title="Say Something!"
-                                nameLabel="Name"
-                                messageLabel="Message"
-                                attendanceLabel="Attendance"
-                                buttonText="Send Now!"
+                    </div>
+                    <div className="relative">
+                        <div className="absolute left-0 right-0 top-48 h-[400px] scale-y-[-1] z-0">
+                            <Image
+                                src={"/images/background/bg-template-border-gradient-7.png"}
+                                alt="background patern"
+                                layout="fill"
+                                objectFit="cover"
+                                className="z-0"
                             />
                         </div>
-                        <div>
-                            <CommentCard comments={comments} />
+                        <div className="relative container px-5 pb-5 lg:pb-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-10">
+                            <div className="mb-9">
+                                <FeedbackCard
+                                    title="Say Something!"
+                                    nameLabel="Name"
+                                    messageLabel="Message"
+                                    attendanceLabel="Attendance"
+                                    buttonText="Send Now!"
+                                />
+                            </div>
+                            <div>
+                                <CommentCard comments={comments} />
+                            </div>
                         </div>
                     </div>
                 </section>
