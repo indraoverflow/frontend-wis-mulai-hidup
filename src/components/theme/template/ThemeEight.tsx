@@ -18,7 +18,7 @@ import GalleryCarouselItem from "../GalleryCarouselItem";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
 
-export default function ThemeSeven() {
+export default function ThemeEight() {
     const stories = [
         {
             title: "Raka",
@@ -55,9 +55,9 @@ export default function ThemeSeven() {
 
     return (
         <>
-            <Navbar />
+            <Navbar darkTheme={false}/>
             <main className={cn('relative', comfortaa.className)}>
-                <section className="bg-black text-white">
+                <section className="bg-white text-raisin-black">
                     <div className="relative px-5 lg:px-16">
                         <div className={cn("text-center mb-8 md:mb-0", playfairDisplay.className)}>
                             <h1 className="text-9xl mb-2">R & R</h1>
@@ -160,11 +160,13 @@ export default function ThemeSeven() {
                             <Carousel>
                                 <CarouselContent>
                                     {stories.map((story, index) => (
-                                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 border-none">
                                             <GalleryCarouselItem
                                                 galleryImage={story.image}
                                                 title={story.title}
                                                 description={story.description}
+                                                className="border-2 border-philippine-yellow"
+                                                textClassName="bg-white text-raisin-black"
                                             />
                                         </CarouselItem>
                                     ))}
@@ -205,7 +207,7 @@ export default function ThemeSeven() {
                             </h3>
                             <DateCountDown
                                 date={new Date("2024-11-11T12:00:00")}
-                                className="text-white bg-black w-full h-auto md:w-40 md:h-48"
+                                className="text-black bg-white border-black w-full h-auto md:w-40 md:h-48"
                             />
                         </div>
                         <div className="flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px]">

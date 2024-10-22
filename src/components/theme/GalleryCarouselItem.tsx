@@ -10,6 +10,7 @@ interface GalleryItemProps {
     title?: string | null;
     description?: string | null;
     className?: string;
+    textClassName?: string;
 }
 
 const GalleryCarouselItem: React.FC<GalleryItemProps> = ({
@@ -17,12 +18,13 @@ const GalleryCarouselItem: React.FC<GalleryItemProps> = ({
     title,
     description,
     className,
+    textClassName,
 }) => {
     return (
         <Card className="bg-transparent border-none">
             <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
                 <div className={cn("absolute inset-0 rounded-full ", className ?? "border-2 border-light-silver")} />
-                { galleryImage ? (
+                {galleryImage ? (
                     <Image
                         src={galleryImage}
                         alt="wedding"
@@ -31,7 +33,7 @@ const GalleryCarouselItem: React.FC<GalleryItemProps> = ({
                         className="w-full h-full"
                     />
                 ) : (
-                    <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+                    <div className={cn("absolute inset-0 flex flex-col items-center justify-center ", textClassName ?? "text-white bg-black/40")}>
                         <h2 className="text-3xl font-serif mb-4">
                             {title}
                         </h2>
@@ -39,8 +41,7 @@ const GalleryCarouselItem: React.FC<GalleryItemProps> = ({
                             {description}
                         </p>
                     </div>
-                )
-                }
+                )}
             </CardContent>
         </Card>
     );
