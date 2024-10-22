@@ -16,7 +16,13 @@ import { cn } from "@/lib/utils/tailwind-util";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
 
-export default function ThemeThree() {
+export default function ThemeThree({
+  data,
+  isTemplate = false,
+}: {
+  data?: any;
+  isTemplate?: boolean;
+}) {
   return (
     <>
       <main className={cn("relative", comfortaa.className)}>
@@ -45,7 +51,9 @@ export default function ThemeThree() {
                   className="object-cover h-full rounded-[150px]"
                 />
                 <div>
-                  <h4 className={cn("text-9xl mb-6", allura.className)}>Azka</h4>
+                  <h4 className={cn("text-9xl mb-6", allura.className)}>
+                    Azka
+                  </h4>
                   <p className="text-2xl font-bold mb-4">
                     Putra dari Bapak Murzandi dan ibu Halimah
                   </p>
@@ -53,7 +61,10 @@ export default function ThemeThree() {
                 </div>
               </div>
               <p
-                className={cn("text-9xl text-center my-6 md:my-[-50px]", allura.className)}
+                className={cn(
+                  "text-9xl text-center my-6 md:my-[-50px]",
+                  allura.className
+                )}
               >
                 &
               </p>

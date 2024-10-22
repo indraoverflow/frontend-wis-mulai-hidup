@@ -1,8 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-import { getSession, signOut } from "next-auth/react";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import config from "@/lib/config";
 import { setCookie } from "nookies";
-import { set } from "date-fns";
 
 // Create an Axios instance with default configuration
 const axiosInstance: AxiosInstance = axios.create({
@@ -20,6 +19,7 @@ axiosInstance.interceptors.request.use(
   async (axiosConfig) => {
     const session = await getSession();
     axiosConfig.withCredentials = true;
+    console.log(session);
     if (session) {
       const { user } = session;
       if (user.accessToken) {
@@ -27,9 +27,7 @@ axiosInstance.interceptors.request.use(
 
         // add token to headers
         axiosConfig.headers["token"] = `Bearer ${user.accessToken}`;
-        axiosConfig.headers["Authorization"] = `${user.accessToken}`;
-        // add token to query params (move to per request)
-        // axiosConfig.params = { token: user.accessToken };
+        axiosConfig.headers["Authorization"] = `Bearer ${user.accessToken}`;
       }
 
       if (user.refreshToken) {
@@ -40,12 +38,12 @@ axiosInstance.interceptors.request.use(
       });
       console.log(res);
 
-      axiosConfig.headers["X-CSRF-TOKEN"] = res.data.csrf_token;
-      (axiosConfig.headers["refresh_token"] = user.refreshToken),
-        (axiosConfig.headers["Cookie"] =
-          res.headers["set-cookie"]?.join("; ") +
-          "refresh_token=" +
-          user.refreshToken);
+      axiosConfig.headers["X-XSRF-TOKEN"] = res.data.csrf_token;
+      axiosConfig.headers["refresh_token"] = user.refreshToken;
+      axiosConfig.headers["Cookie"] =
+        res.headers["set-cookie"]?.join("; ") +
+        "refresh_token=" +
+        user.refreshToken;
 
       console.log(
         res.headers["set-cookie"] + "refresh_token=" + user.refreshToken
@@ -76,25 +74,44 @@ axiosInstance.interceptors.response.use(
       if (session) {
         const { user } = session;
         if (user) {
-          const res = await axiosInstance.get(
-            `${config.apiUrl}/auth/refresh-token`,
-            {
-              withCredentials: true,
+          try {
+            const res = await axiosInstance.get(
+              `${config.apiUrl}/auth/refresh-token`,
+              {
+                withCredentials: true,
+              }
+            );
+            console.log("refreh token", res.data.token);
+
+            await signIn("jwt", {
+              redirect: false,
+              accessToken: res.data.token.access_token,
+              refreshToken: res.data.token.refresh_token,
+            });
+
+            if (res.data.token.access_token) {
+              setCookie(null, "access_token", res.data.token.access_token, {});
+              setCookie(null, "refresh_token", res.data.token.refreh_token, {});
+              error.config.headers[
+                "Authorization"
+              ] = `Bearer ${res.data.token.access_token}`;
+              error.config.headers[
+                "token"
+              ] = `Bearer ${res.data.token.access_token}`;
+
+              return axiosInstance(error.config);
             }
-          );
-          console.log("refreh token", res.data.token);
-          user.accessToken = res.data.token.access_token;
-          user.refreshToken = res.data.token.refresh_token;
-          session.user = user;
-          console.log("user baru", user);
+          } catch (error) {
+            signOut();
+            console.log(message);
+          }
         }
       }
+      console.log(session);
     }
 
-    if (message === "Unauthorized") {
-      signOut();
-      console.log(message);
-    }
+    console.log(message);
+
     return Promise.reject(error);
   }
 );

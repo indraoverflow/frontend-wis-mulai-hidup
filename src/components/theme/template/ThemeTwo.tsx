@@ -16,18 +16,25 @@ import { cn } from "@/lib/utils/tailwind-util";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
 
-export default function ThemeTwo() {
+export default function ThemeTwo({
+  data,
+  isTemplate = false,
+}: {
+  data?: any;
+  isTemplate?: boolean;
+}) {
   return (
     <>
-      <main className={cn('relative', comfortaa.className)}>
+      <main className={cn("relative", comfortaa.className)}>
         <div className="bg-surface pb-0">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="text-center mb-[-150px]">
-              <h3 className="font-bold text-4xl mb-14">
-                We’r Getting Married
-              </h3>
+              <h3 className="font-bold text-4xl mb-14">We’r Getting Married</h3>
               <h2
-                className={cn("text-5xl text-dark-liver mb-3", allura.className)}
+                className={cn(
+                  "text-5xl text-dark-liver mb-3",
+                  allura.className
+                )}
               >
                 Assalamualaikum Warrohmatullah Wabarrakatuhu
               </h2>
@@ -40,7 +47,10 @@ export default function ThemeTwo() {
                 THE WEDDING OF
               </h3>
               <p
-                className={cn("text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20", allura.className)}
+                className={cn(
+                  "text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20",
+                  allura.className
+                )}
               >
                 <Image
                   src={"/images/icon/leaf-theme-black.svg"}
