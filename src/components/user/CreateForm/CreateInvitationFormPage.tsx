@@ -23,10 +23,12 @@ import axiosInstance from "@/lib/axios/axios";
 import config from "@/lib/config";
 import { dataUrlToFile } from "@/lib/utils/file-util";
 import { createInvitationFormToRequest } from "@/lib/utils/create-invitation-util";
+import { useRouter } from "next/navigation";
 
 export default function CreateInvitationFormPage() {
   const [addInvitation, addInvitationResult] = useAddInvitationMutation();
   const [addMedia, addMediaResult] = useAddInvitationMediaMutation();
+  const router = useRouter();
   const session = useSession();
 
   const [formIndex, setFormIndex] = React.useState(0);
@@ -61,6 +63,8 @@ export default function CreateInvitationFormPage() {
         receptionId: receptionId,
         media: media,
       });
+
+      router.push("/my-invitation");
 
       // console.log(res, response);
     } catch (error) {

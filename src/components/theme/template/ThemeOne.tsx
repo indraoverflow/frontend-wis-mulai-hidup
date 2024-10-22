@@ -9,8 +9,11 @@ import OurStory from "@/components/theme/OurStory";
 import { accounts, comments, story } from "@/lib/data";
 import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
-import { CreateInvitationRequest } from "@/types/invitation-types";
 import config from "@/lib/config";
+import { get } from "http";
+import getInvitationResponse from "@/lib/hooks/use-invitation-data";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
+import { OurStoryProps } from "@/types/our-story-props";
 
 export default function ThemeOne({
   data,
@@ -20,111 +23,48 @@ export default function ThemeOne({
   isTemplate?: boolean;
 }) {
   let {
-    name_man: nameMan,
-    nickname_man: nicknameMan,
-    prefix_man: prefixMan,
-    title_man: titleMan,
-    father_man: fatherMan,
-    mother_man: motherMan,
-    description_man: descriptionMan,
-    name_woman: nameWoman,
-    nickname_woman: nicknameWoman,
-    prefix_woman: prefixWoman,
-    title_woman: titleWoman,
-    father_woman: fatherWoman,
-    mother_woman: motherWoman,
-    description_woman: descriptionWoman,
-    start_date: receptionStartDate,
-    end_date: receptionEndDate,
-    start_time: receptionStartTime,
-    endT_time: receptionEndTime,
-    time_zone: receptionTimezone,
-    location: receptionLocation,
-    address: receptionAddress,
-    man_media: manMedia,
-    woman_media: womanMedia,
-    man_story: manStory,
-    woman_story: womanStory,
-    video_url: videoUrl,
-    wedding_ceremony,
-  } = data || {};
-
-  let {
-    start_date: ceremonyStartDate,
-    end_date: ceremonyEndDate,
-    start_time: ceremonyStartTime,
-    end_time: ceremonyEndTime,
-    time_zone: ceremonyTimezone,
-    location: ceremonyLocation,
-    address: ceremonyAddress,
-  } = wedding_ceremony || {};
-
-  let ceremonyStartDateString;
-  let ceremonyStartDateWithFullMonth;
-  let ceremonyStartDateTime;
-  if (data) {
-    let startDate = new Date(ceremonyStartDate);
-    ceremonyStartDateString = `${startDate.getUTCDate()} ${
-      startDate.getMonth() + 1
-    } ${startDate.getFullYear()}`;
-
-    ceremonyStartDateWithFullMonth = startDate.toLocaleDateString("en-UK", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-
-    ceremonyStartDateTime = ceremonyStartDate;
-  }
-
-  if (isTemplate) {
-    prefixMan = "";
-    nameMan = "Azka";
-    nicknameMan = "Azka";
-    titleMan = "";
-    fatherMan = "";
-    motherMan = "";
-    descriptionMan = "Azka";
-    prefixWoman = "";
-    nameWoman = "Zeldya";
-    nicknameWoman = "Zeldya";
-    titleWoman = "";
-    fatherWoman = "";
-    motherWoman = "";
-    descriptionWoman = "Zeldya";
-    ceremonyStartDateString = "02 10 2025";
-    ceremonyStartDateWithFullMonth = "25 February 2025";
-    ceremonyStartDateTime = "2025-02-25T07:00:00";
-    ceremonyStartTime = "07:00";
-    ceremonyEndTime = "08:00";
-    receptionStartTime = "10:00";
-    receptionEndTime = "13:00";
-    ceremonyLocation =
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid";
-  }
-
-  if (!isTemplate) {
-    let manPhoto: string = manMedia[0].photo_url;
-    if (manPhoto.startsWith("undefined")) {
-      manPhoto = `${config.apiUrl}${manPhoto.split("undefined")[1]}`;
-    }
-    let womanPhoto: string = womanMedia[0].photo_url;
-    if (womanPhoto.startsWith("undefined")) {
-      womanPhoto = `${config.apiUrl}${womanPhoto.split("undefined")[1]}`;
-    }
-
-    console.log(manPhoto);
-
-    story.imgGroom = manPhoto ?? story.imgGroom;
-    story.imgBride = womanPhoto ?? story.imgBride;
-    story.quoteGroom = descriptionMan;
-    story.quoteBride = descriptionWoman;
-  }
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+  } = useInvitationData(data);
 
   return (
     <>
       <main className="bg-surface">
-        {ceremonyLocation}
         <section className="relative md:w-full z-20">
           <Image
             src={"/images/background/hero-bg-theme-1.png"}
@@ -224,20 +164,26 @@ export default function ThemeOne({
                 backgroundImage="/images/background/bg-ceremony-potrait.png"
                 iconImage="/images/icon/wedding-ring.svg"
                 ceremonyTitle="Akad Ceremony"
-                ceremonyTime={`${ceremonyStartTime} - ${ceremonyEndTime}`}
+                ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+                  ceremonyEndTime
+                    ? ceremonyEndTime + " " + receptionTimezone
+                    : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={ceremonyAddress}
                 buttonText="Open Map"
               />
               <CeremonyCardPotrait
                 backgroundImage="/images/background/bg-reception-potrait.png"
                 iconImage="/images/icon/dinner-table.svg"
                 ceremonyTitle="Wedding Reseption"
-                ceremonyTime={`${receptionStartTime} - ${
-                  receptionEndTime ? receptionEndTime : "Selesai"
+                ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+                  receptionEndTime
+                    ? receptionEndTime + " " + receptionTimezone
+                    : "Selesai"
                 }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={receptionAddress}
                 buttonText="Open Map"
               />
             </div>
