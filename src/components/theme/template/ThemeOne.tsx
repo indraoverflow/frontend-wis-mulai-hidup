@@ -10,20 +10,121 @@ import { accounts, comments, story } from "@/lib/data";
 import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
 import { CreateInvitationRequest } from "@/types/invitation-types";
+import config from "@/lib/config";
 
-export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
-  let startDate;
-  let dateString;
+export default function ThemeOne({
+  data,
+  isTemplate = false,
+}: {
+  data?: any;
+  isTemplate?: boolean;
+}) {
+  let {
+    name_man: nameMan,
+    nickname_man: nicknameMan,
+    prefix_man: prefixMan,
+    title_man: titleMan,
+    father_man: fatherMan,
+    mother_man: motherMan,
+    description_man: descriptionMan,
+    name_woman: nameWoman,
+    nickname_woman: nicknameWoman,
+    prefix_woman: prefixWoman,
+    title_woman: titleWoman,
+    father_woman: fatherWoman,
+    mother_woman: motherWoman,
+    description_woman: descriptionWoman,
+    start_date: receptionStartDate,
+    end_date: receptionEndDate,
+    start_time: receptionStartTime,
+    endT_time: receptionEndTime,
+    time_zone: receptionTimezone,
+    location: receptionLocation,
+    address: receptionAddress,
+    man_media: manMedia,
+    woman_media: womanMedia,
+    man_story: manStory,
+    woman_story: womanStory,
+    video_url: videoUrl,
+    wedding_ceremony,
+  } = data || {};
+
+  let {
+    start_date: ceremonyStartDate,
+    end_date: ceremonyEndDate,
+    start_time: ceremonyStartTime,
+    end_time: ceremonyEndTime,
+    time_zone: ceremonyTimezone,
+    location: ceremonyLocation,
+    address: ceremonyAddress,
+  } = wedding_ceremony || {};
+
+  let ceremonyStartDateString;
+  let ceremonyStartDateWithFullMonth;
+  let ceremonyStartDateTime;
   if (data) {
-    startDate = new Date(data.start_date);
-    dateString = `${startDate.getUTCDate()} ${
+    let startDate = new Date(ceremonyStartDate);
+    ceremonyStartDateString = `${startDate.getUTCDate()} ${
       startDate.getMonth() + 1
     } ${startDate.getFullYear()}`;
+
+    ceremonyStartDateWithFullMonth = startDate.toLocaleDateString("en-UK", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+
+    ceremonyStartDateTime = ceremonyStartDate;
+  }
+
+  if (isTemplate) {
+    prefixMan = "";
+    nameMan = "Azka";
+    nicknameMan = "Azka";
+    titleMan = "";
+    fatherMan = "";
+    motherMan = "";
+    descriptionMan = "Azka";
+    prefixWoman = "";
+    nameWoman = "Zeldya";
+    nicknameWoman = "Zeldya";
+    titleWoman = "";
+    fatherWoman = "";
+    motherWoman = "";
+    descriptionWoman = "Zeldya";
+    ceremonyStartDateString = "02 10 2025";
+    ceremonyStartDateWithFullMonth = "25 February 2025";
+    ceremonyStartDateTime = "2025-02-25T07:00:00";
+    ceremonyStartTime = "07:00";
+    ceremonyEndTime = "08:00";
+    receptionStartTime = "10:00";
+    receptionEndTime = "13:00";
+    ceremonyLocation =
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid";
+  }
+
+  if (!isTemplate) {
+    let manPhoto: string = manMedia[0].photo_url;
+    if (manPhoto.startsWith("undefined")) {
+      manPhoto = `${config.apiUrl}${manPhoto.split("undefined")[1]}`;
+    }
+    let womanPhoto: string = womanMedia[0].photo_url;
+    if (womanPhoto.startsWith("undefined")) {
+      womanPhoto = `${config.apiUrl}${womanPhoto.split("undefined")[1]}`;
+    }
+
+    console.log(manPhoto);
+
+    story.imgGroom = manPhoto ?? story.imgGroom;
+    story.imgBride = womanPhoto ?? story.imgBride;
+    story.quoteGroom = descriptionMan;
+    story.quoteBride = descriptionWoman;
   }
 
   return (
     <>
       <main className="bg-surface">
+        {ceremonyLocation}
         <section className="relative md:w-full z-20">
           <Image
             src={"/images/background/hero-bg-theme-1.png"}
@@ -51,8 +152,7 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
                 height={60}
                 className="scale-x-[-1] w-6 h-6 md:w-8 md:h-8"
               />
-              {data?.nickname_man ?? "Azka"} &{" "}
-              {data?.nickname_woman ?? "Zeldya"}
+              {nicknameMan} & {nicknameWoman}
               <Image
                 src={"/images/icon/leaf-theme-1.svg"}
                 alt={"leaf decoration left"}
@@ -62,7 +162,7 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
               />
             </p>
             <p className="text-2xl md:text-3xl lg:text-[40px] flex gap-2 md:gap-[30px]">
-              •<span>{dateString ?? "02 02 2025"}</span>•
+              •<span>{ceremonyStartDateString}</span>•
             </p>
           </div>
           <div className="flex  gap-6 lg:gap-20 lg:w-full justify-center w-11/12 mx-auto  sm:px-20 md:px-12 lg:px-48">
@@ -112,10 +212,10 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
           <div className="container px-5 pb-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-12 md:mb-16 lg:mb-24 ">
               <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
-                05 February 2025
+                {ceremonyStartDateWithFullMonth}
               </h3>
               <DateCountDown
-                date={new Date("2024-10-10T12:00:00")}
+                date={new Date(ceremonyStartDateTime)}
                 className="bg-black text-white rounded-[20px] w-full h-auto md:w-40 md:h-48"
               />
             </div>
@@ -124,7 +224,7 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
                 backgroundImage="/images/background/bg-ceremony-potrait.png"
                 iconImage="/images/icon/wedding-ring.svg"
                 ceremonyTitle="Akad Ceremony"
-                ceremonyTime="07:00 - 08:00"
+                ceremonyTime={`${ceremonyStartTime} - ${ceremonyEndTime}`}
                 locationTitle="InterContinental Jakarta Hotel"
                 locationAddress="Jl. Jalan Metro Pondok Indah"
                 buttonText="Open Map"
@@ -133,7 +233,9 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
                 backgroundImage="/images/background/bg-reception-potrait.png"
                 iconImage="/images/icon/dinner-table.svg"
                 ceremonyTitle="Wedding Reseption"
-                ceremonyTime="11.00 - 14.00"
+                ceremonyTime={`${receptionStartTime} - ${
+                  receptionEndTime ? receptionEndTime : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
                 locationAddress="Jl. Jalan Metro Pondok Indah"
                 buttonText="Open Map"
@@ -148,7 +250,7 @@ export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
               className="mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                src={ceremonyLocation}
                 loading="lazy"
                 width="100%"
                 height="100%"

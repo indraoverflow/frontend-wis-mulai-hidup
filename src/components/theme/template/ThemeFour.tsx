@@ -12,10 +12,21 @@ import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa, inter, playfairDisplay } from "@/lib/fonts";
 import Footer from "@/components/shared/Footer";
 
-export default function ThemeFour() {
+export default function ThemeFour({
+  data,
+  isTemplate = false,
+}: {
+  data?: any;
+  isTemplate?: boolean;
+}) {
   return (
     <>
-      <main className={cn("relative overflow-hidden bg-surface", comfortaa.className)}>
+      <main
+        className={cn(
+          "relative overflow-hidden bg-surface",
+          comfortaa.className
+        )}
+      >
         <section className="relative md:w-full z-20 overflow-hidden">
           <div className="w-full  h-full  absolute top-0 left-0 opacity-[98%] -z-10 bg-fire-opal overflow-hidden">
             <Image
@@ -205,10 +216,10 @@ export default function ThemeFour() {
               willing to attend to give blessings to the bride and groom.
             </p>
             <p className="text-spanish-gray text-xl font-medium mb-3">
-              &quot;And among His verses is that He has created for you wives
-              of your own kind, so that you may feel comfortable in them, and
-              He has made between you mawaddah and mercy. Verily in that are
-              signs for the people who think&quot;
+              &quot;And among His verses is that He has created for you wives of
+              your own kind, so that you may feel comfortable in them, and He
+              has made between you mawaddah and mercy. Verily in that are signs
+              for the people who think&quot;
             </p>
             <p className="text-granite-gray text-2xl font-medium">
               - AR-RUM 21 -

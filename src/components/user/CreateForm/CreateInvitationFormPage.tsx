@@ -51,10 +51,11 @@ export default function CreateInvitationFormPage() {
         ),
       });
 
-      console.log(media);
-
       const res = await addInvitation(data);
+      console.log(addInvitationResult.data);
+
       const receptionId = res.data.receptionId;
+      console.log(media);
 
       const response = await addMedia({
         receptionId: receptionId,

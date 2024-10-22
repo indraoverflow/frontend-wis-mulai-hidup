@@ -10,7 +10,11 @@ import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
 import DateCountDown from "../DateCountdown";
 import CeremonyCardPotrait from "../CeremonyCardPotrait";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils/tailwind-util";
 import Navbar from "../header/Navbar";
 import GalleryCarouselItem from "../GalleryCarouselItem";
@@ -18,7 +22,13 @@ import GalleryCarouselItem from "../GalleryCarouselItem";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
 
-export default function ThemeSeven() {
+export default function ThemeSeven({
+  data,
+  isTemplate = false,
+}: {
+  data?: any;
+  isTemplate?: boolean;
+}) {
     const stories = [
         {
             title: "Raka",
