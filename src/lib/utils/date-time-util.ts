@@ -12,4 +12,6 @@ export const getStringDate = (date?: Date) => {
 };
 
 export const getStringTime = (hour?: number, minute?: number) =>
-  `${hour ? hour : 0}:${minute ? minute : 0}`;
+  `${hour ? (hour.toString().length === 1 ? `0${hour}` : hour) : "00"}:${
+    minute ? (minute.toString().length === 1 ? `0${minute}` : minute) : "00"
+  }`;
