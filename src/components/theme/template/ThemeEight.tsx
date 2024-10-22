@@ -18,7 +18,13 @@ import GalleryCarouselItem from "../GalleryCarouselItem";
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
 
-export default function ThemeEight() {
+export default function ThemeEight({
+    data,
+    isTemplate = false,
+  }: {
+    data?: any;
+    isTemplate?: boolean;
+  }) {
     const stories = [
         {
             title: "Raka",
