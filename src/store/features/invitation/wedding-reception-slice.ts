@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { axiosBaseQuery } from "@/lib/axios/axios-base-query";
-import { CreateInvitationRequest } from "@/types/invitation-types";
 
 export const weddingReceptionApi = createApi({
   reducerPath: "weddingReceptionApi",

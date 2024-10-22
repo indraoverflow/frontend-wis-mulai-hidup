@@ -11,7 +11,13 @@ import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
 import { CreateInvitationRequest } from "@/types/invitation-types";
 
-export default function ThemeOne({ data }: { data?: CreateInvitationRequest }) {
+export default function ThemeOne({
+  data,
+  isTemplate = true,
+}: {
+  data?: CreateInvitationRequest;
+  isTemplate?: boolean;
+}) {
   let startDate;
   let dateString;
   if (data) {
