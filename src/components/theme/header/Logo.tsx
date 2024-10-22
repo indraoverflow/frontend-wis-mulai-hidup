@@ -11,7 +11,7 @@ export default function Logo({
   className?: string;
 }) {
   return (
-    <div className={cn("flex justify-center items-center  border rounded-full  p-1 w-[104px] h-[104px]", className)}>
+    <div className={cn("flex justify-center items-center  border rounded-full  p-1 w-[104px] h-[104px] ", className)}>
         <h5 className="text-3xl">
             {title}
         </h5>
