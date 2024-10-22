@@ -1,11 +1,10 @@
 import React from "react";
 
 import { Comfortaa, Playfair_Display } from "next/font/google";
-import { minervaModern } from "@/lib/fonts";
 import Image from "next/image";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
-import { accounts, comments, story } from "@/lib/data";
+import { accounts, comments } from "@/lib/data";
 import CommentCard from "@/components/theme/comment-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
@@ -15,11 +14,47 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { cn } from "@/lib/utils/tailwind-util";
 import Navbar from "../header/Navbar";
 import { Card, CardContent } from "@/components/ui/card";
+import { title } from "process";
+import GalleryCarouselItem from "../GalleryCarouselItem";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
 
 export default function ThemeSeven() {
+    const stories = [
+        {
+            title: "Raka",
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
+        },
+        {
+            title: null,
+            description: null,
+            image: "/images/background/carousel-weeding-1-theme-7.png",
+        },
+        {
+            title: "Raisa",
+            description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
+            image: null,
+        },
+        {
+            title: null,
+            description: null,
+            image: "/images/background/carousel-weeding-2-theme-7.png",
+        },
+    ];
+
+    const galleries = [
+        {
+            image: "/images/couple/gallery-wedding-1-theme-7.png",
+        },
+        {
+            image: "/images/couple/gallery-wedding-2-theme-7.png",
+        },
+        {
+            image: "/images/couple/gallery-wedding-3-theme-7.png",
+        },
+    ];
+
     return (
         <>
             <Navbar />
@@ -45,8 +80,8 @@ export default function ThemeSeven() {
                                         <Image
                                             src="/images/background/bg-frame-template-7.svg"
                                             className="relative z-20"
-                                            layout="fill"
-                                            objectFit="cover"
+                                            fill
+                                            style={{ objectFit: "cover" }}
                                             alt="mempelai pria"
                                         />
                                     </div>
@@ -54,8 +89,8 @@ export default function ThemeSeven() {
                                         <Image
                                             src="/images/couple/groom-hero.png"
                                             alt="mempelai pria"
-                                            layout="fill"
-                                            objectFit="cover"
+                                            fill
+                                            style={{ objectFit: "cover" }}
                                             className="relative rounded-full z-10"
                                         />
                                     </div>
@@ -70,8 +105,8 @@ export default function ThemeSeven() {
                                         <Image
                                             src="/images/background/bg-frame-template-7.svg"
                                             className="relative z-20"
-                                            layout="fill"
-                                            objectFit="cover"
+                                            fill
+                                            style={{ objectFit: "cover" }}
                                             alt="mempelai wanita"
                                         />
                                     </div>
@@ -79,8 +114,8 @@ export default function ThemeSeven() {
                                         <Image
                                             src="/images/couple/bride-hero.png"
                                             alt="mempelai wanita"
-                                            layout="fill"
-                                            objectFit="cover"
+                                            fill
+                                            style={{ objectFit: "cover" }}
                                             className="relative rounded-full z-10"
                                         />
                                     </div>
@@ -93,8 +128,8 @@ export default function ThemeSeven() {
                                     <Image
                                         src="/images/background/bg-frame-template-7.svg"
                                         className="relative z-20"
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
+                                        style={{ objectFit: "cover" }}
                                         alt="mempelai"
                                     />
                                 </div>
@@ -102,8 +137,8 @@ export default function ThemeSeven() {
                                     <Image
                                         src="/images/couple/couple-hero.png"
                                         alt="mempelai"
-                                        layout="fill"
-                                        objectFit="cover"
+                                        fill
+                                        style={{ objectFit: "cover" }}
                                         className="relative rounded-full z-10"
                                     />
                                 </div>
@@ -113,12 +148,11 @@ export default function ThemeSeven() {
                             <Image
                                 src={"/images/background/bg-template-border-gradient-7.png"}
                                 alt="background patern"
-                                layout="fill"
-                                objectFit="cover"
+                                fill
+                                style={{ objectFit: "cover" }}
                                 className="z-0"
                             />
                         </div>
-                        {/* <div className="bg-gradient-to-r from-philippine-yellow to-light-silver h-[2px]"></div> */}
                     </div>
                     <div className="container px-5 pt-5 lg:pt-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
                         <h3 className="text-6xl mb-40 text-center">
@@ -127,60 +161,15 @@ export default function ThemeSeven() {
                         <div className="relative">
                             <Carousel>
                                 <CarouselContent>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-[218px] overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-[218px] border-2 border-light-silver" />
-                                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
-                                                    <h2 className="text-3xl font-serif mb-4">Raka</h2>
-                                                    <p className="text-sm text-center max-w-[80%] leading-relaxed">
-                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.
-                                                    </p>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
-                                                <Image
-                                                    src={"/images/background/carousel-weeding-1-theme-7.png"}
-                                                    alt="wedding"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    className="w-full h-full"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-[218px] overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-[218px] border-2 border-light-silver" />
-                                                <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
-                                                    <h2 className="text-3xl font-serif mb-4">Raisa</h2>
-                                                    <p className="text-sm text-center max-w-[80%] leading-relaxed">
-                                                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.
-                                                    </p>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
-                                                <Image
-                                                    src={"/images/background/carousel-weeding-2-theme-7.png"}
-                                                    alt="wedding"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    className="w-full h-full"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
+                                    {stories.map((story, index) => (
+                                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                                            <GalleryCarouselItem
+                                                galleryImage={story.image}
+                                                title={story.title}
+                                                description={story.description}
+                                            />
+                                        </CarouselItem>
+                                    ))}
                                 </CarouselContent>
                             </Carousel>
                         </div>
@@ -201,48 +190,13 @@ export default function ThemeSeven() {
                         <div className="relative mb-16">
                             <Carousel>
                                 <CarouselContent>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
-                                                <Image
-                                                    src={"/images/couple/gallery-wedding-1-theme-7.png"}
-                                                    alt="wedding"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    className="w-full h-full"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
-                                                <Image
-                                                    src={"/images/couple/gallery-wedding-2-theme-7.png"}
-                                                    alt="wedding"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    className="w-full h-full"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
-                                    <CarouselItem className="md:basis-1/2 lg:basis-1/3">
-                                        <Card className="bg-transparent border-none">
-                                            <CardContent className={`aspect-square relative p-0 group rounded-full overflow-hidden`}>
-                                                <div className="absolute inset-0 rounded-full border-2 border-light-silver" />
-                                                <Image
-                                                    src={"/images/couple/gallery-wedding-3-theme-7.png"}
-                                                    alt="wedding"
-                                                    layout="fill"
-                                                    objectFit="cover"
-                                                    className="w-full h-full"
-                                                />
-                                            </CardContent>
-                                        </Card>
-                                    </CarouselItem>
+                                    {galleries.map((gallery, index) => (
+                                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                                            <GalleryCarouselItem
+                                                galleryImage={gallery.image}
+                                            />
+                                        </CarouselItem>
+                                    ))}
                                 </CarouselContent>
                             </Carousel>
                         </div>
@@ -316,8 +270,8 @@ export default function ThemeSeven() {
                             <Image
                                 src={"/images/background/bg-template-border-gradient-7.png"}
                                 alt="background patern"
-                                layout="fill"
-                                objectFit="cover"
+                                fill
+                                style={{ objectFit: "cover" }}
                                 className="z-0"
                             />
                         </div>
