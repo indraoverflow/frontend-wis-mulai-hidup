@@ -1,6 +1,7 @@
 "use client";
 
 import SubmitButton from "@/components/button/submit";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Form,
@@ -12,9 +13,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axiosInstance from "@/lib/axios/axios";
+import { useEditPasswordMutation } from "@/store/features/user/password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { RxCrossCircled } from "react-icons/rx";
 import { z } from "zod";
 
 const formPasswordSchema = z.object({
@@ -22,7 +26,10 @@ const formPasswordSchema = z.object({
 });
 
 export default function EditPasswordPage() {
-  const { data } = useSession();
+  const { data: session } = useSession();
+
+  const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
   const form = useForm({
     resolver: zodResolver(formPasswordSchema),
     defaultValues: {
@@ -30,19 +37,29 @@ export default function EditPasswordPage() {
     },
   });
 
+  const [editPassword, editPasswordResult] = useEditPasswordMutation();
+
   async function onSubmit(values: z.infer<typeof formPasswordSchema>) {
     try {
-      const response = await axiosInstance.post(
-        "/auth/changepassword" + `?token=${data?.user?.accessToken}`,
-        {
+      const res = await editPassword({
+        token: session?.user?.accessToken as string,
+        data: {
           password: values.password,
         }
-      );
-
-      if (response.status === 200) {
-        alert("Kata sandi berhasil diubah");
+      });
+      
+      if (!res.error) {
+        setAlert({
+          type: "success",
+          message: "Kata sandi berhasil diubah",
+        });
+        form.reset();
       }
     } catch (error) {
+      setAlert({
+        type: "error",
+        message: "Terjadi kesalahan, silahkan coba lagi",
+      });
       console.log(error);
     }
   }
@@ -58,6 +75,17 @@ export default function EditPasswordPage() {
             <hr className="border-primary" />
           </CardHeader>
           <CardContent>
+            {alert && (
+              <Alert variant={alert.type === 'success' ? 'primary' : 'destructive'} className="mb-6 flex justify-between items-center">
+                <AlertDescription>
+                  <AlertTitle>{alert.type === 'success' ? 'Berhasil' : 'Gagal'}</AlertTitle>
+                  {alert.message}
+                </AlertDescription>
+                <span onClick={() => setAlert(null)} className="cursor-pointer">
+                  <RxCrossCircled className="h-5 w-5" />
+                </span>
+              </Alert>
+            )}
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField

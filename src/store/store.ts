@@ -3,6 +3,7 @@ import counterSlice from "./features/dummy/dummySlice";
 import { userApi } from "./features/dummy/api/apiSlice";
 import { weddingReceptionApi } from "./features/invitation/wedding-reception-slice";
 import { userProfileApi } from "./features/user/profile";
+import { userPasswordApi } from "./features/user/password";
 
 export const makeStore = () => {
   return configureStore({
@@ -10,6 +11,7 @@ export const makeStore = () => {
       counter: counterSlice,
       userApi: userApi.reducer,
       userProfileApi: userProfileApi.reducer,
+      userPasswordApi: userPasswordApi.reducer,
       weddingReceptionApi: weddingReceptionApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
@@ -17,6 +19,7 @@ export const makeStore = () => {
         userApi.middleware,
         weddingReceptionApi.middleware,
         userProfileApi.middleware,
+        userPasswordApi.middleware
       ),
   });
 };
