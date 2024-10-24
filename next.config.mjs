@@ -5,7 +5,7 @@ import { urlToHttpOptions } from "url";
 dotenv.config();
 
 const urlInfo = urlToHttpOptions(new URL(process.env.API_URL));
-console.log(urlInfo, process.env.API_URL, process.env.NODE_ENV);
+// console.log(urlInfo, process.env.API_URL, process.env.NODE_ENV);
 
 const nextConfig = {
   output: "standalone",
