@@ -6,7 +6,7 @@ import CommentCard from "@/components/theme/comment-card";
 import Image from "next/image";
 import CeremonyCardPotrait from "@/components/theme/CeremonyCardPotrait";
 import OurStory from "@/components/theme/OurStory";
-import { accounts, comments, story } from "@/lib/data";
+import { comments } from "@/lib/data";
 import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
 import config from "@/lib/config";
@@ -60,6 +60,7 @@ export default function ThemeOne({
     ceremonyStartDateWithFullMonth,
     ceremonyStartDateTime,
     story,
+    accounts,
   } = useInvitationData(data);
 
   return (

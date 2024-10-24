@@ -4,12 +4,14 @@ export const accounts = [
   {
     name: "Azka Kasasih",
     bankLogo: "/images/logo/bni.png",
-    accountNumber: "033 - 0424 23334 31",
+    number: "033 - 0424 23334 31",
+    bank: "BNI",
   },
   {
     name: "Zeldya Ananda",
     bankLogo: "/images/logo/bni.png",
-    accountNumber: "033 - 0555 7788 90",
+    number: "033 - 0555 7788 90",
+    bank: "BNI",
   },
 ];
 
