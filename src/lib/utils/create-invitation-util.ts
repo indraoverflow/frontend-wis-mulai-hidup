@@ -6,19 +6,19 @@ import { getStringDate, getStringTime } from "./date-time-util";
 
 export const createInvitationFormToRequest = (values: CreateInvitationType) => {
   const bankAccount1 = {
-    name: values.accoutBank.at(0)?.name ?? values.mrName,
-    number: values.accoutBank.at(0)?.number ?? "",
-    bank: values.accoutBank.at(0)?.bank ?? "",
+    name: values.accountBank.at(0)?.name ?? values.mrName,
+    number: values.accountBank.at(0)?.number ?? "",
+    bank: values.accountBank.at(0)?.bank ?? "",
   };
 
   const bankAccount2 =
-    values.accoutBank.at(1)?.name ||
-    values.accoutBank.at(1)?.bank ||
-    values.accoutBank.at(1)?.number
+    values.accountBank.at(1)?.name ||
+    values.accountBank.at(1)?.bank ||
+    values.accountBank.at(1)?.number
       ? {
-          name: values.accoutBank.at(1)?.name ?? values.mrsName,
-          number: values.accoutBank.at(1)?.number ?? "0000",
-          bank: values.accoutBank.at(1)?.bank ?? "Lainnya",
+          name: values.accountBank.at(1)?.name ?? values.mrsName,
+          number: values.accountBank.at(1)?.number ?? "0000",
+          bank: values.accountBank.at(1)?.bank ?? "Lainnya",
         }
       : null;
   return createInvitationRequestScheme.parse({
