@@ -4,6 +4,8 @@ import { userApi } from "./features/dummy/api/apiSlice";
 import { weddingReceptionApi } from "./features/invitation/wedding-reception-slice";
 import { userProfileApi } from "./features/user/profile";
 import { userPasswordApi } from "./features/user/password";
+import { subscribeApi } from "./features/subscription/subscribe";
+import { paymentApi } from "./features/payment/payment";
 
 export const makeStore = () => {
   return configureStore({
@@ -13,13 +15,17 @@ export const makeStore = () => {
       userProfileApi: userProfileApi.reducer,
       userPasswordApi: userPasswordApi.reducer,
       weddingReceptionApi: weddingReceptionApi.reducer,
+      subscribeApi: subscribeApi.reducer,
+      paymentApi: paymentApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
         userApi.middleware,
         weddingReceptionApi.middleware,
         userProfileApi.middleware,
-        userPasswordApi.middleware
+        userPasswordApi.middleware,
+        subscribeApi.middleware,
+        paymentApi.middleware
       ),
   });
 };

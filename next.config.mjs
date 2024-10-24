@@ -11,6 +11,8 @@ const nextConfig = {
   output: "standalone",
   env: {
     API_URL: process.env.API_URL,
+    XENDIT_SECRET_KEY: process.env.XENDIT_SECRET_KEY,
+    XENDIT_URL: process.env.XENDIT_URL,
   },
   images: {
     remotePatterns: [
