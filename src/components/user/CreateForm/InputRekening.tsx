@@ -24,22 +24,22 @@ type Props = {
 
 export default function InputRekening({ form, type }: Props) {
   const fieldName: {
-    accountName?: "accoutBank.0.name" | "accoutBank.1.name";
-    accountNumber?: "accoutBank.0.number" | "accoutBank.1.number";
-    bank?: "accoutBank.0.bank" | "accoutBank.1.bank";
+    accountName?: "accountBank.0.name" | "accountBank.1.name";
+    accountNumber?: "accountBank.0.number" | "accountBank.1.number";
+    bank?: "accountBank.0.bank" | "accountBank.1.bank";
   } = {};
 
   switch (type) {
     case "man":
-      fieldName.accountName = "accoutBank.0.name";
-      fieldName.accountNumber = "accoutBank.0.number";
-      fieldName.bank = "accoutBank.0.bank";
+      fieldName.accountName = "accountBank.0.name";
+      fieldName.accountNumber = "accountBank.0.number";
+      fieldName.bank = "accountBank.0.bank";
       break;
 
     case "woman":
-      fieldName.accountName = "accoutBank.1.name";
-      fieldName.accountNumber = "accoutBank.1.number";
-      fieldName.bank = "accoutBank.1.bank";
+      fieldName.accountName = "accountBank.1.name";
+      fieldName.accountNumber = "accountBank.1.number";
+      fieldName.bank = "accountBank.1.bank";
       break;
   }
   return (
@@ -52,14 +52,14 @@ export default function InputRekening({ form, type }: Props) {
           control={form.control}
           name={fieldName.bank}
           render={({ field }) => (
-            <FormItem className=" flex flex-col gap-3 ">
+            <FormItem className=" flex flex-col  ">
               {/* <FormLabel className="hidden md:block">Pilih Bank</FormLabel> */}
               <FormControl>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <SelectTrigger className="w-full bg-white justify-between h-full">
+                  <SelectTrigger className="w-full bg-white justify-between h-[42] ">
                     <SelectValue
                       placeholder={
                         field.value?.length > 0 ? (
@@ -73,11 +73,11 @@ export default function InputRekening({ form, type }: Props) {
                   <SelectContent>
                     <SelectGroup>
                       {/* <SelectLabel>Bank</SelectLabel> */}
-                      <SelectItem value="bca">BCA</SelectItem>
-                      <SelectItem value="bri">BRI</SelectItem>
-                      <SelectItem value="bni">BNI</SelectItem>
+                      <SelectItem value="BCA">BCA</SelectItem>
+                      <SelectItem value="BRI">BRI</SelectItem>
+                      <SelectItem value="BNI">BNI</SelectItem>
                       <SelectItem value="mandiri">Bank Mandiri</SelectItem>
-                      <SelectItem value="bsi">BSI</SelectItem>
+                      <SelectItem value="BSI">BSI</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>

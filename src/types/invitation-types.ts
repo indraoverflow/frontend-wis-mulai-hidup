@@ -20,16 +20,25 @@ const imageSchema = z
 export const formBrideScheme = z.object({
   themeId: z.number().default(1),
   mr: z.string().default(""),
-  mrName: z.string().default(""),
-  mrNickname: z.string().default(""),
+  mrName: z.string().min(1, "Nama lengkap pria tidak boleh kosong").default(""),
+  mrNickname: z
+    .string()
+    .min(1, "Nama panggilan pria tidak boleh kosong")
+    .default(""),
   mrBirthDate: z.string().default(""),
   mrTitle: z.string().default(""),
   mrFather: z.string().default(""),
   mrMother: z.string().default(""),
   mrProfile: z.string().default(""),
   mrs: z.string().default(""),
-  mrsName: z.string().default(""),
-  mrsNickname: z.string().default(""),
+  mrsName: z
+    .string()
+    .min(1, "Nama lengkap wanita tidak boleh kosong")
+    .default(""),
+  mrsNickname: z
+    .string()
+    .min(1, "Nama panggilan wanita tidak boleh kosong")
+    .default(""),
   mrsBirthDate: z.string().default(""),
   mrsTitle: z.string().default(""),
   mrsFather: z.string().default(""),
@@ -59,15 +68,28 @@ export const formBrideScheme = z.object({
       timeZone: z.string().default(""),
     })
     .default({}),
-  accoutBank: z
-    .array(
+  accountBank: z
+    .tuple([
+      z.object({
+        name: z
+          .string()
+          .min(1, "Nama pemilik rekening tidak boleh kosong")
+          .default(""),
+        number: z
+          .string()
+          .min(1, "Nomor rekening tidak boleh kosong")
+          .default(""),
+        bank: z.string().min(1, "Bank harus dipilih").default(""),
+      }),
+    ])
+    .rest(
       z.object({
         name: z.string().default(""),
         number: z.string().default(""),
         bank: z.string().default(""),
       })
     )
-    .default([]),
+    .default([{}]),
   groomImage: z.string().default(""),
   brideImage: z.string().default(""),
   groomStory: z.string().default(""),
