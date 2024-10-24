@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -10,28 +12,81 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/tailwind-util";
 import { minervaModern } from "@/lib/fonts";
 import { FiCheck } from "react-icons/fi";
+import { useSession } from "next-auth/react";
+import { useGetSubscribeQuery } from "@/store/features/subscription/subscribe";
+import { useEffect, useState } from "react";
+import { SubscribeType } from "@/types/subscribe-types";
+import Link from "next/link";
+import { useCreatePaymentMutation } from "@/store/features/payment/payment";
+import { formPaymentScheme } from "@/types/payment-types";
+import { useRouter } from 'next/navigation';
 
-export default function page() {
-  const priceItems = [
-    { items: "Durasi Berlangganan", basic: "1 bulan", premium: "2 bulan" },
-    { items: "Countdown Timer", basic: true, premium: true },
-    { items: "Foto Cover", basic: true, premium: true },
-    { items: "Detail Jadwal Acara", basic: true, premium: true },
-    { items: "Google Maps", basic: true, premium: true },
-    { items: "Wedding Team", basic: true, premium: true },
-    { items: "Registry", basic: true, premium: true },
-    { items: "Wedding Story", basic: true, premium: true },
-    { items: "Bridesmaid and Bestmen", basic: true, premium: true },
-    { items: "Things to Do", basic: true, premium: true },
-    { items: "QR Code Scanner", basic: true, premium: true },
-    { items: "Virtual Gift", basic: true, premium: true },
-    { items: "Virtual Check-In", basic: true, premium: true },
-    { items: "Tablet & Printer", basic: true, premium: true },
-    { items: "Musik Backsound", basic: false, premium: true },
-    { items: "Galeri Foto", basic: false, premium: true },
-    { items: "Wedding Video", basic: false, premium: true },
-    { items: "Premium Template", basic: false, premium: true },
-  ];
+const priceItems = [
+  { items: "Durasi Berlangganan", basic: "1 bulan", premium: "2 bulan" },
+  { items: "Countdown Timer", basic: true, premium: true },
+  { items: "Foto Cover", basic: true, premium: true },
+  { items: "Detail Jadwal Acara", basic: true, premium: true },
+  { items: "Google Maps", basic: true, premium: true },
+  { items: "Wedding Team", basic: true, premium: true },
+  { items: "Registry", basic: true, premium: true },
+  { items: "Wedding Story", basic: true, premium: true },
+  { items: "Bridesmaid and Bestmen", basic: true, premium: true },
+  { items: "Things to Do", basic: true, premium: true },
+  { items: "QR Code Scanner", basic: true, premium: true },
+  { items: "Virtual Gift", basic: true, premium: true },
+  { items: "Virtual Check-In", basic: true, premium: true },
+  { items: "Tablet & Printer", basic: true, premium: true },
+  { items: "Musik Backsound", basic: false, premium: true },
+  { items: "Galeri Foto", basic: false, premium: true },
+  { items: "Wedding Video", basic: false, premium: true },
+  { items: "Premium Template", basic: false, premium: true },
+];
+
+const PricingPage = () => {
+  const router = useRouter();
+
+  const { data: session } = useSession();
+  const { data: subscribeData } = useGetSubscribeQuery({});
+  const [subscribe, setSubscribe] = useState<SubscribeType[] | null>(null);
+
+  useEffect(() => {
+    if (subscribeData) {
+      setSubscribe(subscribeData.data);
+    }
+  }, [subscribeData]);
+
+  const [createPayment, createPaymentResult] = useCreatePaymentMutation();
+
+  async function handlePayment(subscribe: SubscribeType) {
+    try {
+      let data = formPaymentScheme.parse({
+        subscribe_type_id: Number(subscribe.id),
+        currency: "IDR",
+        payment_method: {
+          type: "VIRTUAL_ACCOUNT",
+          reusability: "ONE_TIME_USE",
+          virtual_account: {
+            channel_code: "BCA",
+          }
+        },
+        metadata: {
+          sku: "PAYMENTS-SUBSCRIBER"
+        }
+      });
+
+      if (subscribe.id == 0) {
+        throw new Error("Subscribe ID not found");
+      }
+
+      const res = await createPayment(data);
+
+      if (!res.error) {
+        router.push(`/order/${res.data.data.id}`);
+      }
+    } catch (error) {
+      console.error("Error handle payment:", error);
+    }
+  }
 
   return (
     <main className="bg-surface min-h-screen flex flex-col items-center px-4 md:py-24">
@@ -93,20 +148,48 @@ export default function page() {
             ))}
             <TableRow>
               <TableCell></TableCell>
-              <TableCell className="py-6 text-center">
-                <Button size="lg" className="px-6 md:px-12">
-                  Basic
-                  <br />
-                  Rp. 150.000
-                </Button>
-              </TableCell>
-              <TableCell className="py-6 text-center">
-                <Button size="lg" className="px-6 md:px-12">
-                  Premium
-                  <br />
-                  Rp. 200.000
-                </Button>
-              </TableCell>
+              {subscribe ? (
+                <>
+                  {subscribe.map((item: SubscribeType, index: number) => (
+                    <TableCell key={index} className="py-6 text-center">
+                      {session ? (
+                        <Button 
+                          size="lg" 
+                          className="px-6 md:px-12"
+                          onClick={() => handlePayment(item)}
+                        >
+                          <div>
+                            <span className="capitalize block">{item.name}</span>
+                            <span className="block">Rp. {new Intl.NumberFormat('id-ID').format(item.price)}</span>
+                          </div>
+                        </Button>
+                      ) : (
+                        <Link href="/login">
+                          <Button size="lg" className="px-6 md:px-12">
+                            <div>
+                              <span className="capitalize block">{item.name}</span>
+                              <span className="block">Rp. {new Intl.NumberFormat('id-ID').format(item.price)}</span>
+                            </div>
+                          </Button>
+                        </Link>
+                      )}
+                    </TableCell>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <TableCell className="py-6 text-center">
+                    <Button size="lg" className="px-6 md:px-12">
+                      -
+                    </Button>
+                  </TableCell>
+                  <TableCell className="py-6 text-center">
+                    <Button size="lg" className="px-6 md:px-12">
+                      -
+                    </Button>
+                  </TableCell>
+                </>
+              )}
             </TableRow>
           </TableBody>
         </Table>
@@ -114,3 +197,5 @@ export default function page() {
     </main>
   );
 }
+
+export default PricingPage;
