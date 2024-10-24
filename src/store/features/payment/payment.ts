@@ -19,13 +19,13 @@ export const paymentApi = createApi({
                 data: data,
             }),
         }),
-        paymentGateway: build.query({
+        getPaymentStatus: build.query({
             query: (id) => ({
-                url: `https://api.xendit.co/v2/payment_methods/${id}`,
-                method: "POST",
+                url: `/payment/status/${id}`,
+                method: "GET",
             }),
         }),
     }),
 });
 
-export const { useGetPaymentInfoQuery, useCreatePaymentMutation, usePaymentGatewayQuery } = paymentApi;
+export const { useGetPaymentInfoQuery, useCreatePaymentMutation, useGetPaymentStatusQuery } = paymentApi;
