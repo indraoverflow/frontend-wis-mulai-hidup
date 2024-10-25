@@ -5,13 +5,14 @@ import Image from "next/image";
 import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
-import { accounts, comments, story } from "@/lib/data";
+import { comments } from "@/lib/data";
 import OurStory from "@/components/theme/OurStory";
 import CommentCard from "@/components/theme/comment-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import Footer from "@/components/shared/Footer";
 import DateCountDown from "../DateCountdown";
 import { cn } from "@/lib/utils/tailwind-util";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -23,6 +24,47 @@ export default function ThemeThree({
   data?: any;
   isTemplate?: boolean;
 }) {
+  let {
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+    accounts,
+  } = useInvitationData(data, isTemplate);
+
   return (
     <>
       <main className={cn("relative", comfortaa.className)}>
@@ -43,21 +85,23 @@ export default function ThemeThree({
             </div>
             <div>
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
-                <Image
-                  src={"/images/couple/groom-hero.png"}
-                  alt={"mempelai laki laki"}
-                  width={382.13}
-                  height={529.5}
-                  className="object-cover h-full rounded-[150px]"
-                />
+                <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
+                  <Image
+                    src={"/images/faceless/groom.png"}
+                    alt={"mempelai laki laki"}
+                    width={382.13}
+                    height={529.5}
+                    className="object-cover h-full rounded-[150px]"
+                  />
+                </div>
                 <div>
                   <h4 className={cn("text-9xl mb-6", allura.className)}>
-                    Azka
+                    {nameMan}
                   </h4>
                   <p className="text-2xl font-bold mb-4">
-                    Putra dari Bapak Murzandi dan ibu Halimah
+                    Putra dari Bapak {fatherMan} dan ibu {motherMan}
                   </p>
-                  <h5 className="font-bold text-4xl">Bin Murzandi</h5>
+                  <h5 className="font-bold text-4xl">Bin {fatherMan}</h5>
                 </div>
               </div>
               <p
@@ -71,20 +115,22 @@ export default function ThemeThree({
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
                 <div>
                   <h4 className={cn("text-9xl mb-6", allura.className)}>
-                    Zeldya
+                    {nameWoman}
                   </h4>
-                  <h5 className="font-bold text-4xl">Binti Syaifull</h5>
+                  <h5 className="font-bold text-4xl">Binti {fatherWoman}</h5>
                   <p className="text-2xl font-bold mb-4">
-                    Putri dari Bapak Syaiful dan ibu Nardisah
+                    Putri dari Bapak {fatherWoman} dan ibu {motherWoman}
                   </p>
                 </div>
-                <Image
-                  src={"/images/couple/bride-hero.png"}
-                  alt={"mempelai perempuan"}
-                  width={382.13}
-                  height={529.5}
-                  className="object-cover h-full rounded-[150px]"
-                />
+                <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
+                  <Image
+                    src={"/images/faceless/bride.png"}
+                    alt={"mempelai perempuan"}
+                    width={382.13}
+                    height={529.5}
+                    className="object-cover h-full rounded-[150px]"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -110,10 +156,10 @@ export default function ThemeThree({
               <hr className="border-black mb-28" />
               <div className="mb-24">
                 <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
-                  05 February 2025
+                  {ceremonyStartDateWithFullMonth}
                 </h3>
                 <DateCountDown
-                  date={new Date("2024-10-10T12:00:00")}
+                  date={new Date(ceremonyStartDateTime)}  
                   className="bg-transparent border-black text-black w-full h-auto md:w-40 md:h-48"
                 />
               </div>
@@ -122,9 +168,13 @@ export default function ThemeThree({
                   backgroundImage="/images/background/bg-ceremony.png"
                   iconImage="/images/icon/wedding-ring.svg"
                   ceremonyTitle="Akad Ceremony"
-                  ceremonyTime="07:00 - 08:00"
+                  ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+                    ceremonyEndTime
+                      ? ceremonyEndTime + " " + receptionTimezone
+                      : "Selesai"
+                  }`}
                   locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress="Jl. Jalan Metro Pondok Indah"
+                  locationAddress={ceremonyAddress}
                   buttonText="Open Map"
                 />
               </div>
@@ -133,9 +183,13 @@ export default function ThemeThree({
                   backgroundImage="/images/background/bg-card-place.png"
                   iconImage="/images/icon/dinner-table.svg"
                   ceremonyTitle="Wedding Reseption"
-                  ceremonyTime="11.00 - 14.00"
+                  ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+                    receptionEndTime
+                      ? receptionEndTime + " " + receptionTimezone
+                      : "Selesai"
+                  }`}
                   locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress="Jl. Jalan Metro Pondok Indah"
+                  locationAddress={receptionAddress}
                   buttonText="Open Map"
                 />
               </div>
@@ -180,7 +234,11 @@ export default function ThemeThree({
                   />
                   <OfflineGiftCard
                     title="Offline Gift"
-                    address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                    address={
+                      isTemplate
+                        ? "Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                        : receptionAddress
+                    }
                     buttonText="Open Map"
                   />
                 </div>
