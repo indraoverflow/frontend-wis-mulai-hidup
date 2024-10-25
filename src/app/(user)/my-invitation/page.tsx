@@ -49,7 +49,7 @@ export default function MyInvitationPage() {
                         "text-primary",
                         buttonVariants({ variant: "ghost", size: "sm" })
                       )}
-                      href={`/draft/${invitation.id}`}
+                      href={`/invitation/${invitation.id}`}
                     >
                       Preview
                     </Link>
