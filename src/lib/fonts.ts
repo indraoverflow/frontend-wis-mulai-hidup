@@ -4,7 +4,6 @@ import {
   Playfair_Display,
   Inter,
   Roboto,
-  Roboto_Flex,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -69,6 +68,7 @@ export const comfortaa = Comfortaa({
   preload: true,
   display: "swap",
 });
+
 export const allura = Allura({
   subsets: ["latin"],
   weight: "400",

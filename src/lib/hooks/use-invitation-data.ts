@@ -1,15 +1,37 @@
 import config from "@/lib/config";
 import { OurStoryProps } from "@/types/our-story-props";
 
+interface AccountInfo {
+  name: string;
+  bankLogo?: string;
+  number: string;
+  bank: string;
+}
+
 export default function useInvitationData(invitation: any, isTemplate = false) {
   const story: OurStoryProps = {
-    imgGroom: "/images/couple/groom-story.png",
-    imgBride: "/images/couple/bride-story.png",
+    imgGroom: "/images/faceless/groom.png",
+    imgBride: "/images/faceless/bride.png",
     quoteGroom:
       "Sebagai seorang pria Muslim, saya selalu berusaha menjalani hidup  dengan sebaik-baiknya, berpegang pada ajaran Islam dan terus  memperbaiki diri. Dalam perjalanan mencari jodoh, saya merasa  perlu untuk melakukan ikhtiar yang benar dan memutuskan untuk  menjalani proses taaruf. Meskipun perjalanan ini penuh tantangan,  dengan izin Allah, saya memberanikan diri untuk melangkah maju,  berharap agar Allah memberi petunjuk dan keberkahan dalam setiap  langkah yang saya ambil.",
     quoteBride:
       "Di atas masa penantian dan harapan yang panjang, akhirnya saya menemukan sosok pria yang sejati, insya Allah memiliki akhlak yang baik. Setelah melewati proses yang penuh doa dan harapan, dan setelah melakukan shalat istiqarah, hati saya merasa mantap untuk menerima peminangan tersebut. Saya percaya bahwa Allah telah menunjukkan jalan terbaik bagi kami berdua, dan saya siap untuk memulai babak baru dalam hidup dengan penuh keyakinan dan doa.",
   };
+
+  let accounts: (AccountInfo | undefined)[] = [
+    {
+      name: "Azka Kasasih",
+      bankLogo: "/images/logo/bni.png",
+      number: "033 - 0424 23334 31",
+      bank: "BNI",
+    },
+    {
+      name: "Zeldya Ananda",
+      bankLogo: "/images/logo/bni.png",
+      number: "033 - 0555 7788 90",
+      bank: "BNI",
+    },
+  ];
   let {
     name_man: nameMan,
     nickname_man: nicknameMan,
@@ -38,6 +60,7 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
     woman_story: womanStory,
     video_url: videoUrl,
     wedding_ceremony,
+    account_bank,
   } = invitation || {};
 
   let {
@@ -49,6 +72,13 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
     location: ceremonyLocation,
     address: ceremonyAddress,
   } = wedding_ceremony || {};
+
+  let accountBank1: AccountInfo | undefined = account_bank
+    ? account_bank[0]
+    : undefined;
+  let accountBank2: AccountInfo | undefined = account_bank
+    ? account_bank[1]
+    : undefined;
 
   let ceremonyStartDateString;
   let ceremonyStartDateWithFullMonth;
@@ -95,6 +125,7 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
   }
 
   if (!isTemplate) {
+    accounts = [accountBank1, accountBank2];
     let manPhoto: string | undefined = !manMedia[0]
       ? undefined
       : manMedia[0].photo_url;
@@ -153,5 +184,6 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
     ceremonyStartDateWithFullMonth,
     ceremonyStartDateTime,
     story,
+    accounts,
   };
 }
