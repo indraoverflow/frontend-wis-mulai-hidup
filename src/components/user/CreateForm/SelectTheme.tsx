@@ -49,8 +49,9 @@ export default function SelectTheme({
                       <CardFooter className="flex justify-center items-center gap-1 py-6">
                         <Button
                           size="sm"
-                          onClick={() => {
-                            field.onChange(i);
+                          onClick={(e) => {
+                            e.preventDefault();
+                            form.setValue("themeId", i);
                           }}
                         >
                           Pilih Tema

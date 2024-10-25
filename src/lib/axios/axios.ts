@@ -66,9 +66,9 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     // Handle response error
     let message = error.response.data.message;
-    console.log(message === "TOKEN_EXPIRED");
+    console.log(message === "TOKEN_EXPIRED" || message === "jwt expired");
 
-    if (message === "TOKEN_EXPIRED") {
+    if (message === "TOKEN_EXPIRED" || message === "jwt expired") {
       const session = await getSession();
 
       if (session) {

@@ -26,6 +26,7 @@ import { createInvitationFormToRequest } from "@/lib/utils/create-invitation-uti
 import { useRouter } from "next/navigation";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { RxCrossCircled } from "react-icons/rx";
+import { add } from "date-fns";
 
 export default function CreateInvitationFormPage() {
   const [addInvitation, addInvitationResult] = useAddInvitationMutation();
@@ -40,6 +41,7 @@ export default function CreateInvitationFormPage() {
 
   const form = useForm<CreateInvitationType>({
     resolver: zodResolver(formBrideScheme),
+    reValidateMode: "onSubmit",
     // defaultValues: defaultData,
   });
 
@@ -59,12 +61,11 @@ export default function CreateInvitationFormPage() {
         ),
       });
 
-      const res = await addInvitation(data);
-      console.log(addInvitationResult.data);
+      let res = await addInvitation(data).unwrap();
 
-      const receptionId = res.data.receptionId;
+      const receptionId = res.data?.receptionId ?? 0;
       console.log(media);
-
+      if (receptionId == 0) return;
       const response = await addMedia({
         receptionId: receptionId,
         media: media,
@@ -90,13 +91,13 @@ export default function CreateInvitationFormPage() {
           return (
             <>
               {parsedValue[0]["bank"] ? (
-                <p key={value}>{parsedValue[0]["bank"]?.message}</p>
+                <p key="account-bank">{parsedValue[0]["bank"]?.message}</p>
               ) : null}
               {parsedValue[0]["name"] ? (
-                <p key={value}>{parsedValue[0]["name"]?.message}</p>
+                <p key="account-name">{parsedValue[0]["name"]?.message}</p>
               ) : null}{" "}
               {parsedValue[0]["number"] ? (
-                <p key={value}>{parsedValue[0]["number"]?.message}</p>
+                <p key="account-number">{parsedValue[0]["number"]?.message}</p>
               ) : null}
             </>
           );

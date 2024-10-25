@@ -22,13 +22,13 @@ export default function OurStory({
       </h2>
       <div className="flex flex-col md:flex-row gap-5 max-w-[1040px] mx-auto">
         <div className="flex flex-col flex-1 p-0 border-none bg-transparent shadow-none gap-5">
-          <div className=" overflow-hidden p-0 rounded-[20px] flex flex-col ">
+          <div className=" overflow-hidden p-0 rounded-[20px] flex flex-col bg-isabelline aspect-[10/9]">
             <Image
               src={imgGroom}
               alt={"mempelai laki-laki"}
               width={509}
               height={468}
-              className=" w-full"
+              className="object-fill w-full"
             />
           </div>
           <div
@@ -49,13 +49,13 @@ export default function OurStory({
           </div>
         </div>
         <div className="flex flex-col md:flex-col-reverse flex-1 p-0 border-none bg-transparent shadow-none gap-5">
-          <div className=" overflow-hidden p-0 rounded-[20px] flex flex-col ">
+          <div className=" overflow-hidden p-0 rounded-[20px] flex flex-col bg-isabelline aspect-[10/9]">
             <Image
               src={imgBride}
-              alt={"mempelai laki-laki"}
+              alt={"mempelai perempuan"}
               width={509}
               height={468}
-              className=" w-full"
+              className="object-fill w-full"
             />
           </div>
           <div

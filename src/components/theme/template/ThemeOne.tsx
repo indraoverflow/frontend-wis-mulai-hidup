@@ -14,6 +14,8 @@ import { get } from "http";
 import getInvitationResponse from "@/lib/hooks/use-invitation-data";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import { OurStoryProps } from "@/types/our-story-props";
+import { cn } from "@/lib/utils/tailwind-util";
+import { allura, comfortaa } from "@/lib/fonts";
 
 export default function ThemeOne({
   data,
@@ -61,31 +63,31 @@ export default function ThemeOne({
     ceremonyStartDateTime,
     story,
     accounts,
-  } = useInvitationData(data);
+  } = useInvitationData(data, isTemplate);
 
   return (
     <>
-      <main className="bg-surface">
+      <main className={cn("bg-surface", comfortaa.className)}>
         <section className="relative md:w-full z-20">
           <Image
             src={"/images/background/hero-bg-theme-1.png"}
             alt={"mosque background image"}
             width={1440}
             height={1440}
-            className="w-full aspect-square lg:aspect-auto absolute top-0 left-0 opacity-[98%] -z-10"
+            className="w-full scale-y-[1.5] scale-x-[3] md:aspect-square lg:aspect-auto absolute top-0 left-0 opacity-[98%] -z-10 h-full"
           />
           <div className="py-10 lg:pt-[154px] lg:pb-[53px] flex flex-col w-11/12 mx-auto justify-start items-center text-white ">
-            <p className="text-base md:text-xl text-center font-bold">
+            <p className="text-base md:text-xl text-center font-bold mb-3">
               Ya Allah the Most Loving
             </p>
             <p className="text-base md:text-xl text-center font-medium mb-6 lg:mb-[50px]">
               With Your blessing, you brought us together in a holy marriage
               bond
             </p>
-            <p className="text-xl md:text-[40px] font-bold mb-3 lg:mb-[50px]">
+            <p className="text-xl md:text-[40px] font-bold mb-3 lg:mb-[50px] hidden md:block">
               THE WEDDING OF
             </p>
-            <p className="text-4xl md:text-6xl lg:text-[120px] mb-3 flex justify-between items-center gap-4 lg:gap-20">
+            <p className="text-6xl lg:text-[120px] mb-3 flex justify-between items-center gap-4 lg:gap-20">
               <Image
                 src={"/images/icon/leaf-theme-1.svg"}
                 alt={"leaf decoration left"}
@@ -93,7 +95,15 @@ export default function ThemeOne({
                 height={60}
                 className="scale-x-[-1] w-6 h-6 md:w-8 md:h-8"
               />
-              {nicknameMan} & {nicknameWoman}
+              <span
+                className={cn(
+                  "flex flex-col items-center md:flex-row",
+                  allura.className
+                )}
+              >
+                <span>{nicknameMan}</span>
+                <span>&nbsp; & &nbsp;</span> <span>{nicknameWoman}</span>
+              </span>
               <Image
                 src={"/images/icon/leaf-theme-1.svg"}
                 alt={"leaf decoration left"}
@@ -107,18 +117,18 @@ export default function ThemeOne({
             </p>
           </div>
           <div className="flex  gap-6 lg:gap-20 lg:w-full justify-center w-11/12 mx-auto  sm:px-20 md:px-12 lg:px-48">
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/groom-hero.png"}
+                src={"/images/faceless/groom.png"}
                 alt={"mempelai laki laki"}
                 width={509}
                 height={706}
-                className="object-cover h-full"
+                className="object-cover h-full "
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/bride-hero.png"}
+                src={"/images/faceless/bride.png"}
                 alt={"mempelai perempuan"}
                 width={509}
                 height={706}
