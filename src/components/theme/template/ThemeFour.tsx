@@ -11,6 +11,7 @@ import DateCountDown from "@/components/theme/DateCountdown";
 import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa, inter, playfairDisplay } from "@/lib/fonts";
 import Footer from "@/components/shared/Footer";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
 
 export default function ThemeFour({
   data,
@@ -19,6 +20,46 @@ export default function ThemeFour({
   data?: any;
   isTemplate?: boolean;
 }) {
+  let {
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+    accounts,
+  } = useInvitationData(data, isTemplate);
   return (
     <>
       <main
@@ -66,7 +107,10 @@ export default function ThemeFour({
                 playfairDisplay.className
               )}
             >
-              Azka & Zeldya
+              <span className={cn("flex flex-col items-center md:flex-row")}>
+                <span>{nicknameMan}</span>
+                <span>&nbsp; & &nbsp;</span> <span>{nicknameWoman}</span>
+              </span>
             </p>
             <p
               className={cn(
@@ -74,40 +118,40 @@ export default function ThemeFour({
                 inter.className
               )}
             >
-              2 February, 2025 – Jakarta indonesia
+              {ceremonyStartDateWithFullMonth}
             </p>
           </div>
           <div className="flex relative gap-6 lg:gap-9 justify-center  left-[-10%] w-[120%]  mx-auto">
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/groom-hero.png"}
+                src={"/images/faceless/18.png"}
                 alt={"mempelai laki laki"}
                 width={509}
                 height={706}
                 className="object-cover h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/groom-hero.png"}
+                src={"/images/faceless/groom.png"}
                 alt={"mempelai laki laki"}
                 width={509}
                 height={706}
                 className="object-cover h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/bride-hero.png"}
+                src={"/images/faceless/bride.png"}
                 alt={"mempelai perempuan"}
                 width={509}
                 height={706}
                 className="object-cover  h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/couple/bride-hero.png"}
+                src={"/images/faceless/22.png"}
                 alt={"mempelai perempuan"}
                 width={509}
                 height={706}
@@ -118,9 +162,11 @@ export default function ThemeFour({
         </section>
         <section className=" flex flex-col md:flex-row justify-between items-center max-w-[1040px] mx-auto py-[44px] border-b border-b-raisin-black mb-10">
           <div className="flex flex-col gap-4 items-center">
-            <p className={cn("text-[40px]", inter.className)}>Azka Kosasih</p>
+            <p
+              className={cn("text-[40px]", inter.className)}
+            >{`${prefixMan} ${nameMan}, ${titleMan}`}</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
-              Bin Murzandi
+              Bin {fatherMan}
             </p>
           </div>
           <div className="w-[300px] h-[550px] relative">
@@ -133,9 +179,11 @@ export default function ThemeFour({
             />
           </div>
           <div className="flex flex-col gap-4 items-center">
-            <p className={cn("text-[40px]", inter.className)}>Azka Kosasih</p>
+            <p
+              className={cn("text-[40px]", inter.className)}
+            >{`${prefixWoman} ${nameWoman} ${titleWoman}`}</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
-              Bin Murzandi
+              Binti {fatherWoman}
             </p>
           </div>
         </section>
@@ -158,7 +206,7 @@ export default function ThemeFour({
           />
           <div className="mb-12 md:mb-16 lg:mb-24 ">
             <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
-              05 February 2025
+              {ceremonyStartDateWithFullMonth}
             </h3>
             <DateCountDown
               date={new Date("2024-10-10T12:00:00")}
@@ -170,9 +218,13 @@ export default function ThemeFour({
               backgroundImage="/images/background/bg-ceremony.png"
               iconImage="/images/icon/wedding-ring.svg"
               ceremonyTitle="Akad Ceremony"
-              ceremonyTime="07:00 - 08:00"
+              ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+                ceremonyEndTime
+                  ? ceremonyEndTime + " " + receptionTimezone
+                  : "Selesai"
+              }`}
               locationTitle="InterContinental Jakarta Hotel"
-              locationAddress="Jl. Jalan Metro Pondok Indah"
+              locationAddress={ceremonyAddress}
               buttonText="Open Map"
             />
           </div>
@@ -181,9 +233,13 @@ export default function ThemeFour({
               backgroundImage="/images/background/bg-card-place.png"
               iconImage="/images/icon/dinner-table.svg"
               ceremonyTitle="Wedding Reseption"
-              ceremonyTime="11.00 - 14.00"
+              ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+                receptionEndTime
+                  ? receptionEndTime + " " + receptionTimezone
+                  : "Selesai"
+              }`}
               locationTitle="InterContinental Jakarta Hotel"
-              locationAddress="Jl. Jalan Metro Pondok Indah"
+              locationAddress={ceremonyAddress}
               buttonText="Open Map"
             />
           </div>
@@ -196,7 +252,11 @@ export default function ThemeFour({
             className="relative mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200 z-10"
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+              src={
+                isTemplate
+                  ? "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                  : receptionLocation ?? ceremonyAddress
+              }
               loading="lazy"
               width="100%"
               height="100%"
@@ -239,7 +299,7 @@ export default function ThemeFour({
               />
               <OfflineGiftCard
                 title="Offline Gift"
-                address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                address={receptionAddress ?? ceremonyAddress}
                 buttonText="Open Map"
               />
             </div>

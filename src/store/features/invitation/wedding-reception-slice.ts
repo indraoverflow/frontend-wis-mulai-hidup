@@ -6,6 +6,7 @@ export const weddingReceptionApi = createApi({
   reducerPath: "weddingReceptionApi",
   tagTypes: ["CreateInvitationTypes"],
   baseQuery: axiosBaseQuery(),
+
   endpoints: (build) => ({
     addInvitation: build.mutation({
       query: (data) => {
@@ -17,6 +18,7 @@ export const weddingReceptionApi = createApi({
           data: data,
         };
       },
+      invalidatesTags: ["CreateInvitationTypes"],
     }),
     getInvitationByUserId: build.query({
       query: (id) => {
@@ -25,6 +27,7 @@ export const weddingReceptionApi = createApi({
           method: "GET",
         };
       },
+      providesTags: ["CreateInvitationTypes"],
     }),
     getInvitationById: build.query({
       query: (id) => {
@@ -49,6 +52,13 @@ export const weddingReceptionApi = createApi({
     }),
   }),
 });
+
+// export const updateInvitationById = (id: string) =>
+//   weddingReceptionApi.util.updateQueryData(
+//     "getInvitationByUserId",
+//     id
+//     // (invitation) => invitation
+//   );
 
 export const {
   useAddInvitationMutation,

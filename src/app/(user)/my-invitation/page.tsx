@@ -1,18 +1,25 @@
 "use client";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useAppDispatch } from "@/lib/hooks";
 import { cn } from "@/lib/utils/tailwind-util";
 import { useGetInvitationByUserIdQuery } from "@/store/features/invitation/wedding-reception-slice";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { use } from "react";
+import React from "react";
 
 export default function MyInvitationPage() {
+  const dispatch = useAppDispatch();
   const session = useSession();
   const { data } = useGetInvitationByUserIdQuery(
     session.data?.user?.id as string
   );
+
+  // useEffect(() => {
+  //   dispatch(updateInvitationById(session.data?.user?.id as string));
+  // });
+
   return (
     <div className="bg-surface flex flex-col items-center px-4 py-24">
       <div className="container mx-auto max-w-5xl">

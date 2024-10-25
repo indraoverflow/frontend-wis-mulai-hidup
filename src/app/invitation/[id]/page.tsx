@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { id: string } }) {
       return <ThemeThree />;
 
     case 4:
-      return <ThemeFour />;
+      return <ThemeFour data={data.data} />;
 
     default:
       // router.push("/");

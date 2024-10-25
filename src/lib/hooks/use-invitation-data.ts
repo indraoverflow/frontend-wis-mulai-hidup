@@ -126,15 +126,19 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
 
   if (!isTemplate) {
     accounts = [accountBank1, accountBank2];
-    let manPhoto: string | undefined = !manMedia[0]
-      ? undefined
-      : manMedia[0].photo_url;
+    let manPhoto: string | undefined = manMedia
+      ? !manMedia[0]
+        ? undefined
+        : manMedia[0].photo_url
+      : undefined;
     if (manPhoto?.startsWith("undefined")) {
       manPhoto = `${config.apiUrl}${manPhoto.split("undefined")[1]}`;
     }
-    let womanPhoto: string | undefined = !womanMedia[0]
-      ? undefined
-      : womanMedia[0].photo_url;
+    let womanPhoto: string | undefined = womanMedia
+      ? !womanMedia[0]
+        ? undefined
+        : womanMedia[0].photo_url
+      : undefined;
     if (womanPhoto?.startsWith("undefined")) {
       womanPhoto = `${config.apiUrl}${womanPhoto.split("undefined")[1]}`;
     }
