@@ -241,7 +241,11 @@ export default function ThemeOne({
                 />
                 <OfflineGiftCard
                   title="Offline Gift"
-                  address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                  address={
+                    isTemplate
+                      ? "Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                      : receptionAddress
+                  }
                   buttonText="Open Map"
                 />
               </div>

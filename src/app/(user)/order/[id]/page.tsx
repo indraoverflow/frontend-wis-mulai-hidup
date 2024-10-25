@@ -1,16 +1,23 @@
 "use client";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import axiosInstance from "@/lib/axios/axios";
 import config from "@/lib/config";
 import { useGetPaymentInfoQuery } from "@/store/features/payment/payment";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function OrderPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  
+
   const session = useSession();
 
   const { data: paymentData } = useGetPaymentInfoQuery(params.id, {
@@ -24,17 +31,23 @@ export default function OrderPage({ params }: { params: { id: string } }) {
     }
   }, [paymentData]);
 
-
   async function handlePayment(payment: any) {
+    console.log(config.xenditUrl, config.xenditSecretKey);
+
     try {
       if (payment) {
-        const res = await axiosInstance.post(`${config.xenditUrl}/v2/payment_methods/${payment.payment_method_id}/payments/simulate`, {
-          amount: payment.payment_amount,
-        }, {
-          headers: {
-            Authorization: `${config.xenditSecretKey}`,
+        const res = await axios.post(
+          `${config.xenditUrl}/v2/payment_methods/${payment.payment_method_id}/payments/simulate`,
+          {
+            amount: payment.payment_amount,
+          },
+          {
+            auth: {
+              username: `${config.xenditSecretKey}`,
+              password: "",
+            },
           }
-        });
+        );
 
         // check status
         if (res.status === 200) {
@@ -72,7 +85,9 @@ export default function OrderPage({ params }: { params: { id: string } }) {
             <div className="mb-3">
               <h6 className="text-base mb-3">Batas Pembayaran</h6>
               <p className="text-philippine-silver">
-                {payment?.limit_payment_date ? new Date(payment.limit_payment_date).toLocaleString() : "-"}
+                {payment?.limit_payment_date
+                  ? new Date(payment.limit_payment_date).toLocaleString()
+                  : "-"}
               </p>
             </div>
             <div className="mb-3">
@@ -84,12 +99,20 @@ export default function OrderPage({ params }: { params: { id: string } }) {
             <div className="mb-3">
               <h6 className="text-base mb-3">Total Pembayaran</h6>
               <p className="text-philippine-silver">
-                {payment?.payment_amount ? "Rp. " + new Intl.NumberFormat('id-ID').format(payment.payment_amount) : "-"}
+                {payment?.payment_amount
+                  ? "Rp. " +
+                    new Intl.NumberFormat("id-ID").format(
+                      payment.payment_amount
+                    )
+                  : "-"}
               </p>
             </div>
           </CardContent>
           <CardFooter className="justify-center">
-            <Button className="text-center" onClick={() => handlePayment(payment)}>
+            <Button
+              className="text-center"
+              onClick={() => handlePayment(payment)}
+            >
               Lanjutkan Pembayaran
             </Button>
           </CardFooter>

@@ -45,6 +45,8 @@ Ensure you have the following installed:
    API_URL=
    GOOGLE_CLIENT_ID=
    GOOGLE_CLIENT_SECRET=
+   XENDIT_SECRET_KEY=
+   XENDIT_URL=
    ```
 
 ## Usage
@@ -85,10 +87,10 @@ yarn start
 
 ## Screenshots
 
-| Page     | Mobile                                                | Desktop                                                 |
+| Page     | Mobile                                                | Desktop                                                |
 | -------- | ----------------------------------------------------- | ------------------------------------------------------ |
 | Register | ![Register](./public/images/docs/register-mobile.png) | ![Register](./public/images/docs/register-desktop.png) |
-| Login | ![Login](./public/images/docs/login-mobile.png)    | ![Login](./public/images/docs/login-desktop.png)    |
+| Login    | ![Login](./public/images/docs/login-mobile.png)       | ![Login](./public/images/docs/login-desktop.png)       |
 
 <!--
 ![Home Page](url-to-image)

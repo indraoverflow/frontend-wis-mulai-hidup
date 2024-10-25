@@ -63,13 +63,14 @@ export default function CreateInvitationFormPage() {
 
       let res = await addInvitation(data).unwrap();
 
-      const receptionId = res.data?.receptionId ?? 0;
-      console.log(media);
-      if (receptionId == 0) return;
+      const receptionId = res.data?.receptionId;
+      console.log(media, receptionId);
       const response = await addMedia({
         receptionId: receptionId,
         media: media,
       });
+
+      console.log(addMediaResult, response);
 
       router.push("/my-invitation");
     } catch (error) {
