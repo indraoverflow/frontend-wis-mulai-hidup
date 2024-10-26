@@ -15,10 +15,10 @@ export default function Page({ params }: { params: { id: string } }) {
       return <ThemeOne data={data.data} />;
 
     case 2:
-      return <ThemeTwo />;
+      return <ThemeTwo data={data.data} />;
 
     case 3:
-      return <ThemeThree />;
+      return <ThemeThree data={data.data} />;
 
     case 4:
       return <ThemeFour data={data.data} />;
