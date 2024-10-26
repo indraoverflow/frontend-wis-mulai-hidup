@@ -10,7 +10,7 @@ export default function ScheduleAndLocation({
 }) {
   return (
     <div className="min-h-screen bg-surface py-8">
-      <div className="bg-white p-6">
+      <div className="bg-surface p-6">
         <ScheduleFieldGroup form={form} type="akad" />
         <ScheduleFieldGroup form={form} type="resepsi" />
       </div>

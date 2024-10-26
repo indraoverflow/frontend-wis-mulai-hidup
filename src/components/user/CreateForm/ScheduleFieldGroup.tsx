@@ -57,8 +57,10 @@ export default function ScheduleFieldGroup({ form, type }: Props) {
   }
   return (
     <div className="container mx-auto max-w-5xl">
-      <p className="mb-3">Jadwal & Lokasi Akad</p>
-      <div className="flex gap-8">
+      <p className="mb-3">
+        Jadwal & Lokasi {type === "akad" ? "Akad" : "Resepsi"}
+      </p>
+      <div className="flex flex-col md:flex-row gap-8">
         <div>
           <FormField
             control={form.control}

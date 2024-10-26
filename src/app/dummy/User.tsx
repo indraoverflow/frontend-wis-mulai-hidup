@@ -11,7 +11,7 @@ export default function User({}: Props) {
   // const { data: user, isLoading } = useGetUserQuery("1");
   const { data: session } = useSession();
 
-  console.log(session);
+  // console.log(session);
 
   return (
     <div

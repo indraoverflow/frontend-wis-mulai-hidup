@@ -32,8 +32,6 @@ export default function OrderPage({ params }: { params: { id: string } }) {
   }, [paymentData]);
 
   async function handlePayment(payment: any) {
-    console.log(config.xenditUrl, config.xenditSecretKey);
-
     try {
       if (payment) {
         const res = await axios.post(
@@ -55,7 +53,7 @@ export default function OrderPage({ params }: { params: { id: string } }) {
         }
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 

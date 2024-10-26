@@ -19,7 +19,7 @@ export default function SelectTheme({
   form: UseFormReturn<CreateInvitationType, any, undefined>;
 }) {
   return (
-    <div className="bg-white flex flex-col items-center px-4 py-8">
+    <div className="bg-surface flex flex-col items-center px-4 py-8">
       <div className="container mx-auto max-w-5xl">
         <FormField
           control={form.control}
@@ -27,26 +27,28 @@ export default function SelectTheme({
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
                   {[1, 2, 3, 4].map((i) => (
                     <Card
                       className={cn(
-                        "border-0 shadow-none",
+                        "border-0 shadow-none bg-surface",
                         field.value === i
                           ? "shadow-md border border-primary"
                           : ""
                       )}
                       key={i}
                     >
-                      <CardContent className="p-3 border rounded-md">
-                        <Image
-                          src={`/images/template/template-${i}.png`}
-                          alt={`template ${i}`}
-                          width={262}
-                          height={370}
-                        />
+                      <CardContent className="flex justify-center">
+                        <div className="w-fit border rounded-md flex justify-center bg-white p-2">
+                          <Image
+                            src={`/images/template/template-${i}.png`}
+                            alt={`template ${i}`}
+                            width={262}
+                            height={370}
+                          />
+                        </div>
                       </CardContent>
-                      <CardFooter className="flex justify-center items-center gap-1 py-6">
+                      <CardFooter className="flex justify-center items-center gap-1 pb-3">
                         <Button
                           size="sm"
                           onClick={(e) => {

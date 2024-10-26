@@ -21,7 +21,7 @@ export function DatePicker({ field }: { field: any }) {
           <Button
             variant={"outline"}
             className={cn(
-              "w-full px-6 py-3 text-left font-normal h-12",
+              "w-full px-6 py-3 text-left font-normal h-12 bg-white",
               !field.value && "text-philippine-silver"
             )}
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Logo from "./Logo";
 import { Button, buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils/tailwind-util";
@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { jwtDecode } from "jwt-decode";
 
 type Props = {
   showMenu?: boolean;
@@ -22,7 +23,21 @@ type Props = {
 
 export default function Header({ showMenu = true }: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    // logout user when token expiry less than 5 minutes
+    if (session) {
+      const tokenExpiryDate =
+        (jwtDecode(session.user.refreshToken as string).exp ?? 0) * 1000;
+
+      const timeLeft = tokenExpiryDate - Date.now();
+      // 1000 * 60 * 5 = 5 minute
+      if (timeLeft < 1000 * 60 * 5) {
+        signOut();
+      }
+    }
+  });
   return (
     <header className="sticky top-0  py-7 px-7 md:py-5 lg:py-10 lg:px-0 flex-col items-center bg-surface z-40">
       <nav className="flex  items-center justify-between md:gap-10 lg:gap-14 xl:gap-[138px] max-w-desktop px-5  lg:px-20 xl:px-[100px] mx-auto">
@@ -84,7 +99,8 @@ export default function Header({ showMenu = true }: Props) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          ) : (
+          ) : null}
+          {!session && status !== "loading" ? (
             <>
               {/* <Link href={"/login"}> */}
               <Button
@@ -105,7 +121,7 @@ export default function Header({ showMenu = true }: Props) {
                 <span className="hidden md:block">Start &nbsp;</span> Free Trial
               </Button>
             </>
-          )}
+          ) : null}
           <button
             className="relative z-50 flex items-center justify-center w-8 h-8 md:hidden"
             onClick={() => setIsExpanded(!isExpanded)}

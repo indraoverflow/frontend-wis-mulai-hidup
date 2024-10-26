@@ -27,6 +27,7 @@ import { useRouter } from "next/navigation";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { RxCrossCircled } from "react-icons/rx";
 import { add } from "date-fns";
+import { ArrowUp } from "lucide-react";
 
 export default function CreateInvitationFormPage() {
   const [addInvitation, addInvitationResult] = useAddInvitationMutation();
@@ -47,7 +48,7 @@ export default function CreateInvitationFormPage() {
 
   const onSubmit: SubmitHandler<CreateInvitationType> = async (values) => {
     try {
-      console.log(values);
+      // console.log(values);
 
       const data = createInvitationFormToRequest(values);
 
@@ -64,7 +65,6 @@ export default function CreateInvitationFormPage() {
       let res = await addInvitation(data).unwrap();
 
       const receptionId = res.data?.receptionId;
-      console.log(media, receptionId);
       const response = await addMedia({
         receptionId: receptionId,
         media: media,
@@ -108,7 +108,7 @@ export default function CreateInvitationFormPage() {
     </div>
   );
   return (
-    <div className="min-h-screen bg-surface py-24">
+    <div className="min-h-screen bg-surface md:py-24">
       <div className="flex flex-col items-center px-4 py-8">
         <div className="container mx-auto max-w-5xl">
           <h3 className="text-2xl font-semibold text-philippine-silver">
@@ -117,15 +117,14 @@ export default function CreateInvitationFormPage() {
           <hr className="my-3 border-primary" />
         </div>
       </div>
-      <div className="bg-white flex flex-col items-center px-4 py-8 mb-12">
+      <div className="bg-surface flex flex-col items-center px-4 md:py-8 mb-12">
         <div className="container mx-auto max-w-5xl">
           <MenuInvitation setFormIndex={setFormIndex} formIndex={formIndex} />
         </div>
       </div>
-      <div className="container  mx-auto max-w-5xl">
+      <div className="container  mx-auto max-w-5xl relative">
         {Object.keys(form.formState.errors).length > 0 ? (
           <Alert variant="destructive">
-            {/* {JSON.stringify(errors)} */}
             <AlertDescription className="flex items-start justify-between">
               {errorMessages}
               <span
@@ -145,6 +144,14 @@ export default function CreateInvitationFormPage() {
           {formIndex === 2 && <ScheduleAndLocation form={form} />}
           {formIndex === 3 && <AdditonalInformationForm form={form} />}
         </form>
+        <div className="md:hidden bg-primary rounded-full w-10 h-10 flex items-center justify-center cursor-pointer absolute right-8">
+          <ArrowUp
+            className="text-white "
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          ></ArrowUp>
+        </div>
       </FormProvider>
     </div>
   );

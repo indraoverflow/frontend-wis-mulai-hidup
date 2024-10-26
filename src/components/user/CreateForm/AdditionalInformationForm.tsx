@@ -145,9 +145,9 @@ export default function AdditonalInformationForm({
 
   return (
     <div className="min-h-screen bg-surface py-8">
-      <div className="bg-white p-6">
+      <div className="bg-surface p-6">
         <div className="container mx-auto max-w-5xl space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
             {(
               Object.keys(formAdditionalInformationScheme.shape) as Array<
                 keyof AdditionalInformationType
@@ -168,12 +168,13 @@ export default function AdditonalInformationForm({
                         ) ? (
                           renderPreview(field, formField.value)
                         ) : (
-                          <div className="w-full h-64 flex flex-col items-center justify-center gap-4 border border-primary rounded">
+                          <div className="w-full p-3 md:h-64 flex flex-col items-center justify-center gap-4 border border-primary rounded-lg">
                             <Image
                               src={`/images/icon/upload.svg`}
                               alt="Upload icon"
                               width={120}
                               height={120}
+                              className="w-20 h-20"
                             />
                             <span className="text-xs">
                               {formBrideLabels[field]}
