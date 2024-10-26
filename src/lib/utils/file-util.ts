@@ -2,12 +2,8 @@ export const dataUrlToFile = (
   dataUrl: string,
   filename: string
 ): File | undefined => {
-  console.log(dataUrl);
-
   const arr = dataUrl.split(",");
   const mime = arr[0].match(/:(.*?);/)?.[1];
-  console.log(mime);
-
   if (mime?.includes("text/html") || !mime) return undefined;
   filename = `${filename}.${mime?.split("/")[1]}`;
   const bstr = atob(arr[1]);

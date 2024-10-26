@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(
   async (axiosConfig) => {
     const session = await getSession();
     axiosConfig.withCredentials = true;
-    console.log(session);
+
     if (session) {
       const { user } = session;
       if (user.accessToken) {
@@ -36,7 +36,6 @@ axiosInstance.interceptors.request.use(
       const res = await axios.get(`${config.apiUrl}/protect`, {
         withCredentials: true,
       });
-      console.log(res);
 
       axiosConfig.headers["X-XSRF-TOKEN"] = res.data.csrf_token;
       axiosConfig.headers["refresh_token"] = user.refreshToken;
@@ -44,10 +43,6 @@ axiosInstance.interceptors.request.use(
         res.headers["set-cookie"]?.join("; ") +
         "refresh_token=" +
         user.refreshToken;
-
-      console.log(
-        res.headers["set-cookie"] + "refresh_token=" + user.refreshToken
-      );
     }
     return axiosConfig;
   },
@@ -66,7 +61,7 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     // Handle response error
     let message = error.response.data.message;
-    console.log(message === "TOKEN_EXPIRED" || message === "jwt expired");
+    // console.log(message === "TOKEN_EXPIRED" || message === "jwt expired");
 
     if (message === "TOKEN_EXPIRED" || message === "jwt expired") {
       const session = await getSession();
@@ -81,7 +76,7 @@ axiosInstance.interceptors.response.use(
                 withCredentials: true,
               }
             );
-            console.log("refreh token", res.data.token);
+            // console.log("refreh token", res.data.token);
 
             await signIn("jwt", {
               redirect: false,
@@ -103,14 +98,14 @@ axiosInstance.interceptors.response.use(
             }
           } catch (error) {
             signOut();
-            console.log(message);
+            // console.log(message);
           }
         }
       }
-      console.log(session);
+      // console.log(session);
     }
 
-    console.log(message);
+    // console.log(message);
 
     return Promise.reject(error);
   }

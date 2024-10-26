@@ -53,7 +53,7 @@ export default function OrderPage({ params }: { params: { id: string } }) {
         }
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
     }
   }
 

@@ -67,34 +67,10 @@ export default function CreateInvitation({}: Props) {
         ],
       });
 
-      console.log(data);
+      // console.log(data);
 
-      // let res = await axiosInstance.post("/receptions/create", {
-      //   title_reception: "Reception Dari web",
-      //   name_man: "Andi",
-      //   title_man: "Mr.",
-      //   parent_man: "Budiman",
-      //   description_man: "ini desc 1",
-      //   name_woman: "Melati",
-      //   title_woman: "Mrs.",
-      //   parent_woman: "Lala",
-      //   description_woman: "ini desc 2",
-      //   start_date: "2024-12-12",
-      //   end_date: "2024-12-20",
-      //   location: "Jakarta",
-      //   address: "Matraman",
-      //   user_id: 2,
-      //   theme_id: 1,
-      //   wedding_ceremony: {
-      //     title_ceremony: "Akad Nikah",
-      //     start_date: "2024-12-10",
-      //     end_date: "2024-12-10",
-      //     location: "Jakarta",
-      //     address: "Condet",
-      //   },
-      // });
       let res = await addInvitation(data);
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.log(error);
     }

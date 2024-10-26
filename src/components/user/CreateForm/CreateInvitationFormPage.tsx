@@ -48,7 +48,7 @@ export default function CreateInvitationFormPage() {
 
   const onSubmit: SubmitHandler<CreateInvitationType> = async (values) => {
     try {
-      console.log(values);
+      // console.log(values);
 
       const data = createInvitationFormToRequest(values);
 
@@ -65,7 +65,6 @@ export default function CreateInvitationFormPage() {
       let res = await addInvitation(data).unwrap();
 
       const receptionId = res.data?.receptionId;
-      console.log(media, receptionId);
       const response = await addMedia({
         receptionId: receptionId,
         media: media,

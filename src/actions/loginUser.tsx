@@ -16,7 +16,7 @@ export async function loginUser(data: { email: string; password: string }) {
       withCredentials: true,
     });
 
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data;
   } catch (e: any) {

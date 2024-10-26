@@ -28,7 +28,10 @@ const formPasswordSchema = z.object({
 export default function EditPasswordPage() {
   const { data: session } = useSession();
 
-  const [alert, setAlert] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+  const [alert, setAlert] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   const form = useForm({
     resolver: zodResolver(formPasswordSchema),
@@ -45,9 +48,9 @@ export default function EditPasswordPage() {
         token: session?.user?.accessToken as string,
         data: {
           password: values.password,
-        }
+        },
       });
-      
+
       if (!res.error) {
         setAlert({
           type: "success",
@@ -60,7 +63,7 @@ export default function EditPasswordPage() {
         type: "error",
         message: "Terjadi kesalahan, silahkan coba lagi",
       });
-      console.log(error);
+      // console.log(error);
     }
   }
 
@@ -76,9 +79,14 @@ export default function EditPasswordPage() {
           </CardHeader>
           <CardContent>
             {alert && (
-              <Alert variant={alert.type === 'success' ? 'primary' : 'destructive'} className="mb-6 flex justify-between items-center">
+              <Alert
+                variant={alert.type === "success" ? "primary" : "destructive"}
+                className="mb-6 flex justify-between items-center"
+              >
                 <AlertDescription>
-                  <AlertTitle>{alert.type === 'success' ? 'Berhasil' : 'Gagal'}</AlertTitle>
+                  <AlertTitle>
+                    {alert.type === "success" ? "Berhasil" : "Gagal"}
+                  </AlertTitle>
                   {alert.message}
                 </AlertDescription>
                 <span onClick={() => setAlert(null)} className="cursor-pointer">

@@ -10,7 +10,7 @@ export const weddingReceptionApi = createApi({
   endpoints: (build) => ({
     addInvitation: build.mutation({
       query: (data) => {
-        console.log("rtk ", data);
+        // console.log("rtk ", data);
 
         return {
           url: "/receptions/create",

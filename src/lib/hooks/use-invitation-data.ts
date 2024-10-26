@@ -143,7 +143,7 @@ export default function useInvitationData(invitation: any, isTemplate = false) {
       womanPhoto = `${config.apiUrl}${womanPhoto.split("undefined")[1]}`;
     }
 
-    console.log(manPhoto);
+    // console.log(manPhoto);
 
     story.imgGroom = manPhoto ?? story.imgGroom;
     story.imgBride = womanPhoto ?? story.imgBride;

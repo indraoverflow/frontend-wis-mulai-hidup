@@ -19,7 +19,7 @@ import { SubscribeType } from "@/types/subscribe-types";
 import Link from "next/link";
 import { useCreatePaymentMutation } from "@/store/features/payment/payment";
 import { formPaymentScheme } from "@/types/payment-types";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 const priceItems = [
   { items: "Durasi Berlangganan", basic: "1 bulan", premium: "2 bulan" },
@@ -67,11 +67,11 @@ const PricingPage = () => {
           reusability: "ONE_TIME_USE",
           virtual_account: {
             channel_code: "BCA",
-          }
+          },
         },
         metadata: {
-          sku: "PAYMENTS-SUBSCRIBER"
-        }
+          sku: "PAYMENTS-SUBSCRIBER",
+        },
       });
 
       if (subscribe.id == 0) {
@@ -84,7 +84,7 @@ const PricingPage = () => {
         router.push(`/order/${res.data.data.id}`);
       }
     } catch (error) {
-      console.error("Error handle payment:", error);
+      // console.error("Error handle payment:", error);
     }
   }
 
@@ -153,22 +153,36 @@ const PricingPage = () => {
                   {subscribe.map((item: SubscribeType, index: number) => (
                     <TableCell key={index} className="py-6 text-center">
                       {session ? (
-                        <Button 
-                          size="lg" 
+                        <Button
+                          size="lg"
                           className="px-6 md:px-12"
                           onClick={() => handlePayment(item)}
                         >
                           <div>
-                            <span className="capitalize block">{item.name}</span>
-                            <span className="block">Rp. {new Intl.NumberFormat('id-ID').format(item.price)}</span>
+                            <span className="capitalize block">
+                              {item.name}
+                            </span>
+                            <span className="block">
+                              Rp.{" "}
+                              {new Intl.NumberFormat("id-ID").format(
+                                item.price
+                              )}
+                            </span>
                           </div>
                         </Button>
                       ) : (
                         <Link href="/login">
                           <Button size="lg" className="px-6 md:px-12">
                             <div>
-                              <span className="capitalize block">{item.name}</span>
-                              <span className="block">Rp. {new Intl.NumberFormat('id-ID').format(item.price)}</span>
+                              <span className="capitalize block">
+                                {item.name}
+                              </span>
+                              <span className="block">
+                                Rp.{" "}
+                                {new Intl.NumberFormat("id-ID").format(
+                                  item.price
+                                )}
+                              </span>
                             </div>
                           </Button>
                         </Link>
@@ -196,6 +210,6 @@ const PricingPage = () => {
       </section>
     </main>
   );
-}
+};
 
 export default PricingPage;
