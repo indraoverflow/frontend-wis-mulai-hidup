@@ -17,12 +17,15 @@ const MenuItem: React.FC<MenuItemProps> = ({
   setFormIndex,
 }) => {
   return (
-    <Card className="w-full h-full" onClick={() => setFormIndex(formIndex)}>
-      <CardHeader className="items-center">
+    <Card
+      className="w-full h-full cursor-pointer"
+      onClick={() => setFormIndex(formIndex)}
+    >
+      <CardHeader className="items-center px-0">
         <Image src={icon} alt={title} width={60} height={60} />
       </CardHeader>
       <CardContent className="text-center px-0 md:p-6 md:pt-0">
-        <p className="text-sm">{title}</p>
+        <p className="text-xs md:text-sm">{title}</p>
       </CardContent>
     </Card>
   );

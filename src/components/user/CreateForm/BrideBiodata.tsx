@@ -52,7 +52,7 @@ export default function BrideBiodata({ form, type }: Props) {
   }
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row md:gap-4">
         <FormField
           control={form.control}
           name={fieldName.prefix}
@@ -63,7 +63,9 @@ export default function BrideBiodata({ form, type }: Props) {
                 <Input
                   type="text"
                   className="bg-white placeholder:text-philippine-silver"
-                  placeholder={type == "man" ? "Mr" : "Mrs"}
+                  placeholder={
+                    type == "man" ? "Isi Gelar Depan" : "Isi Gelar Depan"
+                  }
                   {...field}
                 />
               </FormControl>
@@ -129,7 +131,7 @@ export default function BrideBiodata({ form, type }: Props) {
           </FormItem>
         )}
       />
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row md:gap-4">
         <FormField
           control={form.control}
           name={fieldName.father}

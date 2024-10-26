@@ -1,5 +1,7 @@
 import React from "react";
 import MenuItem from "./MenuItem";
+import { cn } from "@/lib/utils/tailwind-util";
+import { elza } from "@/lib/fonts";
 
 const MenuInvitation = ({
   formIndex,
@@ -9,7 +11,12 @@ const MenuInvitation = ({
   setFormIndex: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <div className="grid grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6 lg:gap-16">
+    <div
+      className={cn(
+        "grid grid-cols-4 lg:grid-cols-5 gap-2 md:gap-6 lg:gap-16 bg-surface",
+        elza.className
+      )}
+    >
       <MenuItem
         icon={
           formIndex === 0

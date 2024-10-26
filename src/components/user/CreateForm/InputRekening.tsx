@@ -47,7 +47,7 @@ export default function InputRekening({ form, type }: Props) {
       <p className="mb-2 text-philippine-silver text-sm">
         Rekening Mempelai {type === "man" ? "Pria" : "Wanita"}
       </p>
-      <div className="flex gap-4 mb-6">
+      <div className=" flex flex-col mb-6 md:flex-row gap-4 md:gap-4">
         <FormField
           control={form.control}
           name={fieldName.bank}

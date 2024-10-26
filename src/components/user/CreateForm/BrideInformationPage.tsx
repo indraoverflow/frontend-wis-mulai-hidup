@@ -23,6 +23,7 @@ import React from "react";
 import { UseFormReturn } from "react-hook-form";
 import BrideBiodata from "./BrideBiodata";
 import InputRekening from "./InputRekening";
+import { ArrowUp } from "lucide-react";
 
 export default function BrideInformationPage({
   form,
@@ -31,10 +32,16 @@ export default function BrideInformationPage({
 }) {
   return (
     <div className="min-h-screen bg-surface py-8">
-      <div className="bg-white p-6">
+      <div className="bg-surface p-6">
         <div className="container mx-auto max-w-5xl">
+          <p className="mb-3 text-sm md:text-base font-semibold">
+            Mempelai Pria
+          </p>
           <BrideBiodata form={form} type="man" />
           <hr className="border-primary my-6" />
+          <p className="mb-3 text-sm md:text-base font-semibold">
+            Mempelai Wanita
+          </p>
           <BrideBiodata form={form} type="woman" />
           <hr className="border-primary my-6" />
           <InputRekening form={form} type="man" />
