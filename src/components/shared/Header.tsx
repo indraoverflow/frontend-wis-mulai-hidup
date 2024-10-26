@@ -23,9 +23,10 @@ type Props = {
 
 export default function Header({ showMenu = true }: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
+    // logout user when token expiry less than 5 minutes
     if (session) {
       const tokenExpiryDate =
         (jwtDecode(session.user.refreshToken as string).exp ?? 0) * 1000;
@@ -98,7 +99,8 @@ export default function Header({ showMenu = true }: Props) {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          ) : (
+          ) : null}
+          {!session && status !== "loading" ? (
             <>
               {/* <Link href={"/login"}> */}
               <Button
@@ -119,7 +121,7 @@ export default function Header({ showMenu = true }: Props) {
                 <span className="hidden md:block">Start &nbsp;</span> Free Trial
               </Button>
             </>
-          )}
+          ) : null}
           <button
             className="relative z-50 flex items-center justify-center w-8 h-8 md:hidden"
             onClick={() => setIsExpanded(!isExpanded)}

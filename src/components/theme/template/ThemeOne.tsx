@@ -175,26 +175,36 @@ export default function ThemeOne({
                 backgroundImage="/images/background/bg-ceremony-potrait.png"
                 iconImage="/images/icon/wedding-ring.svg"
                 ceremonyTitle="Akad Ceremony"
-                ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+                ceremonyTime={`${ceremonyStartTime} ${
+                  receptionTimezone ?? ""
+                } - ${
                   ceremonyEndTime
-                    ? ceremonyEndTime + " " + receptionTimezone
+                    ? ceremonyEndTime + " " + (receptionTimezone ?? "")
                     : "Selesai"
                 }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress={ceremonyAddress}
+                locationAddress={
+                  isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+                }
                 buttonText="Open Map"
               />
               <CeremonyCardPotrait
                 backgroundImage="/images/background/bg-reception-potrait.png"
                 iconImage="/images/icon/dinner-table.svg"
                 ceremonyTitle="Wedding Reseption"
-                ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+                ceremonyTime={`${receptionStartTime} ${
+                  receptionTimezone ?? ""
+                } - ${
                   receptionEndTime
-                    ? receptionEndTime + " " + receptionTimezone
+                    ? receptionEndTime + " " + (receptionTimezone ?? "")
                     : "Selesai"
                 }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress={receptionAddress}
+                locationAddress={
+                  isTemplate
+                    ? "Jl.  Jalan Metro Pondok Indah"
+                    : receptionAddress ?? ceremonyAddress
+                }
                 buttonText="Open Map"
               />
             </div>

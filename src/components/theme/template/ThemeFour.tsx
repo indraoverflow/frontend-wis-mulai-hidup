@@ -75,21 +75,21 @@ export default function ThemeFour({
               alt={"love decoration"}
               width={300}
               height={550}
-              className="absolute w-[300px] left-[10px] top-[65px]"
+              className="absolute w-24 md:w-[300px] left-[10px] top-28 md:top-[65px]"
             />
             <Image
               src={"/images/icon/love-decor-theme-4.svg"}
               alt={"love decoration"}
               width={300}
               height={550}
-              className="absolute w-[300px] right-7 top-[341px] rotate-180"
+              className="absolute w-24 md:w-[300px] right-7 top-60 md:top-[341px] rotate-180"
             />
             <div className="absolute bottom-[-70%] left-[-15%] mx-auto rounded-[100%] bg-surface h-[100%] w-[130%]"></div>
           </div>
           <div className="py-10 lg:pt-[154px] lg:pb-[119px] flex flex-col w-11/12 mx-auto justify-start items-center text-white ">
             <p
               className={cn(
-                "text-3xl md:text-4xl text-center font-bold lg:text-5xl py-3 px-48 border-b lg:mb-24",
+                "text-xl md:text-4xl text-center font-bold lg:text-5xl py-3 md:px-48 border-b lg:mb-24",
                 allura.className
               )}
             >
@@ -121,8 +121,8 @@ export default function ThemeFour({
               {ceremonyStartDateWithFullMonth}
             </p>
           </div>
-          <div className="flex relative gap-6 lg:gap-9 justify-center  left-[-10%] w-[120%]  mx-auto">
-            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
+          <div className="flex relative gap-6 lg:gap-9 justify-center  left-[-25%] md:left-[-10%] w-[150%] md:w-[120%]  mx-auto">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline min-h-52 aspect-[10/14]">
               <Image
                 src={"/images/faceless/18.png"}
                 alt={"mempelai laki laki"}
@@ -131,7 +131,7 @@ export default function ThemeFour({
                 className="object-cover h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline min-h-60 aspect-[10/14]">
               <Image
                 src={"/images/faceless/groom.png"}
                 alt={"mempelai laki laki"}
@@ -140,7 +140,7 @@ export default function ThemeFour({
                 className="object-cover h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline min-h-60 aspect-[10/14]">
               <Image
                 src={"/images/faceless/bride.png"}
                 alt={"mempelai perempuan"}
@@ -149,7 +149,7 @@ export default function ThemeFour({
                 className="object-cover  h-full"
               />
             </div>
-            <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
+            <div className="rounded-[30px] overflow-hidden bg-isabelline min-h-60 aspect-[10/14]">
               <Image
                 src={"/images/faceless/22.png"}
                 alt={"mempelai perempuan"}
@@ -164,18 +164,18 @@ export default function ThemeFour({
           <div className="flex flex-col gap-4 items-center">
             <p
               className={cn("text-[40px]", inter.className)}
-            >{`${prefixMan} ${nameMan}, ${titleMan}`}</p>
+            >{`${prefixMan} ${nameMan} ${titleMan}`}</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
-              Bin {fatherMan}
+              Bin {isTemplate ? "Abdul" : fatherMan}
             </p>
           </div>
-          <div className="w-[300px] h-[550px] relative">
+          <div className="w-24 md:w-[300px] h-44 md:h-[550px] relative">
             <Image
               src={"/images/icon/love-decor-theme-4.svg"}
               alt={"love decoration"}
-              layout="fill"
-              objectFit="cover"
-              className="rotate-180"
+              width={509}
+              height={706}
+              className="rotate-180 "
             />
           </div>
           <div className="flex flex-col gap-4 items-center">
@@ -183,7 +183,7 @@ export default function ThemeFour({
               className={cn("text-[40px]", inter.className)}
             >{`${prefixWoman} ${nameWoman} ${titleWoman}`}</p>
             <p className={cn("text-base text-spanish-gray", inter.className)}>
-              Binti {fatherWoman}
+              Binti {isTemplate ? "Ahmad" : fatherWoman}
             </p>
           </div>
         </section>
@@ -218,13 +218,17 @@ export default function ThemeFour({
               backgroundImage="/images/background/bg-ceremony.png"
               iconImage="/images/icon/wedding-ring.svg"
               ceremonyTitle="Akad Ceremony"
-              ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+              ceremonyTime={`${ceremonyStartTime} ${
+                receptionTimezone ?? ""
+              } - ${
                 ceremonyEndTime
-                  ? ceremonyEndTime + " " + receptionTimezone
+                  ? ceremonyEndTime + " " + (receptionTimezone ?? "")
                   : "Selesai"
               }`}
               locationTitle="InterContinental Jakarta Hotel"
-              locationAddress={ceremonyAddress}
+              locationAddress={
+                isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+              }
               buttonText="Open Map"
             />
           </div>
@@ -233,13 +237,17 @@ export default function ThemeFour({
               backgroundImage="/images/background/bg-card-place.png"
               iconImage="/images/icon/dinner-table.svg"
               ceremonyTitle="Wedding Reseption"
-              ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+              ceremonyTime={`${receptionStartTime} ${
+                receptionTimezone ?? ""
+              } - ${
                 receptionEndTime
-                  ? receptionEndTime + " " + receptionTimezone
+                  ? receptionEndTime + " " + (receptionTimezone ?? "")
                   : "Selesai"
               }`}
               locationTitle="InterContinental Jakarta Hotel"
-              locationAddress={ceremonyAddress}
+              locationAddress={
+                isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+              }
               buttonText="Open Map"
             />
           </div>
@@ -267,7 +275,7 @@ export default function ThemeFour({
             alt={"love decoration"}
             width={300}
             height={550}
-            className="absolute bottom-0 -right-24 z-0"
+            className="absolute w-24 md:w-[300px] bottom-0 right-0 md:-right-24 z-0"
           />
 
           <div className="relative text-center mt-12 md:mt-20 mb-12 max-w-[1040px] mx-auto ">
@@ -299,7 +307,11 @@ export default function ThemeFour({
               />
               <OfflineGiftCard
                 title="Offline Gift"
-                address={receptionAddress ?? ceremonyAddress}
+                address={
+                  isTemplate
+                    ? "Jl.  Jalan Metro Pondok Indah"
+                    : receptionAddress ?? ceremonyAddress
+                }
                 buttonText="Open Map"
               />
             </div>
