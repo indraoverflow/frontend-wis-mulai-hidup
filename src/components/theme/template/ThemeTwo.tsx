@@ -5,13 +5,14 @@ import OfflineGiftCard from "@/components/theme/offline-gift-card";
 import React from "react";
 import CommentCard from "@/components/theme/comment-card";
 import OurStory from "@/components/theme/OurStory";
-import { accounts, comments, story } from "@/lib/data";
+import { comments } from "@/lib/data";
 import Footer from "@/components/shared/Footer";
 import Image from "next/image";
 
 import { Comfortaa, Allura } from "next/font/google";
 import DateCountDown from "../DateCountdown";
 import { cn } from "@/lib/utils/tailwind-util";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -23,6 +24,47 @@ export default function ThemeTwo({
   data?: any;
   isTemplate?: boolean;
 }) {
+  let {
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+    accounts,
+  } = useInvitationData(data, isTemplate);
+
   return (
     <>
       <main className={cn("relative", comfortaa.className)}>
@@ -59,7 +101,7 @@ export default function ThemeTwo({
                   height={60}
                   className="hidden md:block"
                 />
-                Azka & Zeldya
+                {nicknameMan} & {nicknameWoman}
                 <Image
                   src={"/images/icon/leaf-theme-black.svg"}
                   alt={"leaf decoration left"}
@@ -69,7 +111,7 @@ export default function ThemeTwo({
                 />
               </p>
               <p className="text-[40px] text-raisin-black">
-                •<span className="mx-8">02 02 2025</span>•
+                •<span className="mx-8">{ceremonyStartDateString}</span>•
               </p>
             </div>
             <div className="relative top-48 z-20">
@@ -131,10 +173,10 @@ export default function ThemeTwo({
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-24">
               <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
-                05 February 2025
+                {ceremonyStartDateWithFullMonth}
               </h3>
               <DateCountDown
-                date={new Date("2024-10-10T12:00:00")}
+                date={new Date(ceremonyStartDateTime)}
                 className="bg-phthalo-green text-white rounded-full w-full h-auto md:w-40 md:h-48"
               />
             </div>
@@ -143,9 +185,13 @@ export default function ThemeTwo({
                 backgroundImage="/images/background/bg-ceremony.png"
                 iconImage="/images/icon/wedding-ring.svg"
                 ceremonyTitle="Akad Ceremony"
-                ceremonyTime="07:00 - 08:00"
+                ceremonyTime={`${ceremonyStartTime} ${receptionTimezone} - ${
+                  ceremonyEndTime
+                    ? ceremonyEndTime + " " + receptionTimezone
+                    : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={ceremonyAddress}
                 buttonText="Open Map"
               />
             </div>
@@ -154,9 +200,13 @@ export default function ThemeTwo({
                 backgroundImage="/images/background/bg-card-place.png"
                 iconImage="/images/icon/dinner-table.svg"
                 ceremonyTitle="Wedding Reseption"
-                ceremonyTime="11.00 - 14.00"
+                ceremonyTime={`${receptionStartTime} ${receptionTimezone} - ${
+                  receptionEndTime
+                    ? receptionEndTime + " " + receptionTimezone
+                    : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={receptionAddress}
                 buttonText="Open Map"
               />
             </div>
@@ -168,7 +218,7 @@ export default function ThemeTwo({
               className="mb-16"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                src={ceremonyLocation}
                 loading="lazy"
                 width="100%"
                 height="100%"
@@ -201,7 +251,11 @@ export default function ThemeTwo({
                 />
                 <OfflineGiftCard
                   title="Offline Gift"
-                  address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                  address={
+                    isTemplate
+                      ? "Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                      : receptionAddress
+                  }
                   buttonText="Open Map"
                 />
               </div>
