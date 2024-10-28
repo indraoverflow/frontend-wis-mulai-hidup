@@ -68,7 +68,9 @@ export default function AdditonalInformationForm({
 
     Promise.all(readerPromises)
       .then((results) => {
-        form.setValue(field, [...form.getValues().gallery, ...results]);
+        const gallery = form.getValues().gallery;
+        const updatedGallery = Array.isArray(gallery) ? [...gallery, ...results] : [...results];
+        form.setValue(field, updatedGallery);
       })
       .catch((error) => console.error("Error reading files:", error));
   };

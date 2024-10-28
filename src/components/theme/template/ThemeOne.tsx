@@ -63,7 +63,7 @@ export default function ThemeOne({
     ceremonyStartDateTime,
     story,
     accounts,
-  } = useInvitationData(data, isTemplate);
+  } = useInvitationData(data, isTemplate);  
 
   return (
     <>
