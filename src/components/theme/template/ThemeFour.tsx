@@ -16,9 +16,13 @@ import useInvitationData from "@/lib/hooks/use-invitation-data";
 export default function ThemeFour({
   data,
   isTemplate = false,
+  uniqueId,
+  to,
 }: {
   data?: any;
   isTemplate?: boolean;
+  uniqueId?: string;
+  to: string | null;
 }) {
   let {
     nameMan,
@@ -327,6 +331,8 @@ export default function ThemeFour({
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
+                uniqueId={uniqueId}
+                to={to}
               />
             </div>
             <div>

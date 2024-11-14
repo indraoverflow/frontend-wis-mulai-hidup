@@ -18,6 +18,8 @@ interface FeedbackCardProps {
   messageLabel: string;
   attendanceLabel: string;
   buttonText: string;
+  uniqueId?: string;
+  to: string | null;
 }
 
 const FeedbackCard: React.FC<FeedbackCardProps> = ({
@@ -26,6 +28,8 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
   messageLabel,
   attendanceLabel,
   buttonText,
+  uniqueId,
+  to,
 }) => {
   return (
     <Card>
@@ -40,7 +44,11 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
             <span className="text-red-500">*</span>
             {nameLabel}
           </Label>
-          <Input id="name" className="border-platinum bg-cultured" />
+          <Input
+            id="name"
+            className="border-platinum bg-cultured disabled:cursor-pointer disabled:opacity-100"
+            disabled={!to}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="message" className="text-sm font-medium">
@@ -49,8 +57,9 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
           </Label>
           <Textarea
             id="message"
-            className="resize-none border-platinum bg-cultured"
+            className="resize-none border-platinum bg-cultured disabled:cursor-pointer disabled:opacity-100"
             rows={4}
+            disabled={!to}
           />
         </div>
         <div className="space-y-2">
@@ -60,13 +69,14 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
           </Label>
           <RadioGroup
             defaultValue="yes"
-            className="flex gap-0 rounded-[20px] overflow-hidden shadow-sm border border-platinum w-fit p-0"
+            className="flex gap-0 rounded-[20px] overflow-hidden shadow-sm border border-platinum w-fit p-0 disabled:cursor-pointer disabled:opacity-100"
+            disabled={!to}
           >
             <div className="flex items-center ">
-              <RadioGroupItem value="yes" id="yes" className="peer hidden" />
+              <RadioGroupItem value="yes" id="yes" className="peer hidden " />
               <Label
                 htmlFor="yes"
-                className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured"
+                className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured "
               >
                 Yes
               </Label>
@@ -97,7 +107,12 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
         </div>
       </CardContent>
       <CardFooter className="flex flex-col space-y-2">
-        <Button variant="dark" size="lg" className="mx-auto rounded-2xl">
+        <Button
+          variant="dark"
+          size="lg"
+          className="mx-auto rounded-2xl"
+          disabled={!to}
+        >
           {buttonText}
         </Button>
       </CardFooter>

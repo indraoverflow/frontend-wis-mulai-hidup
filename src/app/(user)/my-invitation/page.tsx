@@ -49,14 +49,14 @@ export default function MyInvitationPage() {
                   </CardContent>
                   <CardFooter className="flex justify-center items-center gap-1 py-6">
                     <Button size="sm" onClick={() => {}}>
-                      Publish Tema
+                      Daftar Tamu
                     </Button>
                     <Link
                       className={cn(
                         "text-primary",
                         buttonVariants({ variant: "ghost", size: "sm" })
                       )}
-                      href={`/invitation/${invitation.id}`}
+                      href={`/in/${invitation.id}/${invitation.unique_id}`}
                     >
                       Preview
                     </Link>
