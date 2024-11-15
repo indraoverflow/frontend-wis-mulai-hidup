@@ -285,6 +285,7 @@ export default function ThemeSix({
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
+                to={null}
               />
             </div>
             <div>
