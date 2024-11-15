@@ -251,6 +251,7 @@ export default function ThemeFive({
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
+                to={null}
               />
             </div>
             <div>

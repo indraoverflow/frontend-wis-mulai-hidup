@@ -9,20 +9,20 @@ import OurStory from "@/components/theme/OurStory";
 import { comments } from "@/lib/data";
 import DateCountDown from "../../../components/theme/DateCountdown";
 import Footer from "@/components/shared/Footer";
-import config from "@/lib/config";
-import { get } from "http";
-import getInvitationResponse from "@/lib/hooks/use-invitation-data";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
-import { OurStoryProps } from "@/types/our-story-props";
 import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa } from "@/lib/fonts";
 
 export default function ThemeOne({
   data,
   isTemplate = false,
+  uniqueId,
+  to,
 }: {
   data?: any;
   isTemplate?: boolean;
+  uniqueId?: string;
+  to: string | null;
 }) {
   let {
     nameMan,
@@ -63,7 +63,7 @@ export default function ThemeOne({
     ceremonyStartDateTime,
     story,
     accounts,
-  } = useInvitationData(data, isTemplate);  
+  } = useInvitationData(data, isTemplate);
 
   return (
     <>
@@ -270,6 +270,8 @@ export default function ThemeOne({
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
+                uniqueId={uniqueId}
+                to={to}
               />
             </div>
             <div>

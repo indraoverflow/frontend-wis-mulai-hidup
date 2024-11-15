@@ -20,9 +20,13 @@ const allura = Allura({ subsets: ["latin"], weight: "400" });
 export default function ThemeThree({
   data,
   isTemplate = false,
+  uniqueId,
+  to,
 }: {
   data?: any;
   isTemplate?: boolean;
+  uniqueId?: string;
+  to: string | null;
 }) {
   let {
     nameMan,
@@ -159,7 +163,7 @@ export default function ThemeThree({
                   {ceremonyStartDateWithFullMonth}
                 </h3>
                 <DateCountDown
-                  date={new Date(ceremonyStartDateTime)}  
+                  date={new Date(ceremonyStartDateTime)}
                   className="bg-transparent border-black text-black w-full h-auto md:w-40 md:h-48"
                 />
               </div>
@@ -264,6 +268,8 @@ export default function ThemeThree({
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
+                uniqueId={uniqueId}
+                to={to}
               />
             </div>
             <div>
