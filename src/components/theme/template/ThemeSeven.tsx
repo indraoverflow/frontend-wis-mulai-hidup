@@ -18,6 +18,8 @@ import {
 import { cn } from "@/lib/utils/tailwind-util";
 import Navbar from "../header/Navbar";
 import GalleryCarouselItem from "../GalleryCarouselItem";
+import FeedbackCardTemplate from "../feedback-card-template";
+import CommentCardTemplate from "../comment-card-template";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
@@ -292,17 +294,16 @@ export default function ThemeSeven({
             </div>
             <div className="relative container px-5 pb-5 lg:pb-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-10">
               <div className="mb-9">
-                <FeedbackCard
+                <FeedbackCardTemplate
                   title="Say Something!"
                   nameLabel="Name"
                   messageLabel="Message"
                   attendanceLabel="Attendance"
                   buttonText="Send Now!"
-                  to={null}
                 />
               </div>
               <div>
-                <CommentCard comments={comments} />
+                <CommentCardTemplate comments={comments} />
               </div>
             </div>
           </div>

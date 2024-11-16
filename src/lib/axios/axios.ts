@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import config from "@/lib/config";
 import { setCookie } from "nookies";
+import { headers } from "next/headers";
 
 // Create an Axios instance with default configuration
 const axiosInstance: AxiosInstance = axios.create({
@@ -20,6 +21,24 @@ axiosInstance.interceptors.request.use(
     const session = await getSession();
     axiosConfig.withCredentials = true;
 
+    let res;
+
+    const csrfToken = localStorage.getItem("csrfToken");
+    const csrfTokenExpiry = localStorage.getItem("csrfTokenExpiry");
+    if (!csrfToken || Date.now() > Number(csrfTokenExpiry)) {
+      res = await axios.get(`${config.apiUrl}/protect`, {
+        withCredentials: true,
+      });
+
+      localStorage.setItem("csrfToken", res.data.csrf_token);
+      localStorage.setItem(
+        "csrfTokenExpiry",
+        String(Date.now() + 1000 * 60 * 10)
+      );
+    }
+
+    axiosConfig.headers["X-XSRF-TOKEN"] = res?.data.csrf_token ?? csrfToken;
+    axiosConfig.headers["X-CSRF-TOKEN"] = res?.data.csrf_token ?? csrfToken;
     if (session) {
       const { user } = session;
       if (user.accessToken) {
@@ -33,14 +52,10 @@ axiosInstance.interceptors.request.use(
       if (user.refreshToken) {
         setCookie(null, "refresh_token", user.refreshToken, {});
       }
-      const res = await axios.get(`${config.apiUrl}/protect`, {
-        withCredentials: true,
-      });
 
-      axiosConfig.headers["X-XSRF-TOKEN"] = res.data.csrf_token;
       axiosConfig.headers["refresh_token"] = user.refreshToken;
       axiosConfig.headers["Cookie"] =
-        res.headers["set-cookie"]?.join("; ") +
+        res?.headers["set-cookie"]?.join("; ") +
         "refresh_token=" +
         user.refreshToken;
     }
