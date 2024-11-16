@@ -1,3 +1,4 @@
+"use client";
 import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
@@ -14,6 +15,7 @@ import Footer from "@/components/shared/Footer";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
+import Overlay from "../Overlay";
 
 export default function ThemeFour({
   data,
@@ -66,7 +68,16 @@ export default function ThemeFour({
     story,
     accounts,
   } = useInvitationData(data, isTemplate);
-  return (
+  const [hasOverlay, setHasOverlay] = React.useState(true);
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main
         className={cn(
