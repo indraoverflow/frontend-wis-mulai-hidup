@@ -6,6 +6,7 @@ import { userProfileApi } from "./features/user/profile";
 import { userPasswordApi } from "./features/user/password";
 import { subscribeApi } from "./features/subscription/subscribe";
 import { paymentApi } from "./features/payment/payment";
+import { guestApi } from "./features/guest/guest-slice";
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
       userProfileApi: userProfileApi.reducer,
       userPasswordApi: userPasswordApi.reducer,
       weddingReceptionApi: weddingReceptionApi.reducer,
+      guestApi: guestApi.reducer,
       subscribeApi: subscribeApi.reducer,
       paymentApi: paymentApi.reducer
     },
@@ -22,6 +24,7 @@ export const makeStore = () => {
       getDefaultMiddleware().concat(
         userApi.middleware,
         weddingReceptionApi.middleware,
+        guestApi.middleware,
         userProfileApi.middleware,
         userPasswordApi.middleware,
         subscribeApi.middleware,

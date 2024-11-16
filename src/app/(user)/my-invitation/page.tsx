@@ -48,9 +48,9 @@ export default function MyInvitationPage() {
                     />
                   </CardContent>
                   <CardFooter className="flex justify-center items-center gap-1 py-6">
-                    <Button size="sm" onClick={() => {}}>
+                    <Link href={`/my-invitation/guest/${invitation.unique_id}`} className={buttonVariants({size: "sm"})}>
                       Daftar Tamu
-                    </Button>
+                    </Link>
                     <Link
                       className={cn(
                         "text-primary",

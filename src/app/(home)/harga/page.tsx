@@ -258,7 +258,7 @@ const PricingPage = () => {
             </div>
             <DialogFooter>
               <Button type="submit" onClick={handlePayment}>
-                Save changes
+                Bayar
               </Button>
             </DialogFooter>
           </DialogContent>
