@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { FiCopy } from "react-icons/fi";
+import { useToast } from "@/lib/hooks/use-toast";
 
 interface AccountInfo {
   name: string;
@@ -24,8 +25,12 @@ const DigitalWalletCard: React.FC<DigitalWalletCardProps> = ({
   note,
   accounts,
 }) => {
+  const { toast } = useToast();
   const handleCopy = (content: string) => {
     navigator.clipboard.writeText(content);
+    toast({
+      description: "Bank Account Number Copied",
+    });
   };
   return (
     <Card>
