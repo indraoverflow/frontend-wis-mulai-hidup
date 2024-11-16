@@ -29,10 +29,19 @@ export const weddingReceptionApi = createApi({
       },
       providesTags: ["CreateInvitationTypes"],
     }),
+
     getInvitationById: build.query({
       query: (id) => {
         return {
           url: `/receptions/${id}`,
+          method: "GET",
+        };
+      },
+    }),
+    getInvitationByUniqueId: build.query({
+      query: (uniqueId) => {
+        return {
+          url: `/receptions/get_by_unique_id/${uniqueId}`,
           method: "GET",
         };
       },
@@ -64,5 +73,6 @@ export const {
   useAddInvitationMutation,
   useGetInvitationByUserIdQuery,
   useGetInvitationByIdQuery,
+  useGetInvitationByUniqueIdQuery,
   useAddInvitationMediaMutation,
 } = weddingReceptionApi;

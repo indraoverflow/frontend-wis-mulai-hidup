@@ -8,9 +8,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className={cn("", minervaModern.className)}>
-      <Suspense fallback={<Loading />}>{children}</Suspense>
-    </div>
-  );
+  return <div className={cn("", minervaModern.className)}>{children}</div>;
 }

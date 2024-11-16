@@ -12,6 +12,8 @@ import Footer from "@/components/shared/Footer";
 import DateCountDown from "../DateCountdown";
 import CeremonyCardPotrait from "../CeremonyCardPotrait";
 import { cn } from "@/lib/utils/tailwind-util";
+import FeedbackCardTemplate from "../feedback-card-template";
+import CommentCardTemplate from "../comment-card-template";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -279,17 +281,16 @@ export default function ThemeSix({
         <div className={cn("bg-copper-red py-7", comfortaa.className)}>
           <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-9">
-              <FeedbackCard
+              <FeedbackCardTemplate
                 title="Say Something!"
                 nameLabel="Name"
                 messageLabel="Message"
                 attendanceLabel="Attendance"
                 buttonText="Send Now!"
-                to={null}
               />
             </div>
             <div>
-              <CommentCard comments={comments} />
+              <CommentCardTemplate comments={comments} />
             </div>
           </div>
         </div>

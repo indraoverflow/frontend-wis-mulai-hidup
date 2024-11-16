@@ -12,6 +12,9 @@ import Footer from "@/components/shared/Footer";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa } from "@/lib/fonts";
+import dynamic from "next/dynamic";
+import FeedbackCardTemplate from "../feedback-card-template";
+import CommentCardTemplate from "../comment-card-template";
 
 export default function ThemeOne({
   data,
@@ -264,18 +267,37 @@ export default function ThemeOne({
 
           <div className="container py-7 w-11/12 mx-auto max-w-[1040px]">
             <div className="mb-4 md:mb-9">
-              <FeedbackCard
-                title="Say Something!"
-                nameLabel="Name"
-                messageLabel="Message"
-                attendanceLabel="Attendance"
-                buttonText="Send Now!"
-                uniqueId={uniqueId}
-                to={to}
-              />
+              {isTemplate ? (
+                <FeedbackCardTemplate
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                />
+              ) : (
+                <FeedbackCard
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                  uniqueId={uniqueId}
+                  to={to}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
             <div>
-              <CommentCard comments={comments} />
+              {isTemplate ? (
+                <CommentCardTemplate comments={comments} />
+              ) : (
+                <CommentCard
+                  comments={comments}
+                  uniqueId={uniqueId}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
           </div>
         </div>

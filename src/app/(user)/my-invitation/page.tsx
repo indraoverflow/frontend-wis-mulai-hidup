@@ -56,7 +56,7 @@ export default function MyInvitationPage() {
                         "text-primary",
                         buttonVariants({ variant: "ghost", size: "sm" })
                       )}
-                      href={`/in/${invitation.id}/${invitation.unique_id}`}
+                      href={`/${invitation.unique_id}`}
                     >
                       Preview
                     </Link>
