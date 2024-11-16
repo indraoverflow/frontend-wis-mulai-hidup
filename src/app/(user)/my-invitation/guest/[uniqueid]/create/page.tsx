@@ -1,15 +1,6 @@
 "use client";
 
-import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,21 +10,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { formCreateGuestScheme } from "@/types/guest-types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { GuestType } from "@/types/guest-types";
 import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   useAddGuestMutation,
-  useGetGuestByUniqueIdQuery,
 } from "@/store/features/guest/guest-slice";
 import Link from "next/link";
 import SubmitButton from "@/components/button/submit";
