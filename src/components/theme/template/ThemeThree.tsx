@@ -1,5 +1,6 @@
-import React from "react";
+"use client";
 
+import React from "react";
 import { Comfortaa, Allura } from "next/font/google";
 import Image from "next/image";
 import CeremonyCard from "@/components/theme/ceremony-card";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils/tailwind-util";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -71,7 +73,16 @@ export default function ThemeThree({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  const [hasOverlay, setHasOverlay] = React.useState(true);
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main className={cn("relative", comfortaa.className)}>
         <div className="bg-surface">

@@ -1,3 +1,4 @@
+"use client";
 import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils/tailwind-util";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import CommentCardTemplate from "../comment-card-template";
 import FeedbackCardTemplate from "../feedback-card-template";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -71,7 +73,16 @@ export default function ThemeTwo({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  const [hasOverlay, setHasOverlay] = React.useState(true);
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main className={cn("relative", comfortaa.className)}>
         <div className="bg-surface pb-0">

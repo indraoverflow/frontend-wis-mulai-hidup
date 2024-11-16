@@ -1,3 +1,4 @@
+"use client";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
@@ -12,9 +13,9 @@ import Footer from "@/components/shared/Footer";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa } from "@/lib/fonts";
-import dynamic from "next/dynamic";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
+import Overlay from "../Overlay";
 
 export default function ThemeOne({
   data,
@@ -27,6 +28,7 @@ export default function ThemeOne({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
   let {
     nameMan,
     nicknameMan,
@@ -68,7 +70,15 @@ export default function ThemeOne({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main className={cn("bg-surface", comfortaa.className)}>
         <section className="relative md:w-full z-20">
