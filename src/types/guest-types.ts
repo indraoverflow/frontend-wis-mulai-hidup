@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-export interface Guest{
+export interface Guest{    
     wedding_unique_id: string;
     name: string;
     phone_number: string;
-    status?: boolean;
+    status?: string;
     unique_id?: string;
     share_link?: string;
 }
@@ -13,7 +13,7 @@ export const formGuestScheme = z.object({
     wedding_unique_id: z.string().default(""),
     name: z.string().default(""),
     phone_number: z.string().default(""),
-    status: z.boolean().default(false),
+    status: z.string().optional(),
     unique_id: z.string().optional(),
     share_link: z.string().optional(),
 });

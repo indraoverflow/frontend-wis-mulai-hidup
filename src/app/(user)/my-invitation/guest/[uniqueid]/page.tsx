@@ -1,14 +1,9 @@
 "use client";
 
 import { Button, buttonVariants } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { formGuestScheme, GuestType } from '@/types/guest-types'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from "react-hook-form";
-import React, { useEffect, useState } from 'react'
+import { GuestType } from '@/types/guest-types'
+import React, { useEffect } from 'react'
 import { useGetGuestByUniqueIdQuery } from '@/store/features/guest/guest-slice'
 import Link from 'next/link';
 
@@ -17,14 +12,12 @@ export default function GuestPage({
 }: {
     params: { uniqueid: string }
 }) {
-    const { data: guestsData } = useGetGuestByUniqueIdQuery(params.uniqueid);
-    const [guests, setGuests] = useState<GuestType[] | null>(null);
+    const { data: guestsData, refetch } = useGetGuestByUniqueIdQuery(params.uniqueid);
+    const guests = guestsData?.data;
 
     useEffect(() => {
-        if (guestsData) {
-            setGuests(guestsData.data);
-        }
-    }, [guestsData]);
+        refetch();
+    }, [refetch]);
 
     const handleCopyClick = (guest: any, i: number): void => {
         navigator.clipboard.writeText(guest.share_link);
@@ -83,7 +76,7 @@ export default function GuestPage({
                         </TableHeader>
                         <TableBody>
                             {guests && guests.length > 0 ? (
-                                guests.map((guest, i) => (
+                                guests.map((guest: GuestType, i: number) => (
                                     <TableRow className="border-primary" key={i}>
                                         <TableCell>
                                             {i + 1}
@@ -111,12 +104,15 @@ export default function GuestPage({
                                             >
                                                 Share
                                             </Button>
-                                            {/* <Link
-                                                href={`/my-invitation/guest/${params.uniqueid}/edit/${guest.unique_id}`}
+                                            <Link
+                                                href={{
+                                                    pathname: `/my-invitation/guest/${params.uniqueid}/edit/${guest.unique_id}`,
+                                                    query: { guestData: JSON.stringify(guest) }
+                                                }}
                                                 className={buttonVariants({ variant: "tertiary", size: "sm" })}
                                             >
                                                 Edit
-                                            </Link> */}
+                                            </Link>
                                         </TableCell>
                                     </TableRow>
                                 ))
