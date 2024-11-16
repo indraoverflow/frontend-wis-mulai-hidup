@@ -1,3 +1,4 @@
+"use client";
 import CeremonyCard from "@/components/theme/ceremony-card";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
@@ -12,6 +13,9 @@ import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa, inter, playfairDisplay } from "@/lib/fonts";
 import Footer from "@/components/shared/Footer";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
+import FeedbackCardTemplate from "../feedback-card-template";
+import CommentCardTemplate from "../comment-card-template";
+import Overlay from "../Overlay";
 
 export default function ThemeFour({
   data,
@@ -64,7 +68,16 @@ export default function ThemeFour({
     story,
     accounts,
   } = useInvitationData(data, isTemplate);
-  return (
+  const [hasOverlay, setHasOverlay] = React.useState(true);
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main
         className={cn(
@@ -325,18 +338,37 @@ export default function ThemeFour({
         <div className="bg-fire-opal">
           <div className="container py-7 w-11/12 mx-auto max-w-[1040px] bg-fire-opal">
             <div className="mb-4 md:mb-9">
-              <FeedbackCard
-                title="Say Something!"
-                nameLabel="Name"
-                messageLabel="Message"
-                attendanceLabel="Attendance"
-                buttonText="Send Now!"
-                uniqueId={uniqueId}
-                to={to}
-              />
+              {isTemplate ? (
+                <FeedbackCardTemplate
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                />
+              ) : (
+                <FeedbackCard
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                  uniqueId={uniqueId}
+                  to={to}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
             <div>
-              <CommentCard comments={comments} />
+              {isTemplate ? (
+                <CommentCardTemplate comments={comments} />
+              ) : (
+                <CommentCard
+                  comments={comments}
+                  uniqueId={uniqueId}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
           </div>
         </div>

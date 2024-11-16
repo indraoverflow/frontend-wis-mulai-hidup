@@ -1,3 +1,4 @@
+"use client";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import FeedbackCard from "@/components/theme/feedback-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
@@ -12,6 +13,9 @@ import Footer from "@/components/shared/Footer";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import { cn } from "@/lib/utils/tailwind-util";
 import { allura, comfortaa } from "@/lib/fonts";
+import FeedbackCardTemplate from "../feedback-card-template";
+import CommentCardTemplate from "../comment-card-template";
+import Overlay from "../Overlay";
 
 export default function ThemeOne({
   data,
@@ -24,6 +28,7 @@ export default function ThemeOne({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
   let {
     nameMan,
     nicknameMan,
@@ -65,7 +70,15 @@ export default function ThemeOne({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+    />
+  ) : (
     <>
       <main className={cn("bg-surface", comfortaa.className)}>
         <section className="relative md:w-full z-20">
@@ -264,18 +277,37 @@ export default function ThemeOne({
 
           <div className="container py-7 w-11/12 mx-auto max-w-[1040px]">
             <div className="mb-4 md:mb-9">
-              <FeedbackCard
-                title="Say Something!"
-                nameLabel="Name"
-                messageLabel="Message"
-                attendanceLabel="Attendance"
-                buttonText="Send Now!"
-                uniqueId={uniqueId}
-                to={to}
-              />
+              {isTemplate ? (
+                <FeedbackCardTemplate
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                />
+              ) : (
+                <FeedbackCard
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                  uniqueId={uniqueId}
+                  to={to}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
             <div>
-              <CommentCard comments={comments} />
+              {isTemplate ? (
+                <CommentCardTemplate comments={comments} />
+              ) : (
+                <CommentCard
+                  comments={comments}
+                  uniqueId={uniqueId}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
           </div>
         </div>
