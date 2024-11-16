@@ -11,7 +11,7 @@ import { minervaModern } from "@/lib/fonts";
 export default function page() {
   const faqItems = [
     {
-      question: "Membuat akun invita",
+      question: "Membuat akun Mulai Hidup",
       answer:
         "Untuk memudahkan pengelolaan dan pelacakan berbagai aspek undangan dengan lebih efisien. Dashboard menyediakan akses sentral ke semua informasi undangan, membantu mengatur informasi secara lengkap, menyesuaikan desain undangan secara instan. Selain itu, Anda dapat mengelola data tamu secara terorganisir, yang membantu menghemat waktu dan tenaga. Fitur-fitur dashboard ini memudahkan proses pengaturan, lebih praktis dan memungkinkan kontrol penuh di ujung jari Anda.",
     },

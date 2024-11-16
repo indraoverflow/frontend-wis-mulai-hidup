@@ -7,6 +7,7 @@ import "./../styles/globals.css";
 import { elza, minervaModern } from "@/lib/fonts";
 import { Suspense } from "react";
 import Loading from "@/components/shared/Loading";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
             <SessionWrapper>{children}</SessionWrapper>
           </StoreProvider>
         </Suspense>
+        <Toaster />
       </body>
     </html>
   );

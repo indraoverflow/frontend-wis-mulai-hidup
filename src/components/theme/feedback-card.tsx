@@ -135,7 +135,12 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
               {...register("status")}
             >
               <div className="flex items-center ">
-                <RadioGroupItem value="YES" id="yes" className="peer hidden " />
+                <RadioGroupItem
+                  value="YES"
+                  id="yes"
+                  className="peer hidden "
+                  {...register("status")}
+                />
                 <Label
                   htmlFor="yes"
                   className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured "
@@ -148,6 +153,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
                   value="MAYBE"
                   id="maybe"
                   className="peer hidden"
+                  {...register("status")}
                 />
                 <Label
                   htmlFor="maybe"
@@ -157,7 +163,12 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
                 </Label>
               </div>
               <div className="flex items-center">
-                <RadioGroupItem value="NO" id="no" className="peer hidden" />
+                <RadioGroupItem
+                  value="NO"
+                  id="no"
+                  className="peer hidden"
+                  {...register("status")}
+                />
                 <Label
                   htmlFor="no"
                   className="peer-data-[state=checked]:bg-fuchsia-500 peer-data-[state=checked]:text-white peer-data-[state=checked]:bg-opacity-70 px-6 py-4 bg-cultured"
