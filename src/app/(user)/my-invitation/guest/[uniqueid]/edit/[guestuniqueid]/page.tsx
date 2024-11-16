@@ -1,32 +1,35 @@
 "use client";
 
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { buttonVariants } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { formGuestScheme, GuestType } from '@/types/guest-types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from 'react'
-import { useAddGuestMutation, useGetGuestByIdQuery, useGetGuestByUniqueIdQuery, useUpdateGuestMutation } from '@/store/features/guest/guest-slice'
+import { useUpdateGuestMutation } from '@/store/features/guest/guest-slice'
 import Link from 'next/link';
 import SubmitButton from '@/components/button/submit';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { RxCrossCircled } from 'react-icons/rx';
 import { Switch } from '@/components/ui/switch';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function EditGuestPage({
     params,
 }: {
     params: { uniqueid: string, guestuniqueid: string }
 }) {
-    const {
-        data: guestsData,
-        error,
-        isLoading,
-    } = useGetGuestByIdQuery({ uniqueId: params.uniqueid, id: params.guestuniqueid });
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const guestData = searchParams.get('guestData');
+
+    useEffect(() => {
+        if (!guestData) {
+            router.push(`/my-invitation/guest/${params.uniqueid}`);
+        }
+    }, [guestData, params.uniqueid, router]);
 
     const [alert, setAlert] = useState<{
         type: "success" | "error";
@@ -39,10 +42,14 @@ export default function EditGuestPage({
     });
 
     useEffect(() => {
-        if (guestsData) {
-            form.reset(guestsData.data);
+        if (guestData) {
+            const guest = JSON.parse(guestData as string);
+
+            form.setValue("name", guest.name);
+            form.setValue("phone_number", guest.phone_number);
+            form.setValue("status", guest.status);
         }
-    }, [guestsData]);
+    }, [guestData, form]);
 
     const [editGuest, editGuestResult] = useUpdateGuestMutation();
 
@@ -51,16 +58,17 @@ export default function EditGuestPage({
             let data = formGuestScheme.parse({
                 name: values.name,
                 phone_number: values.phone_number,
-                status: values.status,
+                status: values.status ? 'YES' : 'NO',
                 wedding_unique_id: params.uniqueid,
-                guest_unique_id: params.guestuniqueid,
+                unique_id: params.guestuniqueid,
             });
+
+            console.log(data);
 
             const res = await editGuest(data);
 
-            if (!res?.error) {
-                form.reset();
-                setAlert({ type: "success", message: "Tamu berhasil ditambahkan." });
+            if (!res?.error) {                
+                setAlert({ type: "success", message: "Tamu berhasil diperbarui." });
             }
         } catch (error) {
             setAlert({
@@ -158,11 +166,11 @@ export default function EditGuestPage({
                                                 <FormLabel className="">Status</FormLabel>                                                
                                                 <FormControl>
                                                     <Switch
-                                                        checked={field.value}
-                                                        onCheckedChange={field.onChange}
-                                                        aria-readonly
+                                                        checked={field.value === 'YES'}
+                                                        onCheckedChange={(checked) => field.onChange(checked ? 'YES' : 'NO')}
                                                     />
                                                 </FormControl>
+                                                <FormMessage />
                                             </FormItem>
                                         )}
                                     />

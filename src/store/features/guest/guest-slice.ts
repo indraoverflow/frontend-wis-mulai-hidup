@@ -37,21 +37,11 @@ export const guestApi = createApi({
         updateGuest: build.mutation({
             query: (data) => {
                 return {
-                    url: `/guest/${data.unique_id}`,
-                    method: "PUT",
+                    url: `/guest/update/${data.unique_id}`,
+                    method: "PATCH",
                     data: data,
                 };
             },
-            invalidatesTags: ["GuestTypes"],
-        }),
-        deleteGuest: build.mutation({
-            query: (id) => {
-                return {
-                    url: `/guest/${id}`,
-                    method: "DELETE",
-                };
-            },
-            invalidatesTags: ["GuestTypes"],
         }),
     }),
 });
@@ -60,6 +50,5 @@ export const {
     useGetGuestByUniqueIdQuery,
     useGetGuestByIdQuery,
     useAddGuestMutation, 
-    useUpdateGuestMutation,
-    useDeleteGuestMutation 
+    useUpdateGuestMutation    
 } = guestApi;
