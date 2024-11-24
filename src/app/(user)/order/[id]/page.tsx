@@ -111,7 +111,7 @@ export default function OrderPage({ params }: { params: { id: string } }) {
               className="text-center"
               onClick={() => handlePayment(payment)}
             >
-              Lanjutkan Pembayaran
+              Selesaikan Pembayaran
             </Button>
           </CardFooter>
         </Card>
