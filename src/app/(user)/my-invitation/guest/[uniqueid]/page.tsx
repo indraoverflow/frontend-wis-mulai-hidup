@@ -8,6 +8,7 @@ import { useGetGuestByUniqueIdQuery, useAddGuestMutation, useUpdateGuestMutation
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import SubmitButton from '@/components/button/submit';
@@ -26,7 +27,10 @@ export default function GuestPage({ params }: { params: { uniqueid: string } }) 
 
     const form = useForm({
         resolver: zodResolver(formCreateGuestScheme),
-        defaultValues: formCreateGuestScheme.parse({}),
+        defaultValues: formCreateGuestScheme.parse({
+            name: '',
+            phone_number: '',
+        }),
     });
 
     useEffect(() => {
@@ -67,14 +71,14 @@ export default function GuestPage({ params }: { params: { uniqueid: string } }) 
 
     async function onSubmit(values: GuestType) {
         try {
-            let data: { wedding_unique_id: string; name: string; phone_number: string; unique_id?: string } = formCreateGuestScheme.parse({
+            let data: { wedding_unique_id: string; name: string; phone_number: string; unique_id?: string; guest_unid?: string } = formCreateGuestScheme.parse({
                 name: values.name,
                 phone_number: values.phone_number,
                 wedding_unique_id: params.uniqueid,
             });
 
             if (isEditMode && currentGuest) {
-                data = { ...data, unique_id: currentGuest.unique_id };
+                data = { ...data, unique_id: currentGuest.unique_id, guest_unid: currentGuest.unique_id };
                 const res = await updateGuest(data);
                 if (!res?.error) {
                     setAlert({ type: "success", message: "Tamu berhasil diperbarui." });
@@ -182,6 +186,26 @@ export default function GuestPage({ params }: { params: { uniqueid: string } }) 
                                         <FormMessage />
                                     </FormItem>
                                 )} />
+                                {/* {isEditMode && (
+                                    <FormField control={form.control} name="status" render={({ field }) => (
+                                        <FormItem className="mb-6">
+                                            <FormLabel>Status</FormLabel>
+                                            <FormControl>
+                                                <RadioGroup value={field.value} onValueChange={field.onChange} className="flex items-center gap-4">
+                                                    <div className="flex items-center space-x-2">
+                                                        <RadioGroupItem value="YES" id="status-yes" />
+                                                        <FormLabel htmlFor="status-yes">Yes</FormLabel>
+                                                    </div>
+                                                    <div className="flex items-center space-x-2">
+                                                        <RadioGroupItem value="NO" id="status-no" />
+                                                        <FormLabel htmlFor="status-no">No</FormLabel>
+                                                    </div>
+                                                </RadioGroup>
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )} />
+                                )} */}
                                 <div className="text-center">
                                     <SubmitButton isSubmitting={form.formState.isSubmitting} />
                                 </div>
