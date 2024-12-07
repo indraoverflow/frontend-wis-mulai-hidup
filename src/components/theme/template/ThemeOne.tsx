@@ -77,6 +77,7 @@ export default function ThemeOne({
       nicknameMan={nicknameMan}
       nicknameWoman={nicknameWoman}
       ceremonyStartDateString={ceremonyStartDateString}
+      isTemplate={isTemplate}
     />
   ) : (
     <>
