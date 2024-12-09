@@ -15,7 +15,7 @@ export default function Footer({ variant = "default" }: Props) {
         "flex flex-col justify-center items-center  gap-[14px] py-9 md:py-[100px]",
         variant === "dark"
           ? "text-white bg-[#242424]"
-          : "text-[#242424] bg-tertiary"
+          : "text-[#242424] bg-primary"
       )}
     >
       <div className="flex gap-3 md:gap-[22.5px]">
