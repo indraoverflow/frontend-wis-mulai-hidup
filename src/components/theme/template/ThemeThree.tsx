@@ -81,6 +81,7 @@ export default function ThemeThree({
       nicknameMan={nicknameMan}
       nicknameWoman={nicknameWoman}
       ceremonyStartDateString={ceremonyStartDateString}
+      template={3}
     />
   ) : (
     <>

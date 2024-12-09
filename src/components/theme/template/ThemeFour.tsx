@@ -76,6 +76,7 @@ export default function ThemeFour({
       nicknameMan={nicknameMan}
       nicknameWoman={nicknameWoman}
       ceremonyStartDateString={ceremonyStartDateString}
+      template={4}
     />
   ) : (
     <>

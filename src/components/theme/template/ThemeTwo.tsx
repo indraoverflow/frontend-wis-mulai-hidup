@@ -81,6 +81,7 @@ export default function ThemeTwo({
       nicknameMan={nicknameMan}
       nicknameWoman={nicknameWoman}
       ceremonyStartDateString={ceremonyStartDateString}
+      template={2}
     />
   ) : (
     <>
