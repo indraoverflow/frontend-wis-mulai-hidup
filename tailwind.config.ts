@@ -86,6 +86,7 @@ const config: Config = {
         "copper-red": "#C6754D",
         "light-silver": "#D7D7D7",
         "philippine-yellow": "#FFC700",
+        "bright-gray": "#EFEDED",
       },
       maxWidth: {
         desktop: "1440px",

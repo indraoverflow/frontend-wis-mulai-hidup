@@ -105,7 +105,7 @@ export default function ThemeThree({
               <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
                 <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
                   <Image
-                    src={"/images/faceless/groom.png"}
+                    src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
                     alt={"mempelai laki laki"}
                     width={382.13}
                     height={529.5}
@@ -142,7 +142,7 @@ export default function ThemeThree({
                 </div>
                 <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
                   <Image
-                    src={"/images/faceless/bride.png"}
+                    src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
                     alt={"mempelai perempuan"}
                     width={382.13}
                     height={529.5}

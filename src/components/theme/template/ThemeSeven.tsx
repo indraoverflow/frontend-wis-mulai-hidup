@@ -20,6 +20,7 @@ import Navbar from "../header/Navbar";
 import GalleryCarouselItem from "../GalleryCarouselItem";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
@@ -27,49 +28,121 @@ const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
 export default function ThemeSeven({
   data,
   isTemplate = false,
+  uniqueId,
+  to,
 }: {
   data?: any;
   isTemplate?: boolean;
+  uniqueId?: string;
+  to: string | null;
 }) {
-  const stories = [
-    {
-      title: "Raka",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
-    },
-    {
-      title: null,
-      description: null,
-      image: "/images/background/carousel-weeding-1-theme-7.png",
-    },
-    {
-      title: "Raisa",
-      description:
-        "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
-      image: null,
-    },
-    {
-      title: null,
-      description: null,
-      image: "/images/background/carousel-weeding-2-theme-7.png",
-    },
-  ];
+
+  let {
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+    accounts,
+  } = useInvitationData(data, isTemplate);
+
+  let stories;
+
+  if(isTemplate){
+    stories = [
+      {
+        title: "Raka",
+        description:
+          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
+      },
+      {
+        title: null,
+        description: null,
+        image: "/images/faceless/groom.png",
+      },
+      {
+        title: "Raisa",
+        description:
+          "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis maxime consectetur debitis maiores veritatis unde voluptates, nostrum quasi. Vitae molestias alias incidunt, laborum ratione eveniet.",
+        image: null,
+      },
+      {
+        title: null,
+        description: null,
+        image: "/images/faceless/bride.png",
+      },
+    ];
+  } else {
+    stories = [
+      {
+        title: nicknameMan,
+        description: descriptionMan,
+      },
+      {
+        title: null,
+        description: null,
+        image: story.imgGroom,
+      },
+      {
+        title: nicknameWoman,
+        description: descriptionWoman,
+        image: null,
+      },
+      {
+        title: null,
+        description: null,
+        image: story.imgBride,
+      }
+    ];
+  }
 
   const galleries = [
     {
-      image: "/images/couple/gallery-wedding-1-theme-7.png",
+      image: "/images/faceless/25.png",
     },
     {
-      image: "/images/couple/gallery-wedding-2-theme-7.png",
+      image: "/images/faceless/21.png",
     },
     {
-      image: "/images/couple/gallery-wedding-3-theme-7.png",
+      image: "/images/faceless/26.png",
     },
   ];
 
   return (
     <>
-      <Navbar />
+      <Navbar title={`${nicknameMan.charAt(0)} & ${nicknameWoman.charAt(0)}`} />
       <main className={cn("relative", comfortaa.className)}>
         <section className="bg-black text-white">
           <div className="relative px-5 lg:px-16">
@@ -79,15 +152,18 @@ export default function ThemeSeven({
                 playfairDisplay.className
               )}
             >
-              <h1 className="text-9xl mb-2">R & R</h1>
+              <h1 className="text-9xl mb-2 capitalize">
+                {nicknameMan.charAt(0)} & {nicknameWoman.charAt(0)}
+              </h1>
               <h5 className="text-4xl">
-                5TH <span className="font-bold">January</span> 2025
+                {/* 5TH <span className="font-bold">January</span> 2025 */}
+                {ceremonyStartDateWithFullMonth}
               </h5>
               <h5 className="text-4xl">- save the date to calendar -</h5>
             </div>
             <div className="flex flex-col md:flex-row gap-8 items-center justify-between md:-mb-52">
               <div className={playfairDisplay.className}>
-                <p className="text-center text-4xl mb-3">Raka</p>
+                <p className="text-center text-4xl mb-3">{nicknameMan}</p>
                 <div className="relative w-[268.33px] h-[428.37px]">
                   <div className="absolute inset-0">
                     <Image
@@ -100,17 +176,17 @@ export default function ThemeSeven({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src="/images/couple/groom-hero.png"
+                      src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
                       alt="mempelai pria"
                       fill
                       style={{ objectFit: "cover" }}
-                      className="relative rounded-full z-10"
+                      className="relative rounded-full z-10 bg-bright-gray"
                     />
                   </div>
                 </div>
               </div>
               <div className={playfairDisplay.className}>
-                <p className="text-center text-4xl mb-3">Raisa</p>
+                <p className="text-center text-4xl mb-3">{nicknameWoman}</p>
                 <div className="relative w-[268.33px] h-[428.37px]">
                   <div className="absolute inset-0">
                     <Image
@@ -123,11 +199,11 @@ export default function ThemeSeven({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src="/images/couple/bride-hero.png"
+                      src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
                       alt="mempelai wanita"
                       fill
                       style={{ objectFit: "cover" }}
-                      className="relative rounded-full z-10"
+                      className="relative rounded-full z-10 bg-bright-gray"
                     />
                   </div>
                 </div>
@@ -146,11 +222,11 @@ export default function ThemeSeven({
                 </div>
                 <div className="absolute inset-y-8 inset-x-5 lg:inset-y-24 lg:inset-x-12">
                   <Image
-                    src="/images/couple/couple-hero.png"
+                    src="/images/faceless/22.png"
                     alt="mempelai"
                     fill
                     style={{ objectFit: "cover" }}
-                    className="relative rounded-full z-10"
+                    className="relative rounded-full z-10 bg-bright-gray"
                   />
                 </div>
               </div>
@@ -181,27 +257,30 @@ export default function ThemeSeven({
                         galleryImage={story.image}
                         title={story.title}
                         description={story.description}
+                        className={story.image ? "bg-bright-gray" : "border-2 border-light-silver"}
                       />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
               </Carousel>
             </div>
-            <div
-              className="rounded-lg overflow-hidden my-16"
-              style={{
-                width: "100%",
-                height: "557px",
-              }}
-            >
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              ></iframe>
-            </div>
+            {videoUrl || isTemplate == true && (
+              <div
+                className="rounded-lg overflow-hidden my-16"
+                style={{
+                  width: "100%",
+                  height: "557px",
+                }}
+              >
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                ></iframe>
+              </div>
+            )}
             <div className="relative mb-16">
               <Carousel>
                 <CarouselContent>
@@ -210,7 +289,7 @@ export default function ThemeSeven({
                       key={index}
                       className="md:basis-1/2 lg:basis-1/3"
                     >
-                      <GalleryCarouselItem galleryImage={gallery.image} />
+                      <GalleryCarouselItem galleryImage={gallery.image} className="bg-bright-gray" />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -219,30 +298,46 @@ export default function ThemeSeven({
             <hr />
             <div className="my-8 lg:my-16">
               <h3 className="text-center text-gray text-3xl md:text-5xl mb-8 md:mb-36">
-                05 February 2025
+                {ceremonyStartDateWithFullMonth}
               </h3>
               <DateCountDown
-                date={new Date("2024-11-11T12:00:00")}
+                date={new Date(ceremonyStartDateTime)}
                 className="text-white bg-black w-full h-auto md:w-40 md:h-48"
               />
             </div>
             <div className="flex flex-col md:flex-row justify-center gap-5 mb-5 mx-auto max-w-[1040px]">
               <CeremonyCardPotrait
-                backgroundImage="/images/background/bg-ceremony-potrait.png"
+                backgroundImage="/images/background/bg-ceremony.png"
                 iconImage="/images/icon/wedding-ring.svg"
                 ceremonyTitle="Akad Ceremony"
-                ceremonyTime="07:00 - 08:00"
+                ceremonyTime={`${ceremonyStartTime} ${
+                  receptionTimezone ?? ""
+                } - ${
+                  ceremonyEndTime
+                    ? ceremonyEndTime + " " + (receptionTimezone ?? "")
+                    : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={
+                  isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+                }
                 buttonText="Open Map"
               />
               <CeremonyCardPotrait
-                backgroundImage="/images/background/bg-reception-potrait.png"
+                backgroundImage="/images/background/bg-card-place.png"
                 iconImage="/images/icon/dinner-table.svg"
                 ceremonyTitle="Wedding Reseption"
-                ceremonyTime="11.00 - 14.00"
+                ceremonyTime={`${receptionStartTime} ${
+                  receptionTimezone ?? ""
+                } - ${
+                  receptionEndTime
+                    ? receptionEndTime + " " + (receptionTimezone ?? "")
+                    : "Selesai"
+                }`}
                 locationTitle="InterContinental Jakarta Hotel"
-                locationAddress="Jl. Jalan Metro Pondok Indah"
+                locationAddress={
+                  isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                }
                 buttonText="Open Map"
               />
             </div>
@@ -254,7 +349,7 @@ export default function ThemeSeven({
               className="mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                src={ceremonyLocation}
                 loading="lazy"
                 width="100%"
                 height="100%"
@@ -276,7 +371,11 @@ export default function ThemeSeven({
                 />
                 <OfflineGiftCard
                   title="Offline Gift"
-                  address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                  address={
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : receptionAddress ?? ceremonyAddress
+                  }
                   buttonText="Open Map"
                 />
               </div>
@@ -294,16 +393,37 @@ export default function ThemeSeven({
             </div>
             <div className="relative container px-5 pb-5 lg:pb-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-10">
               <div className="mb-9">
-                <FeedbackCardTemplate
-                  title="Say Something!"
-                  nameLabel="Name"
-                  messageLabel="Message"
-                  attendanceLabel="Attendance"
-                  buttonText="Send Now!"
-                />
+                {isTemplate ? (
+                  <FeedbackCardTemplate
+                    title="Say Something!"
+                    nameLabel="Name"
+                    messageLabel="Message"
+                    attendanceLabel="Attendance"
+                    buttonText="Send Now!"
+                  />
+                ) : (
+                  <FeedbackCard
+                    title="Say Something!"
+                    nameLabel="Name"
+                    messageLabel="Message"
+                    attendanceLabel="Attendance"
+                    buttonText="Send Now!"
+                    uniqueId={uniqueId}
+                    to={to}
+                    isTemplate={isTemplate}
+                  />
+                )}
               </div>
               <div>
-                <CommentCardTemplate comments={comments} />
+                {isTemplate ? (
+                  <CommentCardTemplate comments={comments} />
+                ) : (
+                  <CommentCard
+                    comments={comments}
+                    uniqueId={uniqueId}
+                    isTemplate={isTemplate}
+                  />
+                )}
               </div>
             </div>
           </div>
