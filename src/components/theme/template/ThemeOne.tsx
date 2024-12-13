@@ -134,7 +134,7 @@ export default function ThemeOne({
           <div className="flex  gap-6 lg:gap-20 lg:w-full justify-center w-11/12 mx-auto  sm:px-20 md:px-12 lg:px-48">
             <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/faceless/groom.png"}
+                src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
                 alt={"mempelai laki laki"}
                 width={509}
                 height={706}
@@ -143,7 +143,7 @@ export default function ThemeOne({
             </div>
             <div className="rounded-[30px] overflow-hidden bg-isabelline aspect-[10/14]">
               <Image
-                src={"/images/faceless/bride.png"}
+                src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
                 alt={"mempelai perempuan"}
                 width={509}
                 height={706}

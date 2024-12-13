@@ -14,6 +14,7 @@ import CeremonyCardPotrait from "../CeremonyCardPotrait";
 import { cn } from "@/lib/utils/tailwind-util";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
+import useInvitationData from "@/lib/hooks/use-invitation-data";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -22,10 +23,56 @@ const montaga = Montaga({ subsets: ["latin"], weight: "400" });
 export default function ThemeSix({
   data,
   isTemplate = false,
+  uniqueId,
+  to,
 }: {
   data?: any;
   isTemplate?: boolean;
+  uniqueId?: string;
+  to: string | null;
 }) {
+
+  let {
+    nameMan,
+    nicknameMan,
+    prefixMan,
+    titleMan,
+    fatherMan,
+    motherMan,
+    descriptionMan,
+    nameWoman,
+    nicknameWoman,
+    prefixWoman,
+    titleWoman,
+    fatherWoman,
+    motherWoman,
+    descriptionWoman,
+    receptionStartDate,
+    receptionEndDate,
+    receptionStartTime,
+    receptionEndTime,
+    receptionTimezone,
+    receptionLocation,
+    receptionAddress,
+    manMedia,
+    womanMedia,
+    manStory,
+    womanStory,
+    videoUrl,
+    ceremonyStartDate,
+    ceremonyEndDate,
+    ceremonyStartTime,
+    ceremonyEndTime,
+    ceremonyTimezone,
+    ceremonyLocation,
+    ceremonyAddress,
+    ceremonyStartDateString,
+    ceremonyStartDateWithFullMonth,
+    ceremonyStartDateTime,
+    story,
+    accounts,
+  } = useInvitationData(data, isTemplate);
+
   return (
     <>
       <main className={cn("relative", montaga.className)}>
@@ -42,7 +89,7 @@ export default function ThemeSix({
             <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-3">
               <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
                 <Image
-                  src="/images/couple/groom-hero-theme-6.png"
+                  src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero-theme-6.png"}
                   alt="mempelai pria"
                   layout="fill"
                   objectFit="cover"
@@ -54,15 +101,15 @@ export default function ThemeSix({
                   Please join us to celebrate our wedding
                 </p>
                 <h1 className="text-6xl lg:text-[101px] text-copper-red my-10 lg:my-20">
-                  Dony & Arisa
+                  {nicknameMan} & {nicknameWoman}
                 </h1>
                 <p className="text-2xl lg:text-3xl">
-                  Januari 15, 2025 - Bandung, Jawa barat
+                  { isTemplate ? "Januari 15, 2025 - Bandung, Jawa barat" : receptionStartDate + "-" + receptionLocation }
                 </p>
               </div>
               <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
                 <Image
-                  src="/images/couple/bride-hero-theme-6.png"
+                  src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero-theme-6.png"}
                   alt="mempelai wanita"
                   layout="fill"
                   objectFit="cover"
@@ -77,20 +124,12 @@ export default function ThemeSix({
             <div className="lg:pb-60 lg:px-28">
               <h3 className="text-5xl text-center mb-16">Our Story</h3>
               <p className="text-lg leading-relaxed">
-                Feugiat pretium egestas enim blandit purus euismod. Feugiat
-                magna aliquam lectus lectus eu amet. Eros, accumsan purus enim
-                nascetur quam diam felis, fringilla varius. Quis purus nisl orci
-                eu, ultrices.
+                {story.quoteGroom}
                 <br />
                 <br />
-                Purus pretium egestas ultricies tempus sit elit. Maecenas
-                pellentesque sit eros vitae. Maecenas suspendisse tincidunt
-                ullamcorper justo neque quis et, laoreet. Vitae lacus, aliquet
-                lorem mauris, sit dolor sodales. Nullam quam quis lorem dui
-                tristique massa enim.
+                {story.quoteBride}
                 <br />
                 <br />
-                Faucibus sed egestas mollis vivamus et sed sed.
               </p>
             </div>
           </div>
@@ -98,21 +137,23 @@ export default function ThemeSix({
         <section className="bg-snow text-white">
           <div className="container px-5 py-5 lg:pb-16 lg:pt-0 lg:-mb-60 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="lg:relative lg:bottom-60 z-20">
-              <div
-                className="rounded-lg overflow-hidden mb-10"
-                style={{
-                  width: "100%",
-                  height: "557px",
-                }}
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                ></iframe>
-              </div>
+              {videoUrl || isTemplate == true && (
+                <div
+                  className="rounded-lg overflow-hidden mb-10"
+                  style={{
+                    width: "100%",
+                    height: "557px",
+                  }}
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  ></iframe>
+                </div>
+              )}
               <div className="text-center">
                 <h3
                   className={cn(
@@ -140,10 +181,10 @@ export default function ThemeSix({
               </div>
               <div className={cn("mb-8 lg:mb-24", comfortaa.className)}>
                 <h3 className="text-center text-gray text-3xl md:text-5xl mb-8 md:mb-36">
-                  05 February 2025
+                  {ceremonyStartDateWithFullMonth}
                 </h3>
                 <DateCountDown
-                  date={new Date("2024-10-10T12:00:00")}
+                  date={new Date(ceremonyStartDateTime)}
                   className="text-white bg-black rounded-[20px] w-full h-auto md:w-40 md:h-48"
                 />
               </div>
@@ -154,21 +195,37 @@ export default function ThemeSix({
                 )}
               >
                 <CeremonyCardPotrait
-                  backgroundImage="/images/background/bg-ceremony-potrait.png"
+                  backgroundImage="/images/background/bg-ceremony.png"
                   iconImage="/images/icon/wedding-ring.svg"
                   ceremonyTitle="Akad Ceremony"
-                  ceremonyTime="07:00 - 08:00"
+                  ceremonyTime={`${ceremonyStartTime} ${
+                    receptionTimezone ?? ""
+                  } - ${
+                    ceremonyEndTime
+                      ? ceremonyEndTime + " " + (receptionTimezone ?? "")
+                      : "Selesai"
+                  }`}
                   locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress="Jl. Jalan Metro Pondok Indah"
+                  locationAddress={
+                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+                  }
                   buttonText="Open Map"
                 />
                 <CeremonyCardPotrait
-                  backgroundImage="/images/background/bg-reception-potrait.png"
+                  backgroundImage="/images/background/bg-card-place.png"
                   iconImage="/images/icon/dinner-table.svg"
                   ceremonyTitle="Wedding Reseption"
-                  ceremonyTime="11.00 - 14.00"
+                  ceremonyTime={`${receptionStartTime} ${
+                    receptionTimezone ?? ""
+                  } - ${
+                    receptionEndTime
+                      ? receptionEndTime + " " + (receptionTimezone ?? "")
+                      : "Selesai"
+                  }`}
                   locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress="Jl. Jalan Metro Pondok Indah"
+                  locationAddress={
+                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                  }
                   buttonText="Open Map"
                 />
               </div>
@@ -180,7 +237,7 @@ export default function ThemeSix({
                 className="mb-8 md:mb-16 max-w-[1040px] mx-auto rounded-[10px] overflow-hidden bg-stone-200"
               >
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                  src={ceremonyLocation}
                   loading="lazy"
                   width="100%"
                   height="100%"
@@ -220,7 +277,7 @@ export default function ThemeSix({
             >
               <div className="flex flex-col justify-center items-center">
                 <Image
-                  src={"/images/couple/groom-hero-theme-6.png"}
+                  src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero-theme-6.png"}
                   alt="mempelai pria"
                   width={300}
                   height={300}
@@ -234,13 +291,13 @@ export default function ThemeSix({
                   className="mb-4 lg:mb-8"
                 />
                 <div className="text-center">
-                  <h3 className="text-5xl">Donny</h3>
-                  <p className="text-2xl">Putra dari Bapak Nunu dan Ibu Lea</p>
+                  <h3 className="text-5xl">{nameMan}</h3>
+                  <p className="text-2xl">Putra dari Bapak {fatherMan} dan Ibu {motherMan}</p>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center">
                 <Image
-                  src={"/images/couple/bride-hero-theme-6.png"}
+                  src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero-theme-6.png"}
                   alt="mempelai wanita"
                   width={300}
                   height={300}
@@ -254,8 +311,8 @@ export default function ThemeSix({
                   className="mb-4 lg:mb-8"
                 />
                 <div className="text-center">
-                  <h3 className="text-5xl">Arisa</h3>
-                  <p className="text-2xl">Putri dari Bapak Odin dan Ibu Nina</p>
+                  <h3 className="text-5xl">{nameWoman}</h3>
+                  <p className="text-2xl">Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}</p>
                 </div>
               </div>
             </div>
@@ -271,7 +328,11 @@ export default function ThemeSix({
                 />
                 <OfflineGiftCard
                   title="Offline Gift"
-                  address="Jl. Terusan Jakarta No.53, Cicaheum, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40291"
+                  address={
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : receptionAddress ?? ceremonyAddress
+                  }
                   buttonText="Open Map"
                 />
               </div>
@@ -281,16 +342,37 @@ export default function ThemeSix({
         <div className={cn("bg-copper-red py-7", comfortaa.className)}>
           <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-9">
-              <FeedbackCardTemplate
-                title="Say Something!"
-                nameLabel="Name"
-                messageLabel="Message"
-                attendanceLabel="Attendance"
-                buttonText="Send Now!"
-              />
+              {isTemplate ? (
+                <FeedbackCardTemplate
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                />
+              ) : (
+                <FeedbackCard
+                  title="Say Something!"
+                  nameLabel="Name"
+                  messageLabel="Message"
+                  attendanceLabel="Attendance"
+                  buttonText="Send Now!"
+                  uniqueId={uniqueId}
+                  to={to}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
             <div>
-              <CommentCardTemplate comments={comments} />
+              {isTemplate ? (
+                <CommentCardTemplate comments={comments} />
+              ) : (
+                <CommentCard
+                  comments={comments}
+                  uniqueId={uniqueId}
+                  isTemplate={isTemplate}
+                />
+              )}
             </div>
           </div>
         </div>

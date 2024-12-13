@@ -28,7 +28,7 @@ export default function SelectTheme({
             <FormItem>
               <FormControl>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 ">
-                  {[1, 2, 3, 4].map((i) => (
+                  {[1, 2, 3, 4, 5, 6].map((i) => (
                     <Card
                       className={cn(
                         "border-0 shadow-none bg-surface",
@@ -63,7 +63,7 @@ export default function SelectTheme({
                             "text-primary",
                             buttonVariants({ variant: "ghost", size: "sm" })
                           )}
-                          href={`/theme/${i > 4 ? 1 : i}`}
+                          href={`/theme/${i > 6 ? 1 : i}`}
                         >
                           Preview
                         </Link>

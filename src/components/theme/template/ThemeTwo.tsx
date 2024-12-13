@@ -136,7 +136,7 @@ export default function ThemeTwo({
               <div className="flex flex-col md:flex-row gap-8 w-full justify-center items-center md:items-stretch px-12 sm:px-20 md:px-12 lg:px-48">
                 <div className="rounded-[200px] overflow-hidden">
                   <Image
-                    src={"/images/couple/groom-hero.png"}
+                    src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero.png"}
                     alt={"mempelai laki laki"}
                     width={509}
                     height={706}
@@ -153,7 +153,7 @@ export default function ThemeTwo({
                 </div>
                 <div className="rounded-[200px] overflow-hidden">
                   <Image
-                    src={"/images/couple/bride-hero.png"}
+                    src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero.png"}
                     alt={"mempelai perempuan"}
                     width={509}
                     height={706}

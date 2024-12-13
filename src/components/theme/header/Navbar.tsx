@@ -10,16 +10,17 @@ import { Montaga } from "next/font/google";
 type Props = {
   showMenu?: boolean;
   darkTheme?: boolean;
+  title: string;
 };
 
 const montaga = Montaga({ subsets: ["latin"], weight: "400" });
 
-export default function Navbar({ showMenu = true, darkTheme = true }: Props) {
+export default function Navbar({ showMenu = true, darkTheme = true, title }: Props) {
   const [isExpanded, setIsExpanded] = React.useState(false);
   return (
     <header className={cn("sticky top-0  py-7 px-7 md:py-5 lg:py-10 lg:px-0 flex-col items-center  z-40 ", darkTheme ? "bg-black text-white" : "bg-white text-raisin-black")}>
       <nav className="flex  items-center justify-center  max-w-desktop px-5  lg:px-20 xl:px-[100px] mx-auto">
-        <Logo title="R & R" className={cn("md:hidden", montaga.className, darkTheme ? "" : "border-raisin-black")} />
+        <Logo title={title} className={cn("md:hidden", montaga.className, darkTheme ? "" : "border-raisin-black")} />
         {isExpanded ? (
           <div
             onClick={() => setIsExpanded(false)}
@@ -39,7 +40,7 @@ export default function Navbar({ showMenu = true, darkTheme = true }: Props) {
             <NavLink label="Our Story" route="/" darkTheme={darkTheme} />
             <NavLink label="Venue" route="/" darkTheme={darkTheme} />
             <div className="hidden md:block">
-              <Logo title="R & R" className={darkTheme ? "" : "border-raisin-black" + " " + montaga.className} />
+              <Logo title={title} className={darkTheme ? "" : "border-raisin-black" + " " + montaga.className} />
             </div>
             <NavLink label="Gift" route="/" darkTheme={darkTheme} />
             <NavLink label="Comment" route="/" darkTheme={darkTheme} />
