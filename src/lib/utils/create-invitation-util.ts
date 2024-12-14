@@ -1,6 +1,7 @@
 import {
   createInvitationRequestScheme,
   CreateInvitationType,
+  formBrideScheme,
 } from "@/types/invitation-types";
 import { getStringDate, getStringTime } from "./date-time-util";
 
@@ -64,5 +65,77 @@ export const createInvitationFormToRequest = (values: CreateInvitationType) => {
       address: values.weddingCeremony.address,
     },
     account_bank: bankAccount2 ? [bankAccount1, bankAccount2] : [bankAccount1],
+  });
+};
+
+export const invitationResponseToForm = (values: any): CreateInvitationType => {
+  const bankAccount1 = {
+    name: values?.account_bank.at(0)?.name ?? "-",
+    number: values?.account_bank.at(0)?.number ?? "-",
+    bank: values?.account_bank.at(0)?.bank ?? "-",
+  };
+
+  const bankAccount2 =
+    !!values?.account_bank.at(1)?.name ||
+    !!values?.account_bank.at(1)?.bank ||
+    !!values?.account_bank.at(1)?.number
+      ? {
+          name: values?.account_bank.at(1)?.name ?? "",
+          number: values?.account_bank.at(1)?.number ?? "",
+          bank: values?.account_bank.at(1)?.bank ?? "",
+        }
+      : null;
+
+  const [startHour, startMinute] = values?.start_time?.split(":") ?? [
+    "00",
+    "00",
+  ];
+  const [endHour, endMinute] = values?.end_time?.split(":") ?? ["00", "00"];
+
+  const [weddingStartHour, weddingStartMinute] =
+    values?.wedding_ceremony?.start_time?.split(":") ?? ["00", "00"];
+  const [weddingEndHour, weddingEndMinute] =
+    values?.wedding_ceremony?.end_time?.split(":") ?? ["00", "00"];
+
+  return formBrideScheme.parse({
+    mr: values?.prefix_man ?? "",
+    mrName: values?.name_man ?? "-",
+    mrTitle: values?.title_man ?? "",
+    mrNickname: values?.nickname_man ?? "-",
+    mrFather: values?.father_man ?? "",
+    mrMother: values?.mother_man ?? "",
+    mrProfile: values?.description_man ?? "",
+    mrsPrefix: values?.prefix_woman ?? "",
+
+    mrs: values?.prefix_woman ?? "",
+    mrsName: values?.name_woman ?? "-",
+    mrsTitle: values?.title_woman ?? "",
+    mrsNickname: values?.nickname_woman ?? "-",
+    mrsFather: values?.father_woman ?? "",
+    mrsMother: values?.mother_woman ?? "",
+    mrsProfile: values?.description_woman ?? "",
+
+    startDate: new Date(values?.start_date ?? "2000-01-01"),
+    endDate: new Date(values?.end_date ?? "2000-01-01"),
+    startHour: Number(startHour),
+    startMinute: Number(startMinute),
+    endHour: Number(endHour),
+    endMinute: Number(endMinute),
+    timeZone: values?.time_zone ?? "WIB",
+    location: values?.location ?? "",
+    address: values?.address ?? "",
+    themeId: Number(values?.theme_id ?? 1),
+    weddingCeremony: {
+      startHour: Number(weddingStartHour),
+      startMinute: Number(weddingStartMinute),
+      endHour: Number(weddingEndHour),
+      endMinute: Number(weddingEndMinute),
+      startDate: new Date(values?.wedding_ceremony?.start_date ?? "2000-01-01"),
+      endDate: new Date(values?.wedding_ceremony?.end_date ?? "2000-01-01"),
+      timeZone: values?.time_zone ?? "WIB",
+      location: values?.wedding_ceremony?.location ?? "",
+      address: values?.wedding_ceremony?.address ?? "",
+    },
+    accountBank: bankAccount2 ? [bankAccount1, bankAccount2] : [bankAccount1],
   });
 };

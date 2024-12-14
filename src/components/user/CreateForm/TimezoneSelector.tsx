@@ -45,9 +45,9 @@ export default function TimezoneSelector({ form, name }: Props) {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Pilih Zona Waktu</SelectLabel>
-                  <SelectItem value="wib">WIB</SelectItem>
-                  <SelectItem value="wita">WITA</SelectItem>
-                  <SelectItem value="wit">WIT</SelectItem>
+                  <SelectItem value="WIB">WIB</SelectItem>
+                  <SelectItem value="WITA">WITA</SelectItem>
+                  <SelectItem value="WIT">WIT</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

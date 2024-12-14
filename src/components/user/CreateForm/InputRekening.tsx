@@ -76,7 +76,7 @@ export default function InputRekening({ form, type }: Props) {
                       <SelectItem value="BCA">BCA</SelectItem>
                       <SelectItem value="BRI">BRI</SelectItem>
                       <SelectItem value="BNI">BNI</SelectItem>
-                      <SelectItem value="mandiri">Bank Mandiri</SelectItem>
+                      <SelectItem value="MANDIRI">Bank Mandiri</SelectItem>
                       <SelectItem value="BSI">BSI</SelectItem>
                     </SelectGroup>
                   </SelectContent>

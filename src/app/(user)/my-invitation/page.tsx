@@ -7,7 +7,7 @@ import { useGetInvitationByUserIdQuery } from "@/store/features/invitation/weddi
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function MyInvitationPage() {
   const dispatch = useAppDispatch();
@@ -16,9 +16,9 @@ export default function MyInvitationPage() {
     session.data?.user?.id as string
   );
 
-  // useEffect(() => {
-  //   dispatch(updateInvitationById(session.data?.user?.id as string));
-  // });
+  useEffect(() => {
+    dispatch({ type: "reset" });
+  }, [data]);
 
   return (
     <div className="bg-surface flex flex-col items-center px-4 py-24">
@@ -38,8 +38,8 @@ export default function MyInvitationPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mt-20">
             {data &&
               data.map((invitation: any, i: number) => (
-                <Card className={cn("border-0 shadow-none")} key={i + 1}>
-                  <CardContent className="p-3 border rounded-md">
+                <Card className={cn("border-0 shadow max-w-80")} key={i + 1}>
+                  <CardContent className="p-3 border-md flex justify-center shadow-none">
                     <Image
                       src={`/images/template/template-${invitation.theme_id}.png`}
                       alt={`template ${invitation.theme_id}`}
@@ -47,18 +47,35 @@ export default function MyInvitationPage() {
                       height={370}
                     />
                   </CardContent>
-                  <CardFooter className="flex justify-center items-center gap-1 py-6">
-                    <Link href={`/my-invitation/guest/${invitation.unique_id}`} className={buttonVariants({size: "sm"})}>
-                      Daftar Tamu
+                  <CardFooter className="flex flex-col justify-center items-stretch gap-2 py-3">
+                    <Link
+                      href={`/my-invitation/guest/${invitation.unique_id}`}
+                      className={cn(
+                        "flex-1 text-center min-h-7",
+                        buttonVariants({ size: "sm" })
+                      )}
+                    >
+                      Kelola Tamu
                     </Link>
+
                     <Link
                       className={cn(
-                        "text-primary",
-                        buttonVariants({ variant: "ghost", size: "sm" })
+                        "text-primary flex-1 text-center min-h-7",
+                        buttonVariants({ variant: "outline", size: "sm" })
                       )}
                       href={`/${invitation.unique_id}`}
                     >
                       Preview
+                    </Link>
+                    <hr className="border-primary mt-2" />
+                    <Link
+                      href={`/my-invitation/edit/${session.data?.user?.id}/${invitation.unique_id}`}
+                      className={cn(
+                        "text-primary flex-1 text-center min-h-7",
+                        buttonVariants({ size: "sm", variant: "outline" })
+                      )}
+                    >
+                      Edit Undangan
                     </Link>
                   </CardFooter>
                 </Card>

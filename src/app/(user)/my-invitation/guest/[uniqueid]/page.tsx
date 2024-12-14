@@ -141,7 +141,7 @@ export default function GuestPage({ params }: { params: { uniqueid: string } }) 
                                         <TableCell>{i + 1}</TableCell>
                                         <TableCell>{guest.name}</TableCell>
                                         <TableCell>{guest.phone_number}</TableCell>
-                                        <TableCell className="flex justify-center items-center gap-2">
+                                        <TableCell className="flex flex-col sm:flex-row justify-center items-center gap-2">
                                             <Button size="sm" variant="outline" className="px-6 md:px-12" onClick={() => handleCopyClick(guest, i)} id={`copy-button-${i}`}>Copy</Button>
                                             <Button size="sm" className="px-6 md:px-12" onClick={() => handleShareClick(guest)}>Share</Button>
                                             <Button size="sm" variant="tertiary" className="px-6 md:px-12" onClick={() => handleEditGuestClick(guest)}>Edit</Button>

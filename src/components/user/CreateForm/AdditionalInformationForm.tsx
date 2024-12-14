@@ -21,8 +21,10 @@ import { UseFormReturn } from "react-hook-form";
 
 export default function AdditonalInformationForm({
   form,
+  isUpdate = false,
 }: {
   form: UseFormReturn<CreateInvitationType, any, undefined>;
+  isUpdate?: boolean;
 }) {
   const onSubmit = (data: AdditionalInformationType) => {
     console.log(data);
