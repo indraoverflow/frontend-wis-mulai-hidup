@@ -72,6 +72,19 @@ export const weddingReceptionApi = createApi({
       },
       invalidatesTags: ["CreateInvitationTypes"],
     }),
+    editInvitationMedia: build.mutation({
+      query: (data) => {
+        return {
+          url: `/receptions/update_media/${data.receptionId}`,
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Accept: "multipart/form-data",
+          },
+          data: data.media,
+        };
+      },
+    }),
   }),
 });
 
@@ -83,4 +96,6 @@ export const {
   useGetInvitationByUniqueIdQuery,
   useAddInvitationMediaMutation,
   useUpdateInvitationMutation,
+  useEditInvitationMediaMutation,
+  
 } = weddingReceptionApi;

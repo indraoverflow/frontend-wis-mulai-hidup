@@ -17,6 +17,7 @@ import AdditonalInformationForm from "./AdditionalInformationForm";
 import {
   useAddInvitationMediaMutation,
   useAddInvitationMutation,
+  useEditInvitationMediaMutation,
   useGetInvitationByUniqueIdQuery,
   useUpdateInvitationMutation,
 } from "@/store/features/invitation/wedding-reception-slice";
@@ -41,7 +42,7 @@ export default function UpdateInvitationFormPage({
   const { data } = useGetInvitationByUniqueIdQuery(uniqueId);
   const [updateInvitation, updateInvitationResult] =
     useUpdateInvitationMutation();
-  const [addMedia, addMediaResult] = useAddInvitationMediaMutation();
+  const [editMedia, editMediaResult] = useEditInvitationMediaMutation();
   const router = useRouter();
   const session = useSession();
 
@@ -62,27 +63,30 @@ export default function UpdateInvitationFormPage({
     try {
       // console.log(values);
 
-      const data = createInvitationFormToRequest(values);
+      const newData = createInvitationFormToRequest(values);
 
-      // let media = uploadMediaScheme.parse({
-      //   man_media: dataUrlToFile(values.groomImage, "man_media"),
-      //   woman_media: dataUrlToFile(values.brideImage, "woman_media"),
-      //   our_story_man: dataUrlToFile(values.brideImage, "our_story_man"),
-      //   our_story_woman: dataUrlToFile(values.brideImage, "our_story_woman"),
-      //   wedding_media: values.gallery.map((url, index) =>
-      //     dataUrlToFile(url, `weddings_media_${index}`)
-      //   ),
-      // });
+      let media = uploadMediaScheme.parse({
+        man_media: dataUrlToFile(values.groomImage, "man_media"),
+        woman_media: dataUrlToFile(values.brideImage, "woman_media"),
+        our_story_man: dataUrlToFile(values.brideImage, "our_story_man"),
+        our_story_woman: dataUrlToFile(values.brideImage, "our_story_woman"),
+        wedding_media: values.gallery.map((url, index) =>
+          dataUrlToFile(url, `weddings_media_${index}`)
+        ),
+      });
 
-      let res = await updateInvitation({ data, uniqueId }).unwrap();
+      let res = await updateInvitation({
+        data: newData,
+        uniqueId: data?.data.id,
+      }).unwrap();
 
       const receptionId = res.data?.receptionId;
-      // const response = await addMedia({
-      //   receptionId: receptionId,
-      //   media: media,
-      // });
+      const response = await editMedia({
+        receptionId: receptionId,
+        media: media,
+      });
 
-      // console.log(addMediaResult, response);
+      console.log(editMediaResult, response);
 
       router.push("/my-invitation");
     } catch (error) {

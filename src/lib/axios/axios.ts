@@ -25,6 +25,9 @@ axiosInstance.interceptors.request.use(
 
     const csrfToken = localStorage.getItem("csrfToken");
     const csrfTokenExpiry = localStorage.getItem("csrfTokenExpiry");
+    console.log("csrfToken", csrfTokenExpiry);
+    console.log("now", Date.now());
+    
     if (!csrfToken || Date.now() > Number(csrfTokenExpiry)) {
       res = await axios.get(`${config.apiUrl}/protect`, {
         withCredentials: true,
@@ -33,7 +36,7 @@ axiosInstance.interceptors.request.use(
       localStorage.setItem("csrfToken", res.data.csrf_token);
       localStorage.setItem(
         "csrfTokenExpiry",
-        String(Date.now() + 1000 * 60 * 10)
+        String(Date.now() + 1000 * 60 * 60)
       );
     }
 
