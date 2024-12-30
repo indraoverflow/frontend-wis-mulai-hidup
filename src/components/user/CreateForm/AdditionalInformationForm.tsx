@@ -37,11 +37,11 @@ export default function AdditonalInformationForm({
   ) => {
     const files = e.target.files;
     if (files) {
-      if (field === "gallery") {
-        handleMultipleFiles(files, field);
-      } else {
-        handleSingleFile(files[0], field);
-      }
+      // if (field === "gallery") {
+      //   handleMultipleFiles(files, field);
+      // } else {
+      handleSingleFile(files[0], field);
+      // }
     }
   };
 
@@ -71,7 +71,9 @@ export default function AdditonalInformationForm({
     Promise.all(readerPromises)
       .then((results) => {
         const gallery = form.getValues().gallery;
-        const updatedGallery = Array.isArray(gallery) ? [...gallery, ...results] : [...results];
+        const updatedGallery = Array.isArray(gallery)
+          ? [...gallery, ...results]
+          : [...results];
         form.setValue(field, updatedGallery);
       })
       .catch((error) => console.error("Error reading files:", error));
@@ -104,53 +106,53 @@ export default function AdditonalInformationForm({
     //   );
     // } else
 
-    if (field === "gallery") {
-      return (
-        <ScrollArea className="h-64 w-full border border-primary rounded">
-          <div className="flex gap-2 p-2">
-            {(value as string[]).map((preview, index) => (
-              <div key={index} className="relative w-48 h-48">
-                <Image
-                  src={preview}
-                  alt={`Gallery preview ${index}`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded"
-                />
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="icon"
-                  className="absolute top-0 right-0 h-6 w-6"
-                  onClick={() => removeGalleryImage(index)}
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            ))}
-          </div>
-          <ScrollBar orientation="horizontal" />
-        </ScrollArea>
-      );
-    } else {
-      return (
-        <div className="relative w-full h-64 border border-primary rounded">
-          <Image
-            src={value as string}
-            alt={`Preview for ${field}`}
-            layout="fill"
-            objectFit="cover"
-            className="rounded"
-          />
-        </div>
-      );
-    }
+    // if (field === "gallery") {
+    //   return (
+    //     <ScrollArea className="h-64 w-full border border-primary rounded">
+    //       <div className="flex gap-2 p-2">
+    //         {(value as string[]).map((preview, index) => (
+    //           <div key={index} className="relative w-48 h-48">
+    //             <Image
+    //               src={preview}
+    //               alt={`Gallery preview ${index}`}
+    //               layout="fill"
+    //               objectFit="cover"
+    //               className="rounded"
+    //             />
+    //             <Button
+    //               type="button"
+    //               variant="destructive"
+    //               size="icon"
+    //               className="absolute top-0 right-0 h-6 w-6"
+    //               onClick={() => removeGalleryImage(index)}
+    //             >
+    //               <X className="h-4 w-4" />
+    //             </Button>
+    //           </div>
+    //         ))}
+    //       </div>
+    //       <ScrollBar orientation="horizontal" />
+    //     </ScrollArea>
+    //   );
+    // } else {
+    return (
+      <div className="relative w-full h-64 border border-primary rounded">
+        <Image
+          src={value as string}
+          alt={`Preview for ${field}`}
+          layout="fill"
+          objectFit="cover"
+          className="rounded"
+        />
+      </div>
+    );
+    // }
   };
 
   return (
     <div className="min-h-screen bg-surface py-8">
       <div className="bg-surface p-6">
-        <div className="container mx-auto max-w-5xl space-y-6">
+        <div className="container mx-auto max-w-5xl space-y-12">
           <div className="grid grid-cols-2 md:grid-cols-2 gap-6">
             {(
               Object.keys(formAdditionalInformationScheme.shape) as Array<
@@ -198,7 +200,7 @@ export default function AdditonalInformationForm({
                             //   ? "audio/*"
                             //   : "image/*"
                           }
-                          multiple={field === "gallery"}
+                          // multiple={field === "gallery"}
                         />
                         <Button asChild>
                           <label
@@ -221,7 +223,7 @@ export default function AdditonalInformationForm({
             ))}
           </div>
           {/* <Button type="submit" className="w-full">Submit</Button> */}
-          <div className="text-center">
+          <div className="text-center mt-12">
             <SubmitButton isSubmitting={form.formState.isSubmitting} />
           </div>
         </div>

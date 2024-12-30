@@ -68,11 +68,11 @@ export default function UpdateInvitationFormPage({
       let media = uploadMediaScheme.parse({
         man_media: dataUrlToFile(values.groomImage, "man_media"),
         woman_media: dataUrlToFile(values.brideImage, "woman_media"),
-        our_story_man: dataUrlToFile(values.brideImage, "our_story_man"),
-        our_story_woman: dataUrlToFile(values.brideImage, "our_story_woman"),
-        wedding_media: values.gallery.map((url, index) =>
-          dataUrlToFile(url, `weddings_media_${index}`)
-        ),
+        our_story_man: dataUrlToFile(values.groomStory, "our_story_man"),
+        our_story_woman: dataUrlToFile(values.brideStory, "our_story_woman"),
+        // wedding_media: values.gallery.map((url, index) =>
+        //   dataUrlToFile(url, `weddings_media_${index}`)
+        // ),
       });
 
       let res = await updateInvitation({
@@ -80,13 +80,21 @@ export default function UpdateInvitationFormPage({
         uniqueId: data?.data.id,
       }).unwrap();
 
-      const receptionId = res.data?.receptionId;
-      const response = await editMedia({
-        receptionId: receptionId,
-        media: media,
-      });
+      const receptionId = data?.data.id;
 
-      console.log(editMediaResult, response);
+      if (
+        values.groomImage &&
+        values.brideImage &&
+        values.groomStory &&
+        values.brideStory
+      ) {
+        const response = await editMedia({
+          receptionId: receptionId,
+          media: media,
+        });
+
+        console.log(editMediaResult, response);
+      }
 
       router.push("/my-invitation");
     } catch (error) {
