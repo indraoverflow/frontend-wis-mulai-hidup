@@ -12,9 +12,7 @@ import React, { useEffect } from "react";
 export default function MyInvitationPage() {
   const dispatch = useAppDispatch();
   const session = useSession();
-  const { data } = useGetInvitationByUserIdQuery(
-    session.data?.user?.id as string
-  );
+  const { data } = useGetInvitationByUserIdQuery("");
 
   useEffect(() => {
     dispatch({ type: "reset" });

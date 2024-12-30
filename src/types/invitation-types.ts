@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 5; // 3MB
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 10; // 10MB
 const ACCEPTED_FILE_TYPES = ["image/png", "image/jpeg", "image/jpg"];
 
 const imageSchema = z
@@ -8,7 +8,7 @@ const imageSchema = z
   .optional()
   .refine((file) => {
     return !file || file.size <= MAX_UPLOAD_SIZE;
-  }, "File size must be less than 3MB")
+  }, "File size must be less than 10MB")
   .refine((file) => {
     return (
       !file ||
@@ -132,7 +132,7 @@ export const formAdditionalInformationScheme = formBrideScheme.pick({
   groomStory: true,
   brideStory: true,
   // cover: true,
-  gallery: true,
+  // gallery: true,
   // video: true,
   // music: true,
 });
@@ -193,7 +193,22 @@ export const uploadMediaScheme = z.object({
   woman_media: imageSchema.optional(),
   our_story_man: imageSchema.optional(),
   our_story_woman: imageSchema.optional(),
-  wedding_media: z.array(imageSchema.optional()).default([]),
+  wedding_media: z
+    .array(
+      z
+        .instanceof(File)
+        .refine((file) => {
+          return !file || file.size <= MAX_UPLOAD_SIZE;
+        }, "File size must be less than 10MB")
+        .refine((file) => {
+          return (
+            !file ||
+            ACCEPTED_FILE_TYPES.includes(file.type) ||
+            file.type.includes("text/html")
+          );
+        }, "File must be an image")
+    )
+    .default([]),
 });
 
 export type CreateInvitationType = z.infer<typeof formBrideScheme>;

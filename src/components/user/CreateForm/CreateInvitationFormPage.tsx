@@ -55,11 +55,11 @@ export default function CreateInvitationFormPage() {
       let media = uploadMediaScheme.parse({
         man_media: dataUrlToFile(values.groomImage, "man_media"),
         woman_media: dataUrlToFile(values.brideImage, "woman_media"),
-        our_story_man: dataUrlToFile(values.brideImage, "our_story_man"),
-        our_story_woman: dataUrlToFile(values.brideImage, "our_story_woman"),
-        wedding_media: values.gallery.map((url, index) =>
-          dataUrlToFile(url, `weddings_media_${index}`)
-        ),
+        our_story_man: dataUrlToFile(values.groomStory, "our_story_man"),
+        our_story_woman: dataUrlToFile(values.brideStory, "our_story_woman"),
+        // wedding_media: values.gallery.map((url, index) =>
+        //   dataUrlToFile(url, `weddings_media_${index}`)
+        // ),
       });
 
       let res = await addInvitation(data).unwrap();

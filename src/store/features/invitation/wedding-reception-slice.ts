@@ -24,7 +24,7 @@ export const weddingReceptionApi = createApi({
     getInvitationByUserId: build.query({
       query: (id) => {
         return {
-          url: `/receptions/user/${id}`,
+          url: `/receptions/user`,
           method: "GET",
         };
       },
@@ -57,6 +57,7 @@ export const weddingReceptionApi = createApi({
             Accept: "multipart/form-data",
           },
           data: data.media,
+          formData: true,
         };
       },
     }),
@@ -76,7 +77,7 @@ export const weddingReceptionApi = createApi({
       query: (data) => {
         return {
           url: `/receptions/update_media/${data.receptionId}`,
-          method: "POST",
+          method: "PATCH",
           headers: {
             "Content-Type": "multipart/form-data",
             Accept: "multipart/form-data",
