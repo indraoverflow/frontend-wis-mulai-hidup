@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Comfortaa, Playfair_Display } from "next/font/google";
@@ -21,6 +22,7 @@ import GalleryCarouselItem from "../GalleryCarouselItem";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
@@ -36,6 +38,7 @@ export default function ThemeSeven({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
 
   let {
     nameMan,
@@ -80,7 +83,7 @@ export default function ThemeSeven({
 
   let stories;
 
-  if(isTemplate){
+  if (isTemplate) {
     stories = [
       {
         title: "Raka",
@@ -124,7 +127,7 @@ export default function ThemeSeven({
         title: null,
         description: null,
         image: story.imgBride,
-      }
+      },
     ];
   }
 
@@ -140,7 +143,17 @@ export default function ThemeSeven({
     },
   ];
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+      isTemplate={isTemplate}
+      template={7}
+    />
+  ) : (
     <>
       <Navbar title={`${nicknameMan.charAt(0)} & ${nicknameWoman.charAt(0)}`} />
       <main className={cn("relative", comfortaa.className)}>
@@ -176,7 +189,11 @@ export default function ThemeSeven({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
+                      src={
+                        manMedia?.[0]?.photo_url
+                          ? manMedia[0].photo_url
+                          : "/images/faceless/groom.png"
+                      }
                       alt="mempelai pria"
                       fill
                       style={{ objectFit: "cover" }}
@@ -199,7 +216,11 @@ export default function ThemeSeven({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
+                      src={
+                        womanMedia?.[0]?.photo_url
+                          ? womanMedia[0].photo_url
+                          : "/images/faceless/bride.png"
+                      }
                       alt="mempelai wanita"
                       fill
                       style={{ objectFit: "cover" }}
@@ -257,30 +278,39 @@ export default function ThemeSeven({
                         galleryImage={story.image}
                         title={story.title}
                         description={story.description}
-                        className={story.image ? "bg-bright-gray" : "border-2 border-light-silver"}
+                        className={
+                          story.image
+                            ? "bg-bright-gray"
+                            : "border-2 border-light-silver"
+                        }
                       />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
               </Carousel>
             </div>
-            {videoUrl || isTemplate == true && (
-              <div
-                className="rounded-lg overflow-hidden my-16"
-                style={{
-                  width: "100%",
-                  height: "557px",
-                }}
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                ></iframe>
-              </div>
-            )}
+            {videoUrl ||
+              (isTemplate == true && (
+                <div
+                  className="rounded-lg overflow-hidden my-16"
+                  style={{
+                    width: "100%",
+                    height: "557px",
+                  }}
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={
+                      isTemplate
+                        ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
+                        : videoUrl
+                    }
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  ></iframe>
+                </div>
+              ))}
             <div className="relative mb-16">
               <Carousel>
                 <CarouselContent>
@@ -289,7 +319,10 @@ export default function ThemeSeven({
                       key={index}
                       className="md:basis-1/2 lg:basis-1/3"
                     >
-                      <GalleryCarouselItem galleryImage={gallery.image} className="bg-bright-gray" />
+                      <GalleryCarouselItem
+                        galleryImage={gallery.image}
+                        className="bg-bright-gray"
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -336,7 +369,9 @@ export default function ThemeSeven({
                 }`}
                 locationTitle="InterContinental Jakarta Hotel"
                 locationAddress={
-                  isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                  isTemplate
+                    ? "Jl.  Jalan Metro Pondok Indah"
+                    : receptionAddress
                 }
                 buttonText="Open Map"
               />

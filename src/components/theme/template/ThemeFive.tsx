@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Comfortaa, Allura } from "next/font/google";
@@ -16,6 +17,7 @@ import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
 import OurStory from "../OurStory";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -31,6 +33,7 @@ export default function ThemeFive({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
 
   let {
     nameMan,
@@ -73,7 +76,17 @@ export default function ThemeFive({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+      isTemplate={isTemplate}
+      template={5}
+    />
+  ) : (
     <>
       <main className={cn("relative", minervaModern.className)}>
         <section className="relative md:w-full z-20 md:min-h-[860px] lg:min-h-[1110px]">
@@ -110,7 +123,9 @@ export default function ThemeFive({
               {nicknameWoman}
             </p>
             <p className="text-base md:text-lg">
-              { isTemplate ? "2 February, 2025 – Jakarta indonesia" : receptionStartDate + "-" + receptionLocation }
+              {isTemplate
+                ? "2 February, 2025 – Jakarta indonesia"
+                : receptionStartDate + "-" + receptionLocation}
             </p>
           </div>
         </section>
@@ -132,7 +147,10 @@ export default function ThemeFive({
               <div className="flex flex-col md:flex-row justify-between items-center gap-12">
                 <div className="flex flex-col justify-center items-center">
                   <Image
-                    src={womanMedia?.[0]?.photo_url ?? "/images/couple/bride-hero-theme-5.png"}
+                    src={
+                      womanMedia?.[0]?.photo_url ??
+                      "/images/couple/bride-hero-theme-5.png"
+                    }
                     alt="mempelai perempuan"
                     width={300}
                     height={300}
@@ -154,7 +172,11 @@ export default function ThemeFive({
                 </div>
                 <div className="flex flex-col justify-center items-center">
                   <Image
-                    src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero-theme-5.png"}
+                    src={
+                      manMedia?.[0]?.photo_url
+                        ? manMedia[0].photo_url
+                        : "/images/couple/groom-hero-theme-5.png"
+                    }
                     alt="mempelai pria"
                     width={300}
                     height={300}
@@ -189,28 +211,37 @@ export default function ThemeFive({
             </div>
             <div className="relative container px-5 py-5 lg:pt-0 lg:pb-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-30">
               <hr className="border-white my-10" />
-              {videoUrl || isTemplate == true && (
-                <div className="text-center">
-                  <h3 className="text-4xl mb-4">Our Story</h3>
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "557px",
-                    }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
-                      title="YouTube video player"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    ></iframe>
+              {videoUrl ||
+                (isTemplate == true && (
+                  <div className="text-center">
+                    <h3 className="text-4xl mb-4">Our Story</h3>
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "557px",
+                      }}
+                    >
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src={
+                          isTemplate
+                            ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
+                            : videoUrl
+                        }
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      ></iframe>
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
 
-              <OurStory {...story} className="bg-white text-black" titleClassName="text-white" />
-              
+              <OurStory
+                {...story}
+                className="bg-white text-black"
+                titleClassName="text-white"
+              />
+
               <hr className="border-white my-10" />
               <div className="mb-8 lg:mb-24">
                 <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
@@ -235,7 +266,9 @@ export default function ThemeFive({
                   }`}
                   locationTitle="InterContinental Jakarta Hotel"
                   locationAddress={
-                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : ceremonyAddress
                   }
                   buttonText="Open Map"
                 />
@@ -254,7 +287,9 @@ export default function ThemeFive({
                   }`}
                   locationTitle="InterContinental Jakarta Hotel"
                   locationAddress={
-                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : receptionAddress
                   }
                   buttonText="Open Map"
                 />
@@ -320,7 +355,7 @@ export default function ThemeFive({
         <div className={cn("bg-philippine-silver py-7", comfortaa.className)}>
           <div className="container px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="mb-9">
-            {isTemplate ? (
+              {isTemplate ? (
                 <FeedbackCardTemplate
                   title="Say Something!"
                   nameLabel="Name"

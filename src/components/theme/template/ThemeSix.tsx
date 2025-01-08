@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Comfortaa, Allura, Montaga } from "next/font/google";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils/tailwind-util";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const allura = Allura({ subsets: ["latin"], weight: "400" });
@@ -31,6 +33,7 @@ export default function ThemeSix({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
 
   let {
     nameMan,
@@ -73,7 +76,17 @@ export default function ThemeSix({
     accounts,
   } = useInvitationData(data, isTemplate);
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+      isTemplate={isTemplate}
+      template={6}
+    />
+  ) : (
     <>
       <main className={cn("relative", montaga.className)}>
         <section className="relative md:w-full z-20 min-h-[960px] lg:min-h-[1110px]">
@@ -89,7 +102,11 @@ export default function ThemeSix({
             <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-3">
               <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
                 <Image
-                  src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero-theme-6.png"}
+                  src={
+                    manMedia?.[0]?.photo_url
+                      ? manMedia[0].photo_url
+                      : "/images/couple/groom-hero-theme-6.png"
+                  }
                   alt="mempelai pria"
                   layout="fill"
                   objectFit="cover"
@@ -104,12 +121,18 @@ export default function ThemeSix({
                   {nicknameMan} & {nicknameWoman}
                 </h1>
                 <p className="text-2xl lg:text-3xl">
-                  { isTemplate ? "Januari 15, 2025 - Bandung, Jawa barat" : receptionStartDate + "-" + receptionLocation }
+                  {isTemplate
+                    ? "Januari 15, 2025 - Bandung, Jawa barat"
+                    : receptionStartDate + "-" + receptionLocation}
                 </p>
               </div>
               <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
                 <Image
-                  src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero-theme-6.png"}
+                  src={
+                    womanMedia?.[0]?.photo_url
+                      ? womanMedia[0].photo_url
+                      : "/images/couple/bride-hero-theme-6.png"
+                  }
                   alt="mempelai wanita"
                   layout="fill"
                   objectFit="cover"
@@ -137,23 +160,28 @@ export default function ThemeSix({
         <section className="bg-snow text-white">
           <div className="container px-5 py-5 lg:pb-16 lg:pt-0 lg:-mb-60 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className="lg:relative lg:bottom-60 z-20">
-              {videoUrl || isTemplate == true && (
-                <div
-                  className="rounded-lg overflow-hidden mb-10"
-                  style={{
-                    width: "100%",
-                    height: "557px",
-                  }}
-                >
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  ></iframe>
-                </div>
-              )}
+              {videoUrl ||
+                (isTemplate == true && (
+                  <div
+                    className="rounded-lg overflow-hidden mb-10"
+                    style={{
+                      width: "100%",
+                      height: "557px",
+                    }}
+                  >
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={
+                        isTemplate
+                          ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
+                          : videoUrl
+                      }
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    ></iframe>
+                  </div>
+                ))}
               <div className="text-center">
                 <h3
                   className={cn(
@@ -207,7 +235,9 @@ export default function ThemeSix({
                   }`}
                   locationTitle="InterContinental Jakarta Hotel"
                   locationAddress={
-                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : ceremonyAddress
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : ceremonyAddress
                   }
                   buttonText="Open Map"
                 />
@@ -224,7 +254,9 @@ export default function ThemeSix({
                   }`}
                   locationTitle="InterContinental Jakarta Hotel"
                   locationAddress={
-                    isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                    isTemplate
+                      ? "Jl.  Jalan Metro Pondok Indah"
+                      : receptionAddress
                   }
                   buttonText="Open Map"
                 />
@@ -277,7 +309,11 @@ export default function ThemeSix({
             >
               <div className="flex flex-col justify-center items-center">
                 <Image
-                  src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero-theme-6.png"}
+                  src={
+                    manMedia?.[0]?.photo_url
+                      ? manMedia[0].photo_url
+                      : "/images/couple/groom-hero-theme-6.png"
+                  }
                   alt="mempelai pria"
                   width={300}
                   height={300}
@@ -292,12 +328,18 @@ export default function ThemeSix({
                 />
                 <div className="text-center">
                   <h3 className="text-5xl">{nameMan}</h3>
-                  <p className="text-2xl">Putra dari Bapak {fatherMan} dan Ibu {motherMan}</p>
+                  <p className="text-2xl">
+                    Putra dari Bapak {fatherMan} dan Ibu {motherMan}
+                  </p>
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center">
                 <Image
-                  src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero-theme-6.png"}
+                  src={
+                    womanMedia?.[0]?.photo_url
+                      ? womanMedia[0].photo_url
+                      : "/images/couple/bride-hero-theme-6.png"
+                  }
                   alt="mempelai wanita"
                   width={300}
                   height={300}
@@ -312,7 +354,9 @@ export default function ThemeSix({
                 />
                 <div className="text-center">
                   <h3 className="text-5xl">{nameWoman}</h3>
-                  <p className="text-2xl">Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}</p>
+                  <p className="text-2xl">
+                    Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}
+                  </p>
                 </div>
               </div>
             </div>
