@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { Comfortaa, Playfair_Display } from "next/font/google";
@@ -21,6 +22,7 @@ import GalleryCarouselItem from "../GalleryCarouselItem";
 import FeedbackCardTemplate from "../feedback-card-template";
 import CommentCardTemplate from "../comment-card-template";
 import useInvitationData from "@/lib/hooks/use-invitation-data";
+import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
@@ -36,6 +38,8 @@ export default function ThemeEight({
   uniqueId?: string;
   to: string | null;
 }) {
+  const [hasOverlay, setHasOverlay] = React.useState(true);
+
   let {
     nameMan,
     nicknameMan,
@@ -79,7 +83,7 @@ export default function ThemeEight({
 
   let stories;
 
-  if(isTemplate){
+  if (isTemplate) {
     stories = [
       {
         title: "Raka",
@@ -123,7 +127,7 @@ export default function ThemeEight({
         title: null,
         description: null,
         image: story.imgBride,
-      }
+      },
     ];
   }
 
@@ -139,9 +143,22 @@ export default function ThemeEight({
     },
   ];
 
-  return (
+  return hasOverlay ? (
+    <Overlay
+      setHasOverlay={setHasOverlay}
+      to={to}
+      nicknameMan={nicknameMan}
+      nicknameWoman={nicknameWoman}
+      ceremonyStartDateString={ceremonyStartDateString}
+      isTemplate={isTemplate}
+      template={8}
+    />
+  ) : (
     <>
-      <Navbar title={`${nicknameMan.charAt(0)} & ${nicknameWoman.charAt(0)}`} darkTheme={false} />
+      <Navbar
+        title={`${nicknameMan.charAt(0)} & ${nicknameWoman.charAt(0)}`}
+        darkTheme={false}
+      />
       <main className={cn("relative", comfortaa.className)}>
         <section className="bg-white text-raisin-black">
           <div className="relative px-5 lg:px-16">
@@ -154,9 +171,7 @@ export default function ThemeEight({
               <h1 className="text-9xl mb-2">
                 {nicknameMan.charAt(0)} & {nicknameWoman.charAt(0)}
               </h1>
-              <h5 className="text-4xl">
-                {ceremonyStartDateWithFullMonth}
-              </h5>
+              <h5 className="text-4xl">{ceremonyStartDateWithFullMonth}</h5>
               <h5 className="text-4xl">- save the date to calendar -</h5>
             </div>
             <div className="flex flex-col md:flex-row gap-8 items-center justify-between md:-mb-52">
@@ -174,7 +189,11 @@ export default function ThemeEight({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
+                      src={
+                        manMedia?.[0]?.photo_url
+                          ? manMedia[0].photo_url
+                          : "/images/faceless/groom.png"
+                      }
                       alt="mempelai pria"
                       fill
                       style={{ objectFit: "cover" }}
@@ -197,7 +216,11 @@ export default function ThemeEight({
                   </div>
                   <div className="absolute inset-y-8 inset-x-5">
                     <Image
-                      src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
+                      src={
+                        womanMedia?.[0]?.photo_url
+                          ? womanMedia[0].photo_url
+                          : "/images/faceless/bride.png"
+                      }
                       alt="mempelai wanita"
                       fill
                       style={{ objectFit: "cover" }}
@@ -256,7 +279,11 @@ export default function ThemeEight({
                         title={story.title}
                         description={story.description}
                         // className="border-2 border-philippine-yellow"
-                        className={story.image ? "bg-bright-gray" : "border-2 border-light-silver"}
+                        className={
+                          story.image
+                            ? "bg-bright-gray"
+                            : "border-2 border-light-silver"
+                        }
                         textClassName="text-raisin-black"
                       />
                     </CarouselItem>
@@ -264,23 +291,28 @@ export default function ThemeEight({
                 </CarouselContent>
               </Carousel>
             </div>
-            {videoUrl || isTemplate == true && (
-              <div
-                className="rounded-lg overflow-hidden my-16"
-                style={{
-                  width: "100%",
-                  height: "557px",
-                }}
-              >
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={isTemplate ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf" : videoUrl}
-                  title="YouTube video player"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                ></iframe>
-              </div>
-            )}
+            {videoUrl ||
+              (isTemplate == true && (
+                <div
+                  className="rounded-lg overflow-hidden my-16"
+                  style={{
+                    width: "100%",
+                    height: "557px",
+                  }}
+                >
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={
+                      isTemplate
+                        ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
+                        : videoUrl
+                    }
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  ></iframe>
+                </div>
+              ))}
             <div className="relative mb-16">
               <Carousel>
                 <CarouselContent>
@@ -289,7 +321,10 @@ export default function ThemeEight({
                       key={index}
                       className="md:basis-1/2 lg:basis-1/3"
                     >
-                      <GalleryCarouselItem galleryImage={gallery.image} className="bg-bright-gray" />
+                      <GalleryCarouselItem
+                        galleryImage={gallery.image}
+                        className="bg-bright-gray"
+                      />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
@@ -336,7 +371,9 @@ export default function ThemeEight({
                 }`}
                 locationTitle="InterContinental Jakarta Hotel"
                 locationAddress={
-                  isTemplate ? "Jl.  Jalan Metro Pondok Indah" : receptionAddress
+                  isTemplate
+                    ? "Jl.  Jalan Metro Pondok Indah"
+                    : receptionAddress
                 }
                 buttonText="Open Map"
               />

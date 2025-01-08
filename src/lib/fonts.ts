@@ -4,6 +4,7 @@ import {
   Playfair_Display,
   Inter,
   Roboto,
+  Montaga,
 } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -91,6 +92,13 @@ export const inter = Inter({
 export const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
   subsets: ["latin"],
+  preload: true,
+  display: "swap",
+});
+
+export const montaga = Montaga({
+  subsets: ["latin"],
+  weight: "400",
   preload: true,
   display: "swap",
 });
