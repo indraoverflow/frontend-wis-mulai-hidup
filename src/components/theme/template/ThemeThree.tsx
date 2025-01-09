@@ -96,16 +96,25 @@ export default function ThemeThree({
                 height={340.6}
                 className="w-full mb-1"
               />
-              <h4 className={cn("text-5xl mb-3", allura.className)}>
+              <h4
+                className={cn(
+                  "text-3xl md:text-5xl mb-3 px-5 md:px-0",
+                  allura.className
+                )}
+              >
                 Turut mengundang Atas Pernikahan
               </h4>
               <hr className="border-black" />
             </div>
             <div>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
+              <div className="flex flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
                 <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
                   <Image
-                    src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/faceless/groom.png"}
+                    src={
+                      manMedia?.[0]?.photo_url
+                        ? manMedia[0].photo_url
+                        : "/images/faceless/groom.png"
+                    }
                     alt={"mempelai laki laki"}
                     width={382.13}
                     height={529.5}
@@ -113,36 +122,54 @@ export default function ThemeThree({
                   />
                 </div>
                 <div>
-                  <h4 className={cn("text-9xl mb-6", allura.className)}>
+                  <h4
+                    className={cn(
+                      "text-4xl md:text-9xl mb-6",
+                      allura.className
+                    )}
+                  >
                     {nameMan}
                   </h4>
-                  <p className="text-2xl font-bold mb-4">
+                  <p className="text-lg md:text-2xl font-bold mb-4">
                     Putra dari Bapak {fatherMan} dan ibu {motherMan}
                   </p>
-                  <h5 className="font-bold text-4xl">Bin {fatherMan}</h5>
+                  <h5 className="font-bold text-xl md:text-4xl">
+                    Bin {fatherMan}
+                  </h5>
                 </div>
               </div>
-              <p
-                className={cn(
-                  "text-9xl text-center my-6 md:my-[-50px]",
-                  allura.className
-                )}
-              >
-                &
-              </p>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
+              <div className="my-6 md:my-[-50px]">
+                <p
+                  className={cn(
+                    "text-9xl text-center hidden md:block",
+                    allura.className
+                  )}
+                >
+                  &
+                </p>
+              </div>
+              <div className="flex flex-row items-center justify-between gap-8 md:gap-16 lg:gap-28">
                 <div>
-                  <h4 className={cn("text-9xl mb-6", allura.className)}>
+                  <h4
+                    className={cn(
+                      "text-4xl md:text-9xl mb-6",
+                      allura.className
+                    )}
+                  >
                     {nameWoman}
                   </h4>
                   <h5 className="font-bold text-4xl">Binti {fatherWoman}</h5>
-                  <p className="text-2xl font-bold mb-4">
+                  <p className="text-lg md:text-2xl font-bold mb-4">
                     Putri dari Bapak {fatherWoman} dan ibu {motherWoman}
                   </p>
                 </div>
                 <div className="rounded-[150px] overflow-hidden bg-isabelline aspect-[10/14]">
                   <Image
-                    src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/faceless/bride.png"}
+                    src={
+                      womanMedia?.[0]?.photo_url
+                        ? womanMedia[0].photo_url
+                        : "/images/faceless/bride.png"
+                    }
                     alt={"mempelai perempuan"}
                     width={382.13}
                     height={529.5}
@@ -163,86 +190,119 @@ export default function ThemeThree({
               />
             </div>
             <div className="container relative px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-30">
-              <hr className="border-black mb-28" />
-              <div className="mb-32">
-                <OurStory
-                  {...story}
-                  className="border border-black text-black bg-white"
-                  titleClassName="text-black"
-                />
-              </div>
-              <hr className="border-black mb-28" />
-              <div className="mb-24">
-                <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
-                  {ceremonyStartDateWithFullMonth}
-                </h3>
-                <DateCountDown
-                  date={new Date(ceremonyStartDateTime)}
-                  className="bg-transparent border-black text-black w-full h-auto md:w-40 md:h-48"
-                />
-              </div>
-              <div className="mb-5">
-                <CeremonyCard
-                  backgroundImage="/images/background/bg-ceremony.png"
-                  iconImage="/images/icon/wedding-ring.svg"
-                  ceremonyTitle="Akad Ceremony"
-                  ceremonyTime={`${ceremonyStartTime} ${
-                    receptionTimezone ?? ""
-                  } - ${
-                    ceremonyEndTime
-                      ? ceremonyEndTime + " " + (receptionTimezone ?? "")
-                      : "Selesai"
-                  }`}
-                  locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress={ceremonyAddress}
-                  buttonText="Open Map"
-                />
-              </div>
-              <div className="mb-16">
-                <CeremonyCard
-                  backgroundImage="/images/background/bg-card-place.png"
-                  iconImage="/images/icon/dinner-table.svg"
-                  ceremonyTitle="Wedding Reseption"
-                  ceremonyTime={`${receptionStartTime} ${
-                    receptionTimezone ?? ""
-                  } - ${
-                    receptionEndTime
-                      ? receptionEndTime + " " + (receptionTimezone ?? "")
-                      : "Selesai"
-                  }`}
-                  locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress={receptionAddress}
-                  buttonText="Open Map"
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "450px",
-                }}
-                className="mb-16"
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
-                  loading="lazy"
-                  width="100%"
-                  height="100%"
-                ></iframe>
-              </div>
-              <div className="text-center mb-8">
-                <p className="text-spanish-gray text-xl font-medium mb-20">
-                  It is an honor and happiness for us if Mr / Ms / Brother (i)
-                  is willing to attend to give blessings to the bride and groom.
-                </p>
-                <p className="text-spanish-gray text-xl font-medium mb-3">
-                  &quot;And among His verses is that He has created for you
-                  wives of your own kind, so that you may feel comfortable in
-                  them, and He has made between you mawaddah and mercy. Verily
-                  in that are signs for the people who think&quot;
-                </p>
-                <p className="text-granite-gray text-2xl font-medium">
-                  - AR-RUM 21 -
-                </p>
+              <div className="flex flex-col">
+                <div className="order-2 md:order-1">
+                  <hr className="border-black mb-28" />
+                  <div className="mb-32">
+                    <OurStory
+                      {...story}
+                      className="border border-black text-black bg-white"
+                      titleClassName="text-black"
+                    />
+                    <div className="block md:hidden text-center mt-8">
+                      <p className="text-spanish-gray text-xl font-medium mb-3">
+                        &quot;And among His verses is that He has created for you
+                        wives of your own kind, so that you may feel comfortable
+                        in them, and He has made between you mawaddah and mercy.
+                        Verily in that are signs for the people who think&quot;
+                      </p>
+                      <p className="text-granite-gray text-2xl font-medium">
+                        - AR-RUM 21 -
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="order-1 md:order-2">
+                  <hr className="border-black mb-28" />
+                  <section className="text-center mb-[50px] w-11/12 mx-auto block md:hidden">
+                    <p className="text-3xl md:text-[39px] font-bold mb-8 md:mb-[50px]">
+                      We’re Getting Married
+                    </p>
+                    <p className="text-2xl md:text-5xl italic mb-[10px]">
+                      Assalamualaikum Warrohmatullah Wabarrakatuhu
+                    </p>
+                    <p className="text-base md:text-xl max-w-screen-md mx-auto px-6">
+                      By asking for the grace and blessing of Allah SWT. We
+                      intend to hold a wedding celebration for our sons and
+                      daughters, which Allah SWT willing will be held on:
+                    </p>
+                  </section>
+                  <div className="mb-24">
+                    <h3 className="text-center text-gray text-3xl md:text-5xl mb-16 md:mb-36">
+                      {ceremonyStartDateWithFullMonth}
+                    </h3>
+                    <DateCountDown
+                      date={new Date(ceremonyStartDateTime)}
+                      className="bg-transparent border-black text-black w-full h-auto md:w-40 md:h-48"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <CeremonyCard
+                      backgroundImage="/images/background/bg-ceremony.png"
+                      iconImage="/images/icon/wedding-ring.svg"
+                      ceremonyTitle="Akad Ceremony"
+                      ceremonyTime={`${ceremonyStartTime} ${
+                        receptionTimezone ?? ""
+                      } - ${
+                        ceremonyEndTime
+                          ? ceremonyEndTime + " " + (receptionTimezone ?? "")
+                          : "Selesai"
+                      }`}
+                      locationTitle="InterContinental Jakarta Hotel"
+                      locationAddress={ceremonyAddress}
+                      buttonText="Open Map"
+                    />
+                  </div>
+                  <div className="mb-16">
+                    <CeremonyCard
+                      backgroundImage="/images/background/bg-card-place.png"
+                      iconImage="/images/icon/dinner-table.svg"
+                      ceremonyTitle="Wedding Reseption"
+                      ceremonyTime={`${receptionStartTime} ${
+                        receptionTimezone ?? ""
+                      } - ${
+                        receptionEndTime
+                          ? receptionEndTime + " " + (receptionTimezone ?? "")
+                          : "Selesai"
+                      }`}
+                      locationTitle="InterContinental Jakarta Hotel"
+                      locationAddress={receptionAddress}
+                      buttonText="Open Map"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "450px",
+                    }}
+                    className="mb-16"
+                  >
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25290.95474578179!2d114.60485266193213!3d-3.3314483022037584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423e3adcd9d9f%3A0x1b5ad295e2204466!2sSwiss-Belhotel%20Borneo%20Banjarmasin!5e0!3m2!1sid!2sid!4v1726833580741!5m2!1sid!2sid"
+                      loading="lazy"
+                      width="100%"
+                      height="100%"
+                    ></iframe>
+                  </div>
+                  <div className="text-center mb-8">
+                    <p className="text-spanish-gray text-xl font-medium mb-20">
+                      It is an honor and happiness for us if Mr / Ms / Brother
+                      (i) is willing to attend to give blessings to the bride
+                      and groom.
+                    </p>
+                    <div className="hidden md:block">
+                      <p className="text-spanish-gray text-xl font-medium mb-3">
+                        &quot;And among His verses is that He has created for you
+                        wives of your own kind, so that you may feel comfortable
+                        in them, and He has made between you mawaddah and mercy.
+                        Verily in that are signs for the people who think&quot;
+                      </p>
+                      <p className="text-granite-gray text-2xl font-medium">
+                        - AR-RUM 21 -
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div>
                 <h3 className="text-black text-center text-4xl font-bold mb-16">

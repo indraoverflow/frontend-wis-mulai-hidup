@@ -88,180 +88,211 @@ export default function ThemeTwo({
       <main className={cn("relative", comfortaa.className)}>
         <div className="bg-surface pb-0">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <div className="text-center mb-[-150px]">
-              <h3 className="font-bold text-4xl mb-14">We’r Getting Married</h3>
-              <h2
-                className={cn(
-                  "text-5xl text-dark-liver mb-3",
-                  allura.className
-                )}
-              >
-                Assalamualaikum Warrohmatullah Wabarrakatuhu
-              </h2>
-              <p className="font-medium text-spanish-gray text-xl mb-8">
-                By asking for the grace and blessing of Allah SWT. We intend to
-                hold a wedding celebration for our sons and daughters, which
-                Allah SWT willing will be held on:
-              </p>
-              <h3 className="font-bold text-raisin-black text-4xl">
-                THE WEDDING OF
-              </h3>
-              <p
-                className={cn(
-                  "text-[120px] text-raisin-black  flex flex-col md:flex-row justify-between gap-20",
-                  allura.className
-                )}
-              >
-                <Image
-                  src={"/images/icon/leaf-theme-black.svg"}
-                  alt={"leaf decoration left"}
-                  width={40}
-                  height={60}
-                  className="hidden md:block"
-                />
-                {nicknameMan} & {nicknameWoman}
-                <Image
-                  src={"/images/icon/leaf-theme-black.svg"}
-                  alt={"leaf decoration left"}
-                  className="hidden md:block  scale-x-[-1]"
-                  width={40}
-                  height={60}
-                />
-              </p>
-              <p className="text-[40px] text-raisin-black">
-                •<span className="mx-8">{ceremonyStartDateString}</span>•
-              </p>
-            </div>
-            <div className="relative top-48 z-20">
-              <div className="flex flex-col md:flex-row gap-8 w-full justify-center items-center md:items-stretch px-12 sm:px-20 md:px-12 lg:px-48">
-                <div className="rounded-[200px] overflow-hidden">
-                  <Image
-                    src={manMedia?.[0]?.photo_url ? manMedia[0].photo_url : "/images/couple/groom-hero.png"}
-                    alt={"mempelai laki laki"}
-                    width={509}
-                    height={706}
-                    className="object-cover h-full"
-                  />
+            <div className="text-center md:mb-[-150px]">
+              <div className="flex flex-col gap-4">
+                <div className="text-raisin-black font-medium text-xl mb-6 block md:hidden">
+                  <p className="mb-4">Ya Allah the Most Loving</p>
+                  <p>
+                    With Your blessing, you brought us together in a holy
+                    marriage bond
+                  </p>
                 </div>
-                <div>
-                  <Image
-                    src={"/images/icon/chevron-down-theme.svg"}
-                    alt="chevron down"
-                    width={18}
-                    height={18}
-                  />
+                <div className="order-2 md:order-1">
+                  <h3 className="font-bold text-4xl mb-14">
+                    We’r Getting Married
+                  </h3>
+                  <h2
+                    className={cn(
+                      "text-5xl text-dark-liver mb-3",
+                      allura.className
+                    )}
+                  >
+                    Assalamualaikum Warrohmatullah Wabarrakatuhu
+                  </h2>
+                  <p className="font-medium text-spanish-gray text-xl mb-8">
+                    By asking for the grace and blessing of Allah SWT. We intend
+                    to hold a wedding celebration for our sons and daughters,
+                    which Allah SWT willing will be held on:
+                  </p>
+                  <h3 className="font-bold text-raisin-black text-2xl md:text-4xl mb-6 hidden md:block">
+                    THE WEDDING OF
+                  </h3>
                 </div>
-                <div className="rounded-[200px] overflow-hidden">
-                  <Image
-                    src={womanMedia?.[0]?.photo_url ? womanMedia[0].photo_url : "/images/couple/bride-hero.png"}
-                    alt={"mempelai perempuan"}
-                    width={509}
-                    height={706}
-                    className="object-cover  h-full"
-                  />
+                <div className="order-1 md:order-2">
+                  <p
+                    className={cn(
+                      "text-5xl md:text-[120px] text-raisin-black  flex flex-row justify-center md:justify-between gap-20",
+                      allura.className
+                    )}
+                  >
+                    <Image
+                      src={"/images/icon/leaf-theme-black.svg"}
+                      alt={"leaf decoration left"}
+                      width={40}
+                      height={60}
+                      className="block"
+                    />
+                    {nicknameMan} & {nicknameWoman}
+                    <Image
+                      src={"/images/icon/leaf-theme-black.svg"}
+                      alt={"leaf decoration left"}
+                      className="block  scale-x-[-1]"
+                      width={40}
+                      height={60}
+                    />
+                  </p>
+                  <p className="text-[40px] text-raisin-black hidden md:block">
+                    •<span className="mx-8">{ceremonyStartDateString}</span>•
+                  </p>
+                  <div className="my-8 md:my-0 md:relative md:top-48 z-20">
+                    <div className="flex flex-row gap-8 w-full justify-center items-center md:items-stretch md:px-12 lg:px-48">
+                      <div className="rounded-[200px] overflow-hidden">
+                        <Image
+                          src={
+                            manMedia?.[0]?.photo_url
+                              ? manMedia[0].photo_url
+                              : "/images/couple/groom-hero.png"
+                          }
+                          alt={"mempelai laki laki"}
+                          width={509}
+                          height={706}
+                          className="object-cover h-full"
+                        />
+                      </div>
+                      <div>
+                        <Image
+                          src={"/images/icon/chevron-down-theme.svg"}
+                          alt="chevron down"
+                          width={18}
+                          height={18}
+                        />
+                      </div>
+                      <div className="rounded-[200px] overflow-hidden">
+                        <Image
+                          src={
+                            womanMedia?.[0]?.photo_url
+                              ? womanMedia[0].photo_url
+                              : "/images/couple/bride-hero.png"
+                          }
+                          alt={"mempelai perempuan"}
+                          width={509}
+                          height={706}
+                          className="object-cover  h-full"
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="relative px-4 py-32 md:py-[262px] bg-phthalo-green z-10">
-          <div className="hidden lg:block absolute right-0 top-0  z-30">
-            <Image
-              src={"/images/background/bg-patern-theme.svg"}
-              alt="background patern"
-              width={522.6}
-              height={482.47}
+        <div className="flex flex-col">
+          <div className="relative px-4 py-32 md:py-[262px] bg-phthalo-green z-10 order-2 md:order-1">
+            <div className="hidden lg:block absolute right-0 top-0  z-30">
+              <Image
+                src={"/images/background/bg-patern-theme.svg"}
+                alt="background patern"
+                width={522.6}
+                height={482.47}
+              />
+            </div>
+            <div className="hidden lg:block  absolute left-0 bottom-0  scale-[-1] z-30">
+              <Image
+                src={"/images/background/bg-patern-theme.svg"}
+                alt="background patern"
+                width={522.6}
+                height={482.47}
+              />
+            </div>
+            <OurStory
+              {...story}
+              className="border border-white text-white"
+              titleClassName="text-white"
             />
           </div>
-          <div className="hidden lg:block  absolute left-0 bottom-0  scale-[-1] z-30">
-            <Image
-              src={"/images/background/bg-patern-theme.svg"}
-              alt="background patern"
-              width={522.6}
-              height={482.47}
-            />
+          <div className="bg-surface order-1 md:order-2">
+            <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
+              <div className="mb-24">
+                <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
+                  {ceremonyStartDateWithFullMonth}
+                </h3>
+                <DateCountDown
+                  date={new Date(ceremonyStartDateTime)}
+                  className="bg-phthalo-green text-white rounded-full w-full h-auto md:w-40 md:h-48"
+                />
+              </div>
+              <div className="mb-5">
+                <CeremonyCard
+                  backgroundImage="/images/background/bg-ceremony.png"
+                  iconImage="/images/icon/wedding-ring.svg"
+                  ceremonyTitle="Akad Ceremony"
+                  ceremonyTime={`${ceremonyStartTime} ${
+                    receptionTimezone ?? ""
+                  } - ${
+                    ceremonyEndTime
+                      ? ceremonyEndTime + " " + (receptionTimezone ?? "")
+                      : "Selesai"
+                  }`}
+                  locationTitle="InterContinental Jakarta Hotel"
+                  locationAddress={ceremonyAddress}
+                  buttonText="Open Map"
+                />
+              </div>
+              <div className="mb-16">
+                <CeremonyCard
+                  backgroundImage="/images/background/bg-card-place.png"
+                  iconImage="/images/icon/dinner-table.svg"
+                  ceremonyTitle="Wedding Reseption"
+                  ceremonyTime={`${receptionStartTime} ${
+                    receptionTimezone ?? ""
+                  } - ${
+                    receptionEndTime
+                      ? receptionEndTime + " " + (receptionTimezone ?? "")
+                      : "Selesai"
+                  }`}
+                  locationTitle="InterContinental Jakarta Hotel"
+                  locationAddress={receptionAddress}
+                  buttonText="Open Map"
+                />
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "450px",
+                }}
+                className="mb-16"
+              >
+                <iframe
+                  src={ceremonyLocation}
+                  loading="lazy"
+                  width="100%"
+                  height="100%"
+                ></iframe>
+              </div>
+              <div className="text-center">
+                <p className="text-spanish-gray text-xl font-medium mb-20">
+                  It is an honor and happiness for us if Mr / Ms / Brother (i)
+                  is willing to attend to give blessings to the bride and groom.
+                </p>
+              </div>
+            </div>
           </div>
-          <OurStory
-            {...story}
-            className="border border-white text-white"
-            titleClassName="text-white"
-          />
         </div>
         <div className="bg-surface">
           <div className="container px-5 p-20 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <div className="mb-24">
-              <h3 className="text-center text-gray text-5xl mb-16 md:mb-36">
-                {ceremonyStartDateWithFullMonth}
-              </h3>
-              <DateCountDown
-                date={new Date(ceremonyStartDateTime)}
-                className="bg-phthalo-green text-white rounded-full w-full h-auto md:w-40 md:h-48"
-              />
-            </div>
-            <div className="mb-5">
-              <CeremonyCard
-                backgroundImage="/images/background/bg-ceremony.png"
-                iconImage="/images/icon/wedding-ring.svg"
-                ceremonyTitle="Akad Ceremony"
-                ceremonyTime={`${ceremonyStartTime} ${
-                  receptionTimezone ?? ""
-                } - ${
-                  ceremonyEndTime
-                    ? ceremonyEndTime + " " + (receptionTimezone ?? "")
-                    : "Selesai"
-                }`}
-                locationTitle="InterContinental Jakarta Hotel"
-                locationAddress={ceremonyAddress}
-                buttonText="Open Map"
-              />
-            </div>
-            <div className="mb-16">
-              <CeremonyCard
-                backgroundImage="/images/background/bg-card-place.png"
-                iconImage="/images/icon/dinner-table.svg"
-                ceremonyTitle="Wedding Reseption"
-                ceremonyTime={`${receptionStartTime} ${
-                  receptionTimezone ?? ""
-                } - ${
-                  receptionEndTime
-                    ? receptionEndTime + " " + (receptionTimezone ?? "")
-                    : "Selesai"
-                }`}
-                locationTitle="InterContinental Jakarta Hotel"
-                locationAddress={receptionAddress}
-                buttonText="Open Map"
-              />
-            </div>
-            <div
-              style={{
-                width: "100%",
-                height: "450px",
-              }}
-              className="mb-16"
-            >
-              <iframe
-                src={ceremonyLocation}
-                loading="lazy"
-                width="100%"
-                height="100%"
-              ></iframe>
-            </div>
-            <div className="text-center mb-8">
-              <p className="text-spanish-gray text-xl font-medium mb-20">
-                It is an honor and happiness for us if Mr / Ms / Brother (i) is
-                willing to attend to give blessings to the bride and groom.
-              </p>
-              <p className="text-spanish-gray text-xl font-medium mb-3">
-                &quot;And among His verses is that He has created for you wives
-                of your own kind, so that you may feel comfortable in them, and
-                He has made between you mawaddah and mercy. Verily in that are
-                signs for the people who think&quot;
-              </p>
-              <p className="text-granite-gray text-2xl font-medium">
-                - AR-RUM 21 -
-              </p>
-            </div>
             <div>
+              <div className="text-center mb-8">
+                <p className="text-spanish-gray text-xl font-medium mb-3">
+                  &quot;And among His verses is that He has created for you
+                  wives of your own kind, so that you may feel comfortable in
+                  them, and He has made between you mawaddah and mercy. Verily
+                  in that are signs for the people who think&quot;
+                </p>
+                <p className="text-granite-gray text-2xl font-medium">
+                  - AR-RUM 21 -
+                </p>
+              </div>
               <h3 className="text-black text-center text-4xl font-bold mb-16">
                 Give a Gift
               </h3>
