@@ -254,7 +254,7 @@ export default function ThemeFive({
                     <h2 className={cn("text-xl mb-3", allura.className)}>
                       Assalamualaikum Warrohmatullah Wabarrakatuhu
                     </h2>
-                    <p className="font-mediumtext-lg mb-8">
+                    <p className="font-medium text-lg mb-8">
                       By asking for the grace and blessing of Allah SWT. We
                       intend to hold a wedding celebration for our sons and
                       daughters, which Allah SWT willing will be held on:
