@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-import { Comfortaa, Playfair_Display } from "next/font/google";
+import { Allura, Comfortaa, Playfair_Display } from "next/font/google";
 import Image from "next/image";
 import DigitalWalletCard from "@/components/theme/digital-wallet-card";
 import OfflineGiftCard from "@/components/theme/offline-gift-card";
@@ -26,6 +26,7 @@ import Overlay from "../Overlay";
 
 const comfortaa = Comfortaa({ subsets: ["latin"] });
 const playfairDisplay = Playfair_Display({ subsets: ["latin"] });
+const allura = Allura({ subsets: ["latin"], weight: "400" });
 
 export default function ThemeEight({
   data,
@@ -168,13 +169,17 @@ export default function ThemeEight({
                 playfairDisplay.className
               )}
             >
-              <h1 className="text-9xl mb-2">
+              <h1 className="text-5xl md:text-9xl mb-2">
                 {nicknameMan.charAt(0)} & {nicknameWoman.charAt(0)}
               </h1>
-              <h5 className="text-4xl">{ceremonyStartDateWithFullMonth}</h5>
-              <h5 className="text-4xl">- save the date to calendar -</h5>
+              <h5 className="text-xl lg:text-4xl">
+                {ceremonyStartDateWithFullMonth}
+              </h5>
+              <h5 className="text-xl lg:text-4xl">
+                - save the date to calendar -
+              </h5>
             </div>
-            <div className="flex flex-col md:flex-row gap-8 items-center justify-between md:-mb-52">
+            <div className="hidden md:flex flex-col md:flex-row gap-8 items-center justify-between md:-mb-52">
               <div className={playfairDisplay.className}>
                 <p className="text-center text-4xl mb-3">{nicknameMan}</p>
                 <div className="relative w-[268.33px] h-[428.37px]">
@@ -263,7 +268,7 @@ export default function ThemeEight({
             </div>
           </div>
           <div className="container px-5 pt-5 lg:pt-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <h3 className="text-6xl mb-40 text-center">
+            <h3 className="text-xl md:text-6xl mb-40 text-center">
               Allah destined it, Allah brought us together…
             </h3>
             <div className="relative">
@@ -332,6 +337,28 @@ export default function ThemeEight({
             </div>
             <hr />
             <div className="my-8 lg:my-16">
+              <div className="text-center text-black">
+                <h3
+                  className={cn(
+                    "font-bold text-2xl lg:text-4xl mb-14",
+                    comfortaa.className
+                  )}
+                >
+                  We’r Getting Married
+                </h3>
+                <h2
+                  className={cn("texl-xl md:text-5xl mb-3", allura.className)}
+                >
+                  Assalamualaikum Warrohmatullah Wabarrakatuhu
+                </h2>
+                <p
+                  className={`font-medium text-lg lg:text-xl mb-8 ${comfortaa.className}`}
+                >
+                  By asking for the grace and blessing of Allah SWT. We intend
+                  to hold a wedding celebration for our sons and daughters,
+                  which Allah SWT willing will be held on:
+                </p>
+              </div>
               <h3 className="text-center text-gray text-3xl md:text-5xl mb-8 md:mb-36">
                 {ceremonyStartDateWithFullMonth}
               </h3>
