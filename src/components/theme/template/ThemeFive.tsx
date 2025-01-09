@@ -131,7 +131,7 @@ export default function ThemeFive({
         </section>
         <section className="bg-raisin-black text-white">
           <div className="container px-5 py-5 lg:pb-0 lg:pt-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <div className="text-center mb-6 lg:mb-28">
+            <div className="text-center mb-6 lg:mb-28 hidden lg:block">
               <p className="text-2xl font-medium mb-3">
                 &quot;And among His verses is that He has created for you wives
                 of your own kind, so that you may feel comfortable in them, and
@@ -140,11 +140,11 @@ export default function ThemeFive({
               </p>
               <p className="text-2xl font-medium">- AR-RUM 21 -</p>
             </div>
-            <div className="mb-8 md:mb-36">
+            <div className="mb-4 md:mb-36">
               <p className="text-2xl text-center mb-4 lg:mb-11">
                 We sincerely hope for your presence at the wedding of
               </p>
-              <div className="flex flex-col md:flex-row justify-between items-center gap-12">
+              <div className="flex flex-row justify-between items-center gap-12">
                 <div className="flex flex-col justify-center items-center">
                   <Image
                     src={
@@ -164,8 +164,8 @@ export default function ThemeFive({
                     className="scale-y-[-1] mb-4 lg:mb-8"
                   />
                   <div className="text-center">
-                    <h3 className="text-5xl">{nameWoman}</h3>
-                    <p className="text-2xl">
+                    <h3 className="text-3xl lg:text-5xl mb-6">{nameWoman}</h3>
+                    <p className="text-sm lg:text-2xl">
                       Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}
                     </p>
                   </div>
@@ -190,8 +190,8 @@ export default function ThemeFive({
                     className="scale-y-[-1] mb-4 lg:mb-8"
                   />
                   <div className="text-center">
-                    <h3 className="text-5xl">{nameMan}</h3>
-                    <p className="text-2xl">
+                    <h3 className="text-3xl lg:text-5xl mb-6">{nameMan}</h3>
+                    <p className="text-sm lg:text-2xl">
                       Putra dari Bapak {fatherMan} dan Ibu {motherMan}
                     </p>
                   </div>
@@ -210,109 +210,129 @@ export default function ThemeFive({
               />
             </div>
             <div className="relative container px-5 py-5 lg:pt-0 lg:pb-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px] z-30">
-              <hr className="border-white my-10" />
-              {videoUrl ||
-                (isTemplate == true && (
-                  <div className="text-center">
-                    <h3 className="text-4xl mb-4">Our Story</h3>
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "557px",
-                      }}
-                    >
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={
-                          isTemplate
-                            ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
-                            : videoUrl
-                        }
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      ></iframe>
-                    </div>
+              <div className="flex flex-col">
+                <div className="order-1 mb-5">
+                  <hr className="border-white my-5 lg:my-10" />
+                  {videoUrl ||
+                    (isTemplate == true && (
+                      <div className="text-center">
+                        <h3 className="text-4xl mb-4">Our Story</h3>
+                        <div
+                          style={{
+                            width: "100%",
+                            height: "557px",
+                          }}
+                        >
+                          <iframe
+                            width="100%"
+                            height="100%"
+                            src={
+                              isTemplate
+                                ? "https://www.youtube.com/embed/ivrumxRUz_Y?si=tipbNyMEGJj7tsRf"
+                                : videoUrl
+                            }
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          ></iframe>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+                <div className="order-3 md:order-2 mb-5">
+                  <OurStory
+                    {...story}
+                    className="bg-white text-black"
+                    titleClassName="text-white"
+                  />
+                </div>
+                <div className="order-2 md:order-2">
+                  <hr className="border-white my-5 lg:my-10 hidden lg:block" />
+                  <div className="block md:hidden mb-12 text-center text-white">
+                    <h3 className="font-bold text-2xl mb-14">
+                      We’r Getting Married
+                    </h3>
+                    <h2 className={cn("text-xl mb-3", allura.className)}>
+                      Assalamualaikum Warrohmatullah Wabarrakatuhu
+                    </h2>
+                    <p className="font-mediumtext-lg mb-8">
+                      By asking for the grace and blessing of Allah SWT. We
+                      intend to hold a wedding celebration for our sons and
+                      daughters, which Allah SWT willing will be held on:
+                    </p>
                   </div>
-                ))}
-
-              <OurStory
-                {...story}
-                className="bg-white text-black"
-                titleClassName="text-white"
-              />
-
-              <hr className="border-white my-10" />
-              <div className="mb-8 lg:mb-24">
-                <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-36">
-                  {ceremonyStartDateWithFullMonth}
-                </h3>
-                <DateCountDown
-                  date={new Date(ceremonyStartDateTime)}
-                  className="text-white bg-transparent w-full h-auto md:w-40 md:h-48"
-                />
-              </div>
-              <div className="mb-5">
-                <CeremonyCard
-                  backgroundImage="/images/background/bg-ceremony.png"
-                  iconImage="/images/icon/wedding-ring.svg"
-                  ceremonyTitle="Akad Ceremony"
-                  ceremonyTime={`${ceremonyStartTime} ${
-                    receptionTimezone ?? ""
-                  } - ${
-                    ceremonyEndTime
-                      ? ceremonyEndTime + " " + (receptionTimezone ?? "")
-                      : "Selesai"
-                  }`}
-                  locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress={
-                    isTemplate
-                      ? "Jl.  Jalan Metro Pondok Indah"
-                      : ceremonyAddress
-                  }
-                  buttonText="Open Map"
-                />
-              </div>
-              <div className="mb-16">
-                <CeremonyCard
-                  backgroundImage="/images/background/bg-card-place.png"
-                  iconImage="/images/icon/dinner-table.svg"
-                  ceremonyTitle="Wedding Reseption"
-                  ceremonyTime={`${receptionStartTime} ${
-                    receptionTimezone ?? ""
-                  } - ${
-                    receptionEndTime
-                      ? receptionEndTime + " " + (receptionTimezone ?? "")
-                      : "Selesai"
-                  }`}
-                  locationTitle="InterContinental Jakarta Hotel"
-                  locationAddress={
-                    isTemplate
-                      ? "Jl.  Jalan Metro Pondok Indah"
-                      : receptionAddress
-                  }
-                  buttonText="Open Map"
-                />
-              </div>
-              <div
-                style={{
-                  width: "100%",
-                  height: "450px",
-                }}
-                className="mb-16"
-              >
-                <iframe
-                  src={ceremonyLocation}
-                  loading="lazy"
-                  width="100%"
-                  height="100%"
-                ></iframe>
-              </div>
-              <div className="mb-5 text-center">
-                <p className="text-spanish-gray text-xl font-medium mb-20">
-                  It is an honor and happiness for us if Mr / Ms / Brother (i)
-                  is willing to attend to give blessings to the bride and groom.
-                </p>
+                  <div className="mb-8 lg:mb-24">
+                    <h3 className="text-center text-gray text-3xl md:text-5xl mb-12 md:mb-24">
+                      {ceremonyStartDateWithFullMonth}
+                    </h3>
+                    <DateCountDown
+                      date={new Date(ceremonyStartDateTime)}
+                      className="text-white bg-transparent w-full h-auto md:w-40 md:h-48"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <CeremonyCard
+                      backgroundImage="/images/background/bg-ceremony.png"
+                      iconImage="/images/icon/wedding-ring.svg"
+                      ceremonyTitle="Akad Ceremony"
+                      ceremonyTime={`${ceremonyStartTime} ${
+                        receptionTimezone ?? ""
+                      } - ${
+                        ceremonyEndTime
+                          ? ceremonyEndTime + " " + (receptionTimezone ?? "")
+                          : "Selesai"
+                      }`}
+                      locationTitle="InterContinental Jakarta Hotel"
+                      locationAddress={
+                        isTemplate
+                          ? "Jl.  Jalan Metro Pondok Indah"
+                          : ceremonyAddress
+                      }
+                      buttonText="Open Map"
+                    />
+                  </div>
+                  <div className="mb-16">
+                    <CeremonyCard
+                      backgroundImage="/images/background/bg-card-place.png"
+                      iconImage="/images/icon/dinner-table.svg"
+                      ceremonyTitle="Wedding Reseption"
+                      ceremonyTime={`${receptionStartTime} ${
+                        receptionTimezone ?? ""
+                      } - ${
+                        receptionEndTime
+                          ? receptionEndTime + " " + (receptionTimezone ?? "")
+                          : "Selesai"
+                      }`}
+                      locationTitle="InterContinental Jakarta Hotel"
+                      locationAddress={
+                        isTemplate
+                          ? "Jl.  Jalan Metro Pondok Indah"
+                          : receptionAddress
+                      }
+                      buttonText="Open Map"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "450px",
+                    }}
+                    className="mb-16"
+                  >
+                    <iframe
+                      src={ceremonyLocation}
+                      loading="lazy"
+                      width="100%"
+                      height="100%"
+                    ></iframe>
+                  </div>
+                  <div className="mb-5 text-center">
+                    <p className="text-spanish-gray text-xl font-medium mb-20">
+                      It is an honor and happiness for us if Mr / Ms / Brother
+                      (i) is willing to attend to give blessings to the bride
+                      and groom.
+                    </p>
+                  </div>
+                </div>
               </div>
               <div>
                 <h3 className="text-center text-4xl font-bold mb-16">
