@@ -99,8 +99,16 @@ export default function ThemeSix({
           />
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 max-w-7xl bg-snow bg-opacity-90 z-10 py-14 px-6 lg:py-28 lg:px-10">
-            <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-3">
-              <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
+            <div className="block md:hidden text-center">
+              <p className="text-base">
+                Please join us to celebrate our wedding
+              </p>
+              <h1 className="text-4xl text-copper-red my-8">
+                {nicknameMan} & {nicknameWoman}
+              </h1>
+            </div>
+            <div className="flex flex-row items-center justify-center gap-6 lg:gap-3">
+              <div className="w-[110px] h-[110px] md:w-[255px] md:h-[255px] relative overflow-hidden rounded-full">
                 <Image
                   src={
                     manMedia?.[0]?.photo_url
@@ -113,7 +121,7 @@ export default function ThemeSix({
                   className="rounded-full"
                 />
               </div>
-              <div className="text-center">
+              <div className="text-center hidden md:block">
                 <p className="text-2xl lg:text-3xl">
                   Please join us to celebrate our wedding
                 </p>
@@ -126,7 +134,7 @@ export default function ThemeSix({
                     : receptionStartDate + "-" + receptionLocation}
                 </p>
               </div>
-              <div className="w-[255px] h-[255px] relative overflow-hidden rounded-full">
+              <div className="w-[110px] h-[110px] md:w-[255px] md:h-[255px] relative overflow-hidden rounded-full">
                 <Image
                   src={
                     womanMedia?.[0]?.photo_url
@@ -139,6 +147,13 @@ export default function ThemeSix({
                   className="rounded-full"
                 />
               </div>
+            </div>
+            <div className="block md:hidden text-center mt-6">
+              <p className="text-base">
+                {isTemplate
+                  ? "Januari 15, 2025 - Bandung, Jawa barat"
+                  : receptionStartDate + "-" + receptionLocation}
+              </p>
             </div>
           </div>
         </section>
@@ -185,7 +200,7 @@ export default function ThemeSix({
               <div className="text-center">
                 <h3
                   className={cn(
-                    "text-black font-bold text-4xl mb-14",
+                    "text-black font-bold text-2xl lg:text-4xl mb-14",
                     comfortaa.className
                   )}
                 >
@@ -193,14 +208,14 @@ export default function ThemeSix({
                 </h3>
                 <h2
                   className={cn(
-                    "text-5xl text-dark-liver mb-3",
+                    "texl-xl md:text-5xl text-dark-liver mb-3",
                     allura.className
                   )}
                 >
                   Assalamualaikum Warrohmatullah Wabarrakatuhu
                 </h2>
                 <p
-                  className={`font-medium text-spanish-gray text-xl mb-8 ${comfortaa.className}`}
+                  className={`font-medium text-spanish-gray text-lg lg:text-xl mb-8 ${comfortaa.className}`}
                 >
                   By asking for the grace and blessing of Allah SWT. We intend
                   to hold a wedding celebration for our sons and daughters,
@@ -287,79 +302,107 @@ export default function ThemeSix({
             </div>
           </div>
         </section>
-        <section className="relative md:w-full z-20 min-h-[810px] lg:min-h-[1110px]">
-          <Image
-            src="/images/background/wedding-bg-theme-6.png"
-            alt=""
-            layout="fill"
-            objectFit="cover"
-            className=""
-          />
-        </section>
-        <section className="bg-snow text-raisin-black">
-          <div className="container px-5 py-5 lg:py-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
-            <h5 className="text-2xl text-center mb-11">
-              We sincerely hope for your presence at the wedding of
-            </h5>
-            <div
-              className={cn(
-                "bg-white flex flex-col md:flex-row justify-between items-center gap-12 mb-24",
-                minervaModern.className
-              )}
-            >
-              <div className="flex flex-col justify-center items-center">
-                <Image
-                  src={
-                    manMedia?.[0]?.photo_url
-                      ? manMedia[0].photo_url
-                      : "/images/couple/groom-hero-theme-6.png"
-                  }
-                  alt="mempelai pria"
-                  width={300}
-                  height={300}
-                  className="rounded-full mb-5"
-                />
-                <Image
-                  src={"/images/icon/crown-theme-6.svg"}
-                  alt="icon"
-                  width={163.65}
-                  height={54.25}
-                  className="mb-4 lg:mb-8"
-                />
-                <div className="text-center">
-                  <h3 className="text-5xl">{nameMan}</h3>
-                  <p className="text-2xl">
-                    Putra dari Bapak {fatherMan} dan Ibu {motherMan}
-                  </p>
+        <div className="flex flex-col">
+          <section className="relative md:w-full z-20 min-h-[810px] lg:min-h-[1110px] order-2 md:order-1">
+            <Image
+              src="/images/background/wedding-bg-theme-6.png"
+              alt=""
+              layout="fill"
+              objectFit="cover"
+              className=""
+            />
+          </section>
+          <section className="bg-copper-red md:bg-snow text-white md:text-raisin-black order-1 md:order-2">
+            <div className="container px-5 py-5 lg:py-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
+              <h5 className="text-lg md:text-2xl text-center mb-4 lg:mb-11">
+                We sincerely hope for your presence at the wedding of
+              </h5>
+              <div
+                className={cn(
+                  "bg-transparent md:bg-white flex flex-row justify-between items-center gap-12",
+                  minervaModern.className
+                )}
+              >
+                <div className="flex flex-col justify-center items-center">
+                  <Image
+                    src={
+                      manMedia?.[0]?.photo_url
+                        ? manMedia[0].photo_url
+                        : "/images/couple/groom-hero-theme-6.png"
+                    }
+                    alt="mempelai pria"
+                    width={300}
+                    height={300}
+                    className="rounded-full mb-5"
+                  />
+                  <Image
+                    src={"/images/icon/crown-theme-6.svg"}
+                    alt="icon"
+                    width={163.65}
+                    height={54.25}
+                    className="mb-4 lg:mb-8 hidden md:block"
+                  />
+                  <Image
+                    src={"/images/icon/crown-theme-5.svg"}
+                    alt="icon"
+                    width={163.65}
+                    height={54.25}
+                    className="scale-y-[-1] mb-4 lg:mb-8 block md:hidden"
+                  />
+                  <div className="text-center">
+                    <h3 className="text-3xl lg:text-5xl mb-6">{nameMan}</h3>
+                    <p className="text-sm lg:text-2xl">
+                      Putra dari Bapak {fatherMan} dan Ibu {motherMan}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col justify-center items-center">
-                <Image
-                  src={
-                    womanMedia?.[0]?.photo_url
-                      ? womanMedia[0].photo_url
-                      : "/images/couple/bride-hero-theme-6.png"
-                  }
-                  alt="mempelai wanita"
-                  width={300}
-                  height={300}
-                  className="rounded-full mb-5"
-                />
-                <Image
-                  src={"/images/icon/crown-theme-6.svg"}
-                  alt="icon"
-                  width={163.65}
-                  height={54.25}
-                  className="mb-4 lg:mb-8"
-                />
-                <div className="text-center">
-                  <h3 className="text-5xl">{nameWoman}</h3>
-                  <p className="text-2xl">
-                    Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}
-                  </p>
+                <div className="flex flex-col justify-center items-center">
+                  <Image
+                    src={
+                      womanMedia?.[0]?.photo_url
+                        ? womanMedia[0].photo_url
+                        : "/images/couple/bride-hero-theme-6.png"
+                    }
+                    alt="mempelai wanita"
+                    width={300}
+                    height={300}
+                    className="rounded-full mb-5"
+                  />
+                  <Image
+                    src={"/images/icon/crown-theme-6.svg"}
+                    alt="icon"
+                    width={163.65}
+                    height={54.25}
+                    className="mb-4 lg:mb-8 hidden md:block"
+                  />
+                  <Image
+                    src={"/images/icon/crown-theme-5.svg"}
+                    alt="icon"
+                    width={163.65}
+                    height={54.25}
+                    className="scale-y-[-1] mb-4 lg:mb-8 block md:hidden"
+                  />
+                  <div className="text-center">
+                    <h3 className="text-3xl lg:text-5xl mb-6">{nameWoman}</h3>
+                    <p className="text-sm lg:text-2xl">
+                      Putri dari Bapak {fatherWoman} dan Ibu {motherWoman}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className="bg-white p-5 pb-10 text-center text-raisin-black text-xl block md:hidden">
+                <p className="mb-4">
+                  &quot;And among His verses is that He has created for you wives of your own kind, so that you may feel comfortable in them, and He has made between you mawaddah and mercy. Verily in that are signs for the people who think&quot;
+                </p>
+                <p>
+                - AR-RUM 21 -
+                </p>
+            </div>
+          </section>
+        </div>
+        <section className="bg-snow text-raisin-black order-1 md:order-2">
+          <div className="container px-5 py-5 lg:py-16 mx-auto max-w-desktop lg:px-20 xl:px-[100px]">
             <div className={cn("", comfortaa.className)}>
               <h3 className="text-center text-4xl font-bold mb-16">
                 Give a Gift
