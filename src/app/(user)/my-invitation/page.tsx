@@ -34,7 +34,7 @@ export default function MyInvitationPage() {
             anda dan tentunya ramah lingkungan.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mt-20">
-            {data &&
+            {Array.isArray(data) && data.length > 0 ? (
               data.map((invitation: any, i: number) => (
                 <Card className={cn("border-0 shadow max-w-80")} key={i + 1}>
                   <CardContent className="p-3 border-md flex justify-center shadow-none">
@@ -77,7 +77,10 @@ export default function MyInvitationPage() {
                     </Link>
                   </CardFooter>
                 </Card>
-              ))}
+              ))
+            ) : (
+              null
+            )}
           </div>
         </div>
       </div>
