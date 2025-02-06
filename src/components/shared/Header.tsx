@@ -118,7 +118,7 @@ export default function Header({ showMenu = true }: Props) {
                 size={"sm"}
                 className="h-8 md:h-10  py-0 border-black rounded md:px-9 lg:border-primary"
               >
-                <span className="hidden md:block">Start &nbsp;</span> Free Trial
+                <span className="hidden md:block">Start &nbsp;</span>Free Trial
               </Button>
             </>
           ) : null}

@@ -71,7 +71,7 @@ export default function page() {
                   {item.question}
                 </p>
               </AccordionTrigger>
-              <AccordionContent className="text-base md:text-[22px] font-normal leading-tight text-justify md:pr-3">
+              <AccordionContent className="text-sm md:text-[16px] font-normal leading-tight text-justify md:pr-3">
                 {item.answer || "No answer provided."}
               </AccordionContent>
             </AccordionItem>

@@ -1,3 +1,5 @@
+"use client";
+
 import AdvantageCard from "@/components/home/AdvantageCard";
 import TemplatePreviewCard from "@/components/home/TemplatePreviewCard";
 import TestimoniCard from "@/components/home/TestimoniCard";
@@ -6,9 +8,13 @@ import Header from "@/components/shared/Header";
 import { Button } from "@/components/ui/button";
 import { minervaModern } from "@/lib/fonts";
 import { cn } from "@/lib/utils/tailwind-util";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 
-export default function page() {
+export default function Page() {
+  const { data: session, status } = useSession();
+
   return (
     <>
       <Header />
@@ -31,13 +37,15 @@ export default function page() {
             Tawarkan Undangan Pernikahan Islami yang Didesain Khusus untuk
             Memperkuat Tali Silaturahmi!{'"'}
           </p>
-          <Button
-            variant={"outline"}
-            className="flex gap-2 py-2 md:py-4 pl-4 pr-5 bg-white rounded"
-          >
-            <FiArrowUpRight className="w-5 h-5" />
-            Mulai Sekarang
-          </Button>
+          <Link href={session && session.user ? '/my-invitation' : '/register' }>
+            <Button
+              variant={"outline"}
+              className="flex gap-2 py-2 md:py-4 pl-4 pr-5 bg-white rounded"
+            >
+              <FiArrowUpRight className="w-5 h-5" />
+              Mulai Sekarang
+            </Button>
+          </Link>
         </section>
         <section className="container flex flex-col gap-14 px-5 mx-auto max-w-desktop lg:px-20 xl:px-[100px] ">
           <div className="grid grid-cols-1 items-stretch gap-5 md:gap-8 lg:gap-5 xl:gap-8 mx-auto md:grid-cols-2 md:w-11/12 lg:w-full lg:grid-cols-3 max-w-desktop">
