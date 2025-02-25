@@ -25,11 +25,11 @@ export default function page() {
             kepada tamu dan rekan-rekan spesial.
           </CardDescription>
 
-          <div className="flex justify-between gap-4 md:gap-10">
+          {/* <div className="flex justify-between gap-4 md:gap-10">
             <FacebookButton />
             <GoogleButton />
           </div>
-          <p className="text-center text-sm">atau</p>
+          <p className="text-center text-sm">atau</p> */}
         </CardHeader>
         <RegisterForm />
       </Card>

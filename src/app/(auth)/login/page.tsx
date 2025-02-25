@@ -27,11 +27,11 @@ export default function page() {
               className="mx-auto"
             />
           </Link>
-          <div className="flex justify-between gap-4 md:gap-10">
+          {/* <div className="flex justify-between gap-4 md:gap-10">
             <FacebookButton />
             <GoogleButton />
           </div>
-          <p className="text-center text-sm">atau</p>
+          <p className="text-center text-sm">atau</p> */}
         </CardHeader>
         <LoginForm />
       </Card>

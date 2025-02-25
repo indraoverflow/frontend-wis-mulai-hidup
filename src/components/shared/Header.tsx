@@ -113,13 +113,13 @@ export default function Header({ showMenu = true }: Props) {
                 Login
               </Button>
               {/* </Link> */}
-              <Button
+              {/* <Button
                 variant={"outline"}
                 size={"sm"}
                 className="h-8 md:h-10  py-0 border-black rounded md:px-9 lg:border-primary"
               >
                 <span className="hidden md:block">Start &nbsp;</span>Free Trial
-              </Button>
+              </Button> */}
             </>
           ) : null}
           <button
